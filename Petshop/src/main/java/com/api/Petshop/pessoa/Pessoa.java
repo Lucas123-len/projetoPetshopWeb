@@ -1,5 +1,5 @@
 package com.api.Petshop.pessoa;
-
+import com.api.Petshop.endereco.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -10,12 +10,13 @@ public abstract class Pessoa {
 	
 	protected String nome;
 	
-	protected String endereco;
+	protected Endereco endereco;
 	
-	public Pessoa(String cpf, String nome, String endereco) {
+	public Pessoa(String cpf, String nome, String pais, String estado, String cidade, String bairro, String numero) {
 		this.cpf = cpf;
 		this.nome = nome;
-		this.endereco = endereco;
+		Endereco ed = new Endereco(pais,estado,cidade,bairro,numero);
+		this.endereco = ed;
 	}
 
 	public String getCpf() {
@@ -34,11 +35,11 @@ public abstract class Pessoa {
 		this.nome = nome;
 	}
 
-	public String getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 	public abstract void imprimeDados();
