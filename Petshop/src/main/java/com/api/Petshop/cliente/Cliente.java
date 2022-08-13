@@ -37,4 +37,28 @@ public class Cliente extends Pessoa{
 				"\nEndereço: "+this.endereco+
 				"\nTelefone: "+this.telefone);
 	}
+	@Override
+	public boolean equals(Object obj){
+		//if(this == obj){return true;}
+		if(!(obj instanceof Cliente)){
+			return false;
+		}
+		//if(this.getClass != obj.getClass){return false;}
+		Cliente cl = (Cliente) obj;
+		if(codigo.equals(null)){
+			if(!cl.codigo.equals(null)){
+				return false;
+			}
+		}
+		if(telefone.equals(null)){
+			if(!cl.telefone.equals(null)){
+				return false;
+			}
+		}
+		return this.codigo.equals(cl.codigo) && this.telefone.equals(cl.telefone);
+	}
+	@Override
+	public int hashCode(){
+		return this.nome.length() * 3;
+	}
 }
