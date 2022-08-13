@@ -1,5 +1,5 @@
 package com.api.Petshop.loja;
-
+import com.api.Petshop.endereco.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,25 +7,26 @@ import javax.persistence.Id;
 public class Loja {
 	
 	@Id
-	private String codigo;
+	private int codigo;
 	
 	private String nomeGerente;
 	
-	private String endereco;
+	private Endereco endereco;
 	
 	private String telefone;
 	
-	public Loja(String codigo, String nome, String endereco, String telefone) {
+	public Loja(int codigo, String nome, String pais, String estado, String cidade, String bairro, String numero, String telefone) {
 		this.codigo = codigo;
 		this.nomeGerente = nome;
-		this.endereco = endereco;
 		this.telefone = telefone;
+		Endereco ed = new Endereco(pais,estado,cidade,bairro,numero);
+		this.endereco = ed;
 	}
 	
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	public String getNomeGerente() {
@@ -34,10 +35,10 @@ public class Loja {
 	public void setNomeGerente(String nomeGerente) {
 		this.nomeGerente = nomeGerente;
 	}
-	public String getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 	public String getTelefone() {
