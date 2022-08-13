@@ -42,4 +42,23 @@ public class Funcionario extends Pessoa{
 				"\nDescrição da Função: "+this.funcionarioFunc.getDescricao()+
 				"\nSalário: "+this.funcionarioFunc.getSalario());
 	}
+	@Override
+	public boolean equals(Object obj){
+	//if(this == obj){return true;}
+		if(!(obj instanceof Funcionario)){
+			return false;
+		}
+		//if(this.getClass != obj.getClass){return false;}
+		Funcionario fc = (Funcionario) obj;
+		if(codigo.equals(null)){
+			if(!fc.codigo.equals(null)){
+				return false;
+			}
+		}
+		return this.codigo.equals(fc.codigo);
+	}
+	@Override
+	public int hashCode(){
+		return this.getNome().length() * 3;
+	}
 }
