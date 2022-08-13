@@ -61,4 +61,36 @@ public class Servico implements Pagamento,ImprimeDados{
 				"\nData do Serviço: "+this.dataServico+
 				"\nTotal do Pagamento: "+this.getTotalPagamento());
 	}
+	@Override
+	public boolean equals(Object obj){
+		//if(this == obj){return true;}
+		if(!(obj instanceof Servico)){return false;}
+		//if(this.getClass != obj.getClass){return false;}
+		Servico s = (Servico) obj;
+		if(codigo.equals(null)){
+			if(!s.codigo.equals(null)){
+				return false;
+			}
+		}
+		if(descricao.equals(null)){
+			if(!s.descricao.equals(null)){
+				return false;
+			}
+		}
+		if(tipo.equals(null)){
+			if(!s.tipo.equals(null)){
+				return false;
+			}
+		}
+		if(dataServico.equals(null)){
+			if(!s.dataServico.equals(null)){
+				return false;
+			}
+		}
+		return this.codigo.equals(s.codigo) && this.descricao.equals(s.descricao) && this.tipo.equals(s.tipo) && this.valor == s.valor && this.dataServico.equals(s.dataServico);
+	}
+	@Override
+	public int hashCode(){
+		return (int)(this.valor * 10 + this.descricao.length());
+	}
 }
