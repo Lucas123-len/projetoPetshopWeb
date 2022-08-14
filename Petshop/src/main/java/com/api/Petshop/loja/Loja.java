@@ -9,14 +9,17 @@ public class Loja {
 	@Id
 	private int codigo;
 	
+	private String cnpjPetshop;
+	
 	private String nomeGerente;
 	
 	private Endereco endereco;
 	
 	private String telefone;
 	
-	public Loja(int codigo, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero, String telefone) {
+	public Loja(int codigo, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero, String telefone, String cnpjPetshop) {
 		this.codigo = codigo;
+		this.cnpjPetshop = cnpjPetshop;
 		this.nomeGerente = nome;
 		this.telefone = telefone;
 		Endereco ed = new Endereco(pais,estado,cidade,bairro,rua,numero);
@@ -29,6 +32,14 @@ public class Loja {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+	public String getCnpjPetshop() {
+		return cnpjPetshop;
+	}
+
+	public void setCnpjPetshop(String cnpjPetshop) {
+		this.cnpjPetshop = cnpjPetshop;
+	}
+
 	public String getNomeGerente() {
 		return nomeGerente;
 	}
