@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 public class Cliente extends Pessoa{
 	private int codigo;
 	private String telefone;
-	public Cliente(int codigo, String telefone, String cpf, String nome, String endereco) {
-		super(cpf,nome,endereco);
+	public Cliente(int codigo, String telefone, String cpf, String nome, String pais, String estado, String cidade, String bairro, String numero) {
+		super(cpf,nome,pais,estado,cidade,bairro,numero);
 		this.codigo=codigo;
 		this.telefone = telefone;
 	}
@@ -45,20 +45,15 @@ public class Cliente extends Pessoa{
 		}
 		//if(this.getClass != obj.getClass){return false;}
 		Cliente cl = (Cliente) obj;
-		if(codigo.equals(null)){
-			if(!cl.codigo.equals(null)){
-				return false;
-			}
-		}
 		if(telefone.equals(null)){
 			if(!cl.telefone.equals(null)){
 				return false;
 			}
 		}
-		return this.codigo.equals(cl.codigo) && this.telefone.equals(cl.telefone);
+		return this.codigo == cl.codigo && this.telefone.equals(cl.telefone);
 	}
 	@Override
 	public int hashCode(){
-		return this.nome.length() * 3;
+		return this.nome.length() * 3 + this.codigo;
 	}
 }
