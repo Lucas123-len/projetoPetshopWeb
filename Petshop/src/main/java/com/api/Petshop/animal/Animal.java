@@ -9,17 +9,28 @@ public class Animal {
 	@Id
 	private int codigo;
 	
+	private int codigoCliente;
+	
 	private String nome;
 	
 	private String raca;
 	
 	private String especie;
 	
-	public Animal(int codigo, String nome, String raca, String especie) {
+	public Animal(int codigo, int codigoCliente, String nome, String raca, String especie) {
 		this.codigo = codigo;
+		this.codigoCliente = codigoCliente;
 		this.nome = nome;
 		this.raca = raca;
 		this.especie = especie;
+	}
+
+	public int getCodigoCliente() {
+		return codigoCliente;
+	}
+
+	public void setCodigoCliente(int codigoCliente) {
+		this.codigoCliente = codigoCliente;
 	}
 
 	public int getCodigo() {
