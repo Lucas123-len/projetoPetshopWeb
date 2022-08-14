@@ -7,19 +7,19 @@ import javax.persistence.Entity;
 
 @Entity
 public class Cliente extends Pessoa{
-	private String codigo;
+	private int codigo;
 	private String telefone;
-	public Cliente(String codigo, String telefone, String cpf, String nome, String endereco) {
+	public Cliente(int codigo, String telefone, String cpf, String nome, String endereco) {
 		super(cpf,nome,endereco);
 		this.codigo=codigo;
 		this.telefone = telefone;
 	}
 	
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 

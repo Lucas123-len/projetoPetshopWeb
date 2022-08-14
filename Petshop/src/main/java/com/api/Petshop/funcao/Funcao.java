@@ -7,23 +7,23 @@ import javax.persistence.Id;
 public class Funcao {
 	
 	@Id
-	private String codigo;
+	private int codigo;
 	
 	private String descricao;
 	
 	private float salario;
 	
-	public Funcao(String codigo, String descricao, float salario) {
+	public Funcao(int codigo, String descricao, float salario) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.salario = salario;
 	}
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 

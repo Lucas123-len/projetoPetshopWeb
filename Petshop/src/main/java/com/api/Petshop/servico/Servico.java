@@ -7,22 +7,22 @@ import com.api.Petshop.pagamento.*;
 @Entity
 public class Servico implements Pagamento,ImprimeDados{
 	@Id
-	private String codigo;
+	private int codigo;
 	private String descricao;
 	private String tipo;
 	private double valor;
 	private String dataServico;
-	public Servico(String codigo,String descricao,String tipo,double valor,String dataServico) {
+	public Servico(int codigo,String descricao,String tipo,double valor,String dataServico) {
 		this.codigo=codigo;
 		this.descricao=descricao;
 		this.tipo=tipo;
 		this.valor=valor;
 		this.dataServico=dataServico;
 	}
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	public String getDescricao() {

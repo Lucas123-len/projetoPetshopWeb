@@ -8,14 +8,14 @@ import javax.swing.JOptionPane;
 @Entity
 public class Produto implements Pagamento,ImprimeDados{
 	@Id
-	private String codigo;
+	private int codigo;
 	private String marca;
 	private double peso;
 	private String tipo;
 	private double valor;
 	private String dataVenda;
 	private int quantidade;
-	public Produto(String codigo,String marca,double peso,String tipo,double valor,String data,int quantidade) {
+	public Produto(int codigo,String marca,double peso,String tipo,double valor,String data,int quantidade) {
 		this.codigo=codigo;
 		this.marca=marca;
 		this.peso=peso;
@@ -24,10 +24,10 @@ public class Produto implements Pagamento,ImprimeDados{
 		this.dataVenda=data;
 		this.quantidade=quantidade;
 	}
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	public String getMarca() {

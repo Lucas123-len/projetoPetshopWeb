@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class Animal {
 	
 	@Id
-	private String codigo;
+	private int codigo;
 	
 	private String nome;
 	
@@ -15,18 +15,18 @@ public class Animal {
 	
 	private String especie;
 	
-	public Animal(String codigo, String nome, String raca, String especie) {
+	public Animal(int codigo, String nome, String raca, String especie) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.raca = raca;
 		this.especie = especie;
 	}
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
