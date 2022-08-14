@@ -5,13 +5,21 @@ public class Endereco {
 	private String estado;
 	private String cidade;
 	private String bairro;
+	private String rua;
 	private String numero;
-	public Endereco(String pais, String estado, String cidade, String bairro, String numero) {
+	public Endereco(String pais, String estado, String cidade, String bairro, String rua, String numero) {
 		this.pais = pais;
 		this.estado = estado;
 		this.cidade = cidade;
 		this.bairro = bairro;
+		this.rua = rua;
 		this.numero = numero;
+	}
+	public String getRua() {
+		return rua;
+	}
+	public void setRua(String rua) {
+		this.rua = rua;
 	}
 	public String getPais() {
 		return pais;

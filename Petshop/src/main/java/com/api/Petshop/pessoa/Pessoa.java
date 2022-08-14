@@ -12,10 +12,10 @@ public abstract class Pessoa {
 	
 	protected Endereco endereco;
 	
-	public Pessoa(String cpf, String nome, String pais, String estado, String cidade, String bairro, String numero) {
+	public Pessoa(String cpf, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero) {
 		this.cpf = cpf;
 		this.nome = nome;
-		Endereco ed = new Endereco(pais,estado,cidade,bairro,numero);
+		Endereco ed = new Endereco(pais,estado,cidade,bairro,rua,numero);
 		this.endereco = ed;
 	}
 

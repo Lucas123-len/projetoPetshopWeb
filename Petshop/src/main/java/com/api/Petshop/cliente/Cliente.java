@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 public class Cliente extends Pessoa{
 	private int codigo;
 	private String telefone;
-	public Cliente(int codigo, String telefone, String cpf, String nome, String pais, String estado, String cidade, String bairro, String numero) {
-		super(cpf,nome,pais,estado,cidade,bairro,numero);
+	public Cliente(int codigo, String telefone, String cpf, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero) {
+		super(cpf,nome,pais,estado,cidade,bairro,rua,numero);
 		this.codigo=codigo;
 		this.telefone = telefone;
 	}
