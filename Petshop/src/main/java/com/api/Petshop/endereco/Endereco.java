@@ -1,9 +1,9 @@
 package com.api.Petshop.endereco;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 
-@Entity
+@Embeddable
 public class Endereco {
 	@Column(length=50)
 	private String pais;

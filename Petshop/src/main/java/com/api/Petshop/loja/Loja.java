@@ -2,6 +2,7 @@ package com.api.Petshop.loja;
 import com.api.Petshop.endereco.*;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class Loja {
 	private String nomeGerente;
 	@Column(length=50)
 	
+	@Embedded
 	private Endereco endereco;
 
 	@Column(length=50)

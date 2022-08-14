@@ -2,6 +2,7 @@ package com.api.Petshop.pessoa;
 import com.api.Petshop.endereco.*;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -13,7 +14,7 @@ public abstract class Pessoa {
 
 	@Column(length=50)
 	protected String nome;
-	
+	@Embedded
 	protected Endereco endereco;
 	
 	public Pessoa(String cpf, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero) {
