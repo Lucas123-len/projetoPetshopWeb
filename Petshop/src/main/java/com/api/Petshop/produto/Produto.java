@@ -86,11 +86,6 @@ public class Produto implements Pagamento,ImprimeDados{
 	if(!(obj instanceof Produto)){return false;}
 	//if(this.getClass != obj.getClass){return false;}
 	Produto p = (Produto) obj;
-	if(codigo.equals(null)){
-		if(!p.codigo.equals(null)){
-			return false;
-		}
-	}
 	if(marca.equals(null)){
 		if(!p.marca.equals(null)){
 			return false;
@@ -106,7 +101,7 @@ public class Produto implements Pagamento,ImprimeDados{
 			return false;
 		}
 	}
-	return this.codigo.equals(p.codigo) && this.marca.equals(p.marca) && this.peso == p.peso && this.tipo.equals(p.tipo) && this.valor == p.valor && this.dataVenda.equals(p.dataVenda) && this.quantidade == p.quantidade;
+	return this.codigo == p.codigo && this.marca.equals(p.marca) && this.peso == p.peso && this.tipo.equals(p.tipo) && this.valor == p.valor && this.dataVenda.equals(p.dataVenda) && this.quantidade == p.quantidade;
 	}
 	@Override
 	public int hashCode(){

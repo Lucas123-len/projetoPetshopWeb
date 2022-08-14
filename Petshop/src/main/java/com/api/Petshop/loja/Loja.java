@@ -15,11 +15,11 @@ public class Loja {
 	
 	private String telefone;
 	
-	public Loja(int codigo, String nome, String pais, String estado, String cidade, String bairro, String numero, String telefone) {
+	public Loja(int codigo, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero, String telefone) {
 		this.codigo = codigo;
 		this.nomeGerente = nome;
 		this.telefone = telefone;
-		Endereco ed = new Endereco(pais,estado,cidade,bairro,numero);
+		Endereco ed = new Endereco(pais,estado,cidade,bairro,rua,numero);
 		this.endereco = ed;
 	}
 	

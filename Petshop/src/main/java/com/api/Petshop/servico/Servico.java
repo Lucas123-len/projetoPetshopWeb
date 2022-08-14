@@ -67,11 +67,6 @@ public class Servico implements Pagamento,ImprimeDados{
 		if(!(obj instanceof Servico)){return false;}
 		//if(this.getClass != obj.getClass){return false;}
 		Servico s = (Servico) obj;
-		if(codigo.equals(null)){
-			if(!s.codigo.equals(null)){
-				return false;
-			}
-		}
 		if(descricao.equals(null)){
 			if(!s.descricao.equals(null)){
 				return false;
@@ -87,7 +82,7 @@ public class Servico implements Pagamento,ImprimeDados{
 				return false;
 			}
 		}
-		return this.codigo.equals(s.codigo) && this.descricao.equals(s.descricao) && this.tipo.equals(s.tipo) && this.valor == s.valor && this.dataServico.equals(s.dataServico);
+		return this.codigo == s.codigo && this.descricao.equals(s.descricao) && this.tipo.equals(s.tipo) && this.valor == s.valor && this.dataServico.equals(s.dataServico);
 	}
 	@Override
 	public int hashCode(){
