@@ -34,8 +34,9 @@ public class Cliente extends Pessoa{
 				"\nCódigo Cliente:"+this.codigo+
 				"\nNome: "+this.nome+
 				"\nCPF: "+this.cpf+
-				"\nEndereço: "+this.endereco+
-				"\nTelefone: "+this.telefone);
+				"\nTelefone: "+this.telefone+
+				"\nEndereço: "+this.endereco.getRua()+","+this.endereco.getNumero()+","+this.endereco.getBairro()+","+this.endereco.getCidade()+","+this.endereco.getEstado()+","+this.endereco.getPais()
+				);
 	}
 	@Override
 	public boolean equals(Object obj){
