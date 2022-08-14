@@ -1,6 +1,11 @@
 package com.api.Petshop.atende;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Atende {
+	@Id
 	private int codigo;
 	private int codigoCliente;
 	private int codigoFuncionario;

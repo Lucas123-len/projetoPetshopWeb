@@ -1,5 +1,8 @@
 package com.api.Petshop.servico;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.swing.JOptionPane;
 import com.api.Petshop.imprimeDados.*;
@@ -7,10 +10,14 @@ import com.api.Petshop.pagamento.*;
 @Entity
 public class Servico implements Pagamento,ImprimeDados{
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
+	@Column(length=50)
 	private String descricao;
+	@Column(length=50)
 	private String tipo;
 	private double valor;
+	@Column(length=50)
 	private String dataServico;
 	public Servico(int codigo,String descricao,String tipo,double valor,String dataServico) {
 		this.codigo=codigo;

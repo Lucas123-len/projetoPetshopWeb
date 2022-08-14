@@ -1,20 +1,28 @@
 package com.api.Petshop.loja;
 import com.api.Petshop.endereco.*;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Loja {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
-	
+	@Column(length=50)
 	private String cnpjPetshop;
+	@Column(length=50)
 	
 	private String nomeGerente;
+	@Column(length=50)
 	
 	private Endereco endereco;
-	
+
+	@Column(length=50)
 	private String telefone;
 	
 	public Loja(int codigo, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero, String telefone, String cnpjPetshop) {

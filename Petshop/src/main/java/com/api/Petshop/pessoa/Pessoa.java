@@ -1,13 +1,17 @@
 package com.api.Petshop.pessoa;
 import com.api.Petshop.endereco.*;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public abstract class Pessoa {
 	@Id
+	@Column(length=50)
 	protected String cpf;
-	
+
+	@Column(length=50)
 	protected String nome;
 	
 	protected Endereco endereco;

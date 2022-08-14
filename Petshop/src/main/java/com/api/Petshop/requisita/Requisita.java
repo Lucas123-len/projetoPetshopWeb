@@ -1,6 +1,14 @@
 package com.api.Petshop.requisita;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Requisita {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
 	private int codigoCliente;
 	private int codigoServico;

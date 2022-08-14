@@ -2,17 +2,27 @@ package com.api.Petshop.produto;
 import com.api.Petshop.imprimeDados.*;
 import com.api.Petshop.pagamento.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.swing.JOptionPane;
 @Entity
 public class Produto implements Pagamento,ImprimeDados{
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
+
+	@Column(length=50)
 	private String marca;
 	private double peso;
+
+	@Column(length=50)
 	private String tipo;
 	private double valor;
+
+	@Column(length=50)
 	private String dataVenda;
 	private int quantidade;
 	public Produto(int codigo,String marca,double peso,String tipo,double valor,String data,int quantidade) {

@@ -1,11 +1,21 @@
 package com.api.Petshop.endereco;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Endereco {
+	@Column(length=50)
 	private String pais;
+	@Column(length=50)
 	private String estado;
+	@Column(length=50)
 	private String cidade;
+	@Column(length=50)
 	private String bairro;
+	@Column(length=50)
 	private String rua;
+	@Column(length=50)
 	private String numero;
 	public Endereco(String pais, String estado, String cidade, String bairro, String rua, String numero) {
 		this.pais = pais;

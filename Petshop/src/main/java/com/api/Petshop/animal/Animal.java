@@ -1,20 +1,24 @@
 package com.api.Petshop.animal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Animal {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
 	
 	private int codigoCliente;
-	
+	@Column(length=50)
 	private String nome;
-	
+	@Column(length=50)
 	private String raca;
-	
+	@Column(length=50)
 	private String especie;
 	
 	public Animal(int codigo, int codigoCliente, String nome, String raca, String especie) {

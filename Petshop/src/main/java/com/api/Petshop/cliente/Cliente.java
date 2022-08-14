@@ -2,12 +2,18 @@ package com.api.Petshop.cliente;
 import com.api.Petshop.pessoa.*;
 
 import javax.swing.JOptionPane;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Cliente extends Pessoa{
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
+	@Column(length=50)
 	private String telefone;
 	public Cliente(int codigo, String telefone, String cpf, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero) {
 		super(cpf,nome,pais,estado,cidade,bairro,rua,numero);
