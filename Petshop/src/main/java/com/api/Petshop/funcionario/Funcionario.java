@@ -1,6 +1,5 @@
 package com.api.Petshop.funcionario;
 import com.api.Petshop.pessoa.*;
-import com.api.Petshop.funcao.*;
 
 import javax.persistence.Entity;
 
@@ -8,12 +7,13 @@ import javax.swing.JOptionPane;
 @Entity
 public class Funcionario extends Pessoa{
 	private int codigo;
-	private Funcao funcionarioFunc;
-	public Funcionario(int codigo, String cpf, String nome, String endereco, String codigoFuncao, String desc, float salario) {
-		super(cpf,nome,endereco);
-		Funcao fc = new Funcao(codigoFuncao,desc,salario);
+	private int codigoFuncao;
+	private int codigoLoja;
+	public Funcionario(int codigo, int codigoFuncao, int codigoLoja, String cpf, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero) {
+		super(cpf,nome,pais,estado,cidade,bairro,rua,numero);
 		this.codigo=codigo;
-		this.funcionarioFunc = fc;
+		this.codigoFuncao = codigoFuncao;
+		this.codigoLoja = codigoLoja;
 	}
 	
 	public int getCodigo() {
@@ -23,13 +23,21 @@ public class Funcionario extends Pessoa{
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-
-	public Funcao getFuncionarioFunc() {
-		return funcionarioFunc;
+	
+	public int getCodigoFuncao() {
+		return codigoFuncao;
 	}
 
-	public void setFuncionarioFun(Funcao funcionarioFunc) {
-		this.funcionarioFunc = funcionarioFunc;
+	public void setCodigoFuncao(int codigoFuncao) {
+		this.codigoFuncao = codigoFuncao;
+	}
+
+	public int getCodigoLoja() {
+		return codigoLoja;
+	}
+
+	public void setCodigoLoja(int codigoLoja) {
+		this.codigoLoja = codigoLoja;
 	}
 
 	public void imprimeDados() {
@@ -37,10 +45,9 @@ public class Funcionario extends Pessoa{
 				"\nCódigo Funcionário: "+this.codigo+
 				"\nNome: "+this.nome+
 				"\nCPF: "+this.cpf+
-				"\nEndereço: "+this.endereco+
-				"\nCódigo Função: "+this.funcionarioFunc.getCodigo()+
-				"\nDescrição da Função: "+this.funcionarioFunc.getDescricao()+
-				"\nSalário: "+this.funcionarioFunc.getSalario());
+				"\nEndereço: "+this.endereco.getRua()+","+this.endereco.getNumero()+","+this.endereco.getBairro()+","+this.endereco.getCidade()+","+this.endereco.getEstado()+","+this.endereco.getPais()+
+				"\nCódigo Função: "+this.codigoFuncao+
+				"\nCódigo Loja: "+this.codigoLoja);
 	}
 	@Override
 	public boolean equals(Object obj){
@@ -50,15 +57,10 @@ public class Funcionario extends Pessoa{
 		}
 		//if(this.getClass != obj.getClass){return false;}
 		Funcionario fc = (Funcionario) obj;
-		if(codigo.equals(null)){
-			if(!fc.codigo.equals(null)){
-				return false;
-			}
-		}
-		return this.codigo.equals(fc.codigo);
+		return this.codigo == fc.codigo;
 	}
 	@Override
 	public int hashCode(){
-		return this.getNome().length() * 3;
+		return this.getNome().length() * 3 + this.codigo;
 	}
 }
