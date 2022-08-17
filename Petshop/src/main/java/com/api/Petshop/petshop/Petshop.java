@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 @Entity
 public class Petshop {
 	@Id
-	@Column(length=50)
+	@Column(length=50, nullable = false, unique = true, updatable = false)
 	private String cnpj;
 
 	@Column(length=50)

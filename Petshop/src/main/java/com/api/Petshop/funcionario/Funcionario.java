@@ -2,30 +2,15 @@ package com.api.Petshop.funcionario;
 import com.api.Petshop.pessoa.*;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.swing.JOptionPane;
 @Entity
 public class Funcionario extends Pessoa{
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int codigo;
 	private int codigoFuncao;
 	private int codigoLoja;
 	public Funcionario(int codigo, int codigoFuncao, int codigoLoja, String cpf, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero) {
-		super(cpf,nome,pais,estado,cidade,bairro,rua,numero);
-		this.codigo=codigo;
+		super(codigo,cpf,nome,pais,estado,cidade,bairro,rua,numero);
 		this.codigoFuncao = codigoFuncao;
 		this.codigoLoja = codigoLoja;
-	}
-	
-	public int getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
 	}
 	
 	public int getCodigoFuncao() {

@@ -14,13 +14,13 @@ public class Loja {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
+	
 	@Column(length=50)
 	private String cnpjPetshop;
-	@Column(length=50)
 	
+	@Column(length=50)
 	private String nomeGerente;
-	@Column(length=50)
-	
+
 	@Embedded
 	private Endereco endereco;
 
