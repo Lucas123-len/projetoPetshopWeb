@@ -1,6 +1,13 @@
 package com.api.Petshop.petshop;
+import com.api.Petshop.loja.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -17,10 +24,15 @@ public class Petshop {
 	@Column(length=50)
 	private String site;
 	
-	public Petshop(String cnpj, String nome, String site) {
+	@OneToMany
+	@JoinColumn(name="cnpjPetshop")
+	private List<Loja> lojas;
+	
+	public Petshop(String cnpj, String nome, String site, List<Loja> lojas) {
 		this.cnpj = cnpj;
 		this.nome = nome;
 		this.site = site;
+		this.lojas = new ArrayList<Loja>();
 	}
 	public String getCnpj() {
 		return cnpj;
@@ -39,5 +51,11 @@ public class Petshop {
 	}
 	public void setSite(String site) {
 		this.site = site;
+	}
+	public List<Loja> getLojas() {
+		return lojas;
+	}
+	public void setLojas(List<Loja> lojas) {
+		this.lojas = lojas;
 	}
 }
