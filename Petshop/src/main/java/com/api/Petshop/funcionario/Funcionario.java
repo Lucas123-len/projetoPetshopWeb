@@ -1,32 +1,47 @@
 package com.api.Petshop.funcionario;
 import com.api.Petshop.pessoa.*;
-
+import com.api.Petshop.cliente.*;
+import com.api.Petshop.servico.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.swing.JOptionPane;
 @Entity
 public class Funcionario extends Pessoa{
-	private int codigoFuncao;
-	private int codigoLoja;
-	public Funcionario(int codigo, int codigoFuncao, int codigoLoja, String cpf, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero) {
-		super(codigo,cpf,nome,pais,estado,cidade,bairro,rua,numero);
-		this.codigoFuncao = codigoFuncao;
-		this.codigoLoja = codigoLoja;
+	@ManyToMany
+	@JoinTable(name="Atende",
+			   joinColumns=@JoinColumn(name="codigoFuncionario"),
+			   inverseJoinColumns = @JoinColumn(name="codigoCliente"))
+	private List<Cliente> clientes;
+	@ManyToMany
+	@JoinTable(name="Realiza",
+	   		   joinColumns=@JoinColumn(name="codigoFuncionario"),
+	   		   inverseJoinColumns = @JoinColumn(name="codigoServico"))
+	private List<Servico> servicos;
+	public Funcionario(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero, List<Cliente> clientes, List<Servico> servicos) {
+		super(codigo,cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);
+		this.clientes = new ArrayList<Cliente>();
+		this.servicos = new ArrayList<Servico>();
 	}
 	
-	public int getCodigoFuncao() {
-		return codigoFuncao;
+	public List<Cliente> getClientes() {
+		return clientes;
 	}
 
-	public void setCodigoFuncao(int codigoFuncao) {
-		this.codigoFuncao = codigoFuncao;
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+	
+	public List<Servico> getServicos() {
+		return servicos;
 	}
 
-	public int getCodigoLoja() {
-		return codigoLoja;
-	}
-
-	public void setCodigoLoja(int codigoLoja) {
-		this.codigoLoja = codigoLoja;
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
 	}
 
 	public void imprimeDados() {
@@ -34,9 +49,8 @@ public class Funcionario extends Pessoa{
 				"\nCódigo Funcionário: "+this.codigo+
 				"\nNome: "+this.nome+
 				"\nCPF: "+this.cpf+
-				"\nEndereço: "+this.endereco.getRua()+","+this.endereco.getNumero()+","+this.endereco.getBairro()+","+this.endereco.getCidade()+","+this.endereco.getEstado()+","+this.endereco.getPais()+
-				"\nCódigo Função: "+this.codigoFuncao+
-				"\nCódigo Loja: "+this.codigoLoja);
+				"\nTelefone: "+this.telefone+
+				"\nEndereço: "+this.endereco.getRua()+","+this.endereco.getNumero()+","+this.endereco.getBairro()+","+this.endereco.getCidade()+","+this.endereco.getEstado()+","+this.endereco.getPais());
 	}
 	@Override
 	public boolean equals(Object obj){

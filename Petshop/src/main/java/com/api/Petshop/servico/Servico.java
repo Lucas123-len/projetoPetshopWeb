@@ -1,12 +1,20 @@
 package com.api.Petshop.servico;
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.swing.JOptionPane;
 import com.api.Petshop.imprimeDados.*;
 import com.api.Petshop.pagamento.*;
+import com.api.Petshop.funcionario.*;
+import com.api.Petshop.cliente.*;
 @Entity
 public class Servico implements Pagamento,ImprimeDados{
 	@Id
@@ -19,13 +27,36 @@ public class Servico implements Pagamento,ImprimeDados{
 	private double valor;
 	@Column(length=50)
 	private String dataServico;
-	public Servico(int codigo,String descricao,String tipo,double valor,String dataServico) {
+	@ManyToMany(mappedBy="servicos")
+	private List<Funcionario> funcionarios;
+	@ManyToMany(mappedBy="servicos")
+	private List<Cliente> clientes;
+	public Servico(int codigo,String descricao,String tipo,double valor,String dataServico, List<Funcionario> funcionarios, List<Cliente> clientes) {
 		this.codigo=codigo;
 		this.descricao=descricao;
 		this.tipo=tipo;
 		this.valor=valor;
 		this.dataServico=dataServico;
+		this.funcionarios = new ArrayList<Funcionario>();
+		this.clientes = new ArrayList<Cliente>();
 	}
+	
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}

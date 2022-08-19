@@ -1,25 +1,61 @@
 package com.api.Petshop.cliente;
 import com.api.Petshop.pessoa.*;
-
+import com.api.Petshop.animal.*;
+import com.api.Petshop.funcionario.*;
+import com.api.Petshop.servico.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.JOptionPane;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente extends Pessoa{
-	@Column(length=50)
-	private String telefone;
-	public Cliente(int codigo, String telefone, String cpf, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero) {
-		super(codigo,cpf,nome,pais,estado,cidade,bairro,rua,numero);
-		this.telefone = telefone;
+	@OneToMany
+	@JoinColumn(name="codigoCliente")
+	private List<Animal> animais;
+	@ManyToMany(mappedBy="clientes")
+	private List<Funcionario> funcionarios;
+	@ManyToMany
+	@JoinTable(name="Requisita",
+	   		   joinColumns=@JoinColumn(name="codigoCliente"),
+	   		   inverseJoinColumns = @JoinColumn(name="codigoServico"))
+	private List<Servico> servicos;
+	public Cliente(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero, List<Animal> animais, List<Funcionario> funcionarios, List<Servico> servicos) {
+		super(codigo,cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);
+		this.animais = new ArrayList<Animal>();
+		this.funcionarios = new ArrayList<Funcionario>();
+		this.servicos = new ArrayList<Servico>();
+	}
+	
+	public List<Servico> getServicos() {
+		return servicos;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
 	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+
+	public List<Animal> getAnimais() {
+		return animais;
 	}
+
+	public void setAnimais(List<Animal> animais) {
+		this.animais = animais;
+	}
+	
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
+	}
+
 	public void imprimeDados() {
 		JOptionPane.showMessageDialog(null, "Informações do Cliente:"+
 				"\nCódigo Cliente:"+this.codigo+

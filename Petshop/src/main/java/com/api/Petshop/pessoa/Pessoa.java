@@ -7,8 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Pessoa {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -19,17 +22,30 @@ public abstract class Pessoa {
 
 	@Column(length=50)
 	protected String nome;
+	
+	@Column(length=50)
+	protected String telefone;
+	
 	@Embedded
 	protected Endereco endereco;
 	
-	public Pessoa(int codigo, String cpf, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero) {
+	public Pessoa(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero) {
 		this.codigo = codigo;
 		this.cpf = cpf;
 		this.nome = nome;
+		this.telefone = telefone;
 		Endereco ed = new Endereco(pais,estado,cidade,bairro,rua,numero);
 		this.endereco = ed;
 	}
 	
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}
