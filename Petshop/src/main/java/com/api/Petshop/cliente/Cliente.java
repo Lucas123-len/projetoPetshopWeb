@@ -3,6 +3,7 @@ import com.api.Petshop.pessoa.*;
 import com.api.Petshop.animal.*;
 import com.api.Petshop.funcionario.*;
 import com.api.Petshop.servico.*;
+import com.api.Petshop.produto.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +19,9 @@ public class Cliente extends Pessoa{
 	@OneToMany
 	@JoinColumn(name="codigoCliente")
 	private List<Animal> animais;
+	@OneToMany
+	@JoinColumn(name="codigoCliente")
+	private List<Produto> produtos;
 	@ManyToMany(mappedBy="clientes")
 	private List<Funcionario> funcionarios;
 	@ManyToMany
@@ -25,13 +29,22 @@ public class Cliente extends Pessoa{
 	   		   joinColumns=@JoinColumn(name="codigoCliente"),
 	   		   inverseJoinColumns = @JoinColumn(name="codigoServico"))
 	private List<Servico> servicos;
-	public Cliente(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero, List<Animal> animais, List<Funcionario> funcionarios, List<Servico> servicos) {
+	public Cliente(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero, List<Animal> animais, List<Funcionario> funcionarios, List<Servico> servicos, List<Produto> produtos) {
 		super(codigo,cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);
 		this.animais = new ArrayList<Animal>();
 		this.funcionarios = new ArrayList<Funcionario>();
 		this.servicos = new ArrayList<Servico>();
+		this.produtos = new ArrayList<Produto>();
 	}
 	
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
 	public List<Servico> getServicos() {
 		return servicos;
 	}
