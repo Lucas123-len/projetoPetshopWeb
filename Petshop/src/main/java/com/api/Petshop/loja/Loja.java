@@ -2,6 +2,7 @@ package com.api.Petshop.loja;
 import com.api.Petshop.endereco.*;
 import com.api.Petshop.funcionario.*;
 import com.api.Petshop.produto.*;
+import com.api.Petshop.petshop.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -39,6 +41,9 @@ public class Loja {
 	@OneToMany(mappedBy = "loja")
 	@JoinColumn(nullable = false, name="codigoLoja")
 	private List<Produto> produtos;
+	
+	@ManyToOne
+	private Petshop petshop;
 	
 	public Loja(int codigo, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero, String telefone, List<Funcionario> funcionarios, List<Produto> produtos) {
 		this.codigo = codigo;
