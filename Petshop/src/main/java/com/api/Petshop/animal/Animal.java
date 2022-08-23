@@ -1,10 +1,11 @@
 package com.api.Petshop.animal;
-
+import com.api.Petshop.cliente.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Animal {
@@ -18,7 +19,8 @@ public class Animal {
 	private String raca;
 	@Column(length=50)
 	private String especie;
-	
+	@ManyToOne
+	private Cliente cliente;
 	public Animal(int codigo, String nome, String raca, String especie) {
 		this.codigo = codigo;
 		this.nome = nome;

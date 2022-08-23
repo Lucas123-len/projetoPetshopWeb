@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente extends Pessoa{
-	@OneToMany
+	@OneToMany(mappedBy = "cliente")
 	@JoinColumn(nullable = false, name="codigoCliente")
 	private List<Animal> animais;
 	@OneToMany(mappedBy = "cliente")
