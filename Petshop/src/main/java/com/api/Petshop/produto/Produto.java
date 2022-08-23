@@ -1,12 +1,14 @@
 package com.api.Petshop.produto;
 import com.api.Petshop.imprimeDados.*;
 import com.api.Petshop.pagamento.*;
-
+import com.api.Petshop.cliente.*;
+import com.api.Petshop.loja.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.swing.JOptionPane;
 @Entity
 public class Produto implements Pagamento,ImprimeDados{
@@ -25,6 +27,10 @@ public class Produto implements Pagamento,ImprimeDados{
 	@Column(length=50)
 	private String dataVenda;
 	private int quantidade;
+	@ManyToOne
+	private Loja loja;
+	@ManyToOne
+	private Cliente cliente;
 	public Produto(int codigo,String marca,double peso,String tipo,double valor,String data,int quantidade) {
 		this.codigo=codigo;
 		this.marca=marca;

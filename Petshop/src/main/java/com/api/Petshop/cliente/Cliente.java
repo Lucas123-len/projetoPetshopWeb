@@ -17,10 +17,10 @@ import javax.persistence.OneToMany;
 @Entity
 public class Cliente extends Pessoa{
 	@OneToMany
-	@JoinColumn(name="codigoCliente")
+	@JoinColumn(nullable = false, name="codigoCliente")
 	private List<Animal> animais;
-	@OneToMany
-	@JoinColumn(name="codigoCliente")
+	@OneToMany(mappedBy = "cliente")
+	@JoinColumn(nullable = false, name="codigoCliente")
 	private List<Produto> produtos;
 	@ManyToMany(mappedBy="clientes")
 	private List<Funcionario> funcionarios;

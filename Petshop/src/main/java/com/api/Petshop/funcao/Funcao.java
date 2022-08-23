@@ -22,8 +22,8 @@ public class Funcao {
 	private String descricao;
 	
 	private float salario;
-	@OneToMany
-	@JoinColumn(name="codigoFuncao")
+	@OneToMany(mappedBy = "funcao")
+	@JoinColumn(nullable = false, name="codigoFuncao")
 	private List<Funcionario> funcionarios;
 	
 	public Funcao(int codigo, String descricao, float salario, List<Funcionario> funcionarios) {

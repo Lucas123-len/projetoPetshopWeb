@@ -2,6 +2,8 @@ package com.api.Petshop.funcionario;
 import com.api.Petshop.pessoa.*;
 import com.api.Petshop.cliente.*;
 import com.api.Petshop.servico.*;
+import com.api.Petshop.funcao.*;
+import com.api.Petshop.loja.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.swing.JOptionPane;
 @Entity
 public class Funcionario extends Pessoa{
@@ -22,6 +25,11 @@ public class Funcionario extends Pessoa{
 	   		   joinColumns=@JoinColumn(name="codigoFuncionario"),
 	   		   inverseJoinColumns = @JoinColumn(name="codigoServico"))
 	private List<Servico> servicos;
+	@ManyToOne
+	private Loja loja;
+	@ManyToOne
+	private Funcao funcao;
+	
 	public Funcionario(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero, List<Cliente> clientes, List<Servico> servicos) {
 		super(codigo,cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);
 		this.clientes = new ArrayList<Cliente>();

@@ -32,12 +32,12 @@ public class Loja {
 	@Column(length=50)
 	private String telefone;
 	
-	@OneToMany
-	@JoinColumn(name="codigoLoja")
+	@OneToMany(mappedBy = "loja")
+	@JoinColumn(nullable = false, name="codigoLoja")
 	private List<Funcionario> funcionarios;
 	
-	@OneToMany
-	@JoinColumn(name="codigoLoja")
+	@OneToMany(mappedBy = "loja")
+	@JoinColumn(nullable = false, name="codigoLoja")
 	private List<Produto> produtos;
 	
 	public Loja(int codigo, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero, String telefone, List<Funcionario> funcionarios, List<Produto> produtos) {
