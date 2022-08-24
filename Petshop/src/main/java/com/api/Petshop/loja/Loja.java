@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
 public class Loja {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int codigo;
 	
 	@Column(length=50)

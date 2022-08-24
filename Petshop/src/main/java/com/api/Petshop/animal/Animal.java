@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 public class Animal {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int codigo;
 	@Column(length=50)
 	private String nome;
