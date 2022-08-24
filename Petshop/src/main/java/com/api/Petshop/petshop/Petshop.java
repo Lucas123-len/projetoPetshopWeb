@@ -2,7 +2,6 @@ package com.api.Petshop.petshop;
 import com.api.Petshop.loja.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Id;

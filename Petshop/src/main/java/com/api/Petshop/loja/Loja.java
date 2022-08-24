@@ -2,10 +2,8 @@ package com.api.Petshop.loja;
 import com.api.Petshop.endereco.*;
 import com.api.Petshop.funcionario.*;
 import com.api.Petshop.produto.*;
-import com.api.Petshop.petshop.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity

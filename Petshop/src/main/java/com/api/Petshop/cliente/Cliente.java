@@ -5,7 +5,6 @@ import com.api.Petshop.funcionario.*;
 import com.api.Petshop.servico.*;
 import com.api.Petshop.produto.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.persistence.Entity;

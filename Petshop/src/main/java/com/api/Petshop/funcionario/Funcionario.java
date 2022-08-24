@@ -2,16 +2,12 @@ package com.api.Petshop.funcionario;
 import com.api.Petshop.pessoa.*;
 import com.api.Petshop.cliente.*;
 import com.api.Petshop.servico.*;
-import com.api.Petshop.funcao.*;
-import com.api.Petshop.loja.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.swing.JOptionPane;
 @Entity
 public class Funcionario extends Pessoa{
