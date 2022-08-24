@@ -19,8 +19,6 @@ public class Animal {
 	private String raca;
 	@Column(length=50)
 	private String especie;
-	@ManyToOne
-	private Cliente cliente;
 	public Animal(int codigo, String nome, String raca, String especie) {
 		this.codigo = codigo;
 		this.nome = nome;

@@ -16,16 +16,18 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente extends Pessoa{
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany
+	@JoinColumn(nullable = false, name = "cliente_codigo")
 	private List<Animal> animais;
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany
+	@JoinColumn(nullable = false, name = "cliente_codigo")
 	private List<Produto> produtos;
 	@ManyToMany(mappedBy="clientes")
 	private List<Funcionario> funcionarios;
 	@ManyToMany
 	@JoinTable(name="Requisita",
-	   		   joinColumns=@JoinColumn(name="codigoCliente"),
-	   		   inverseJoinColumns = @JoinColumn(name="codigoServico"))
+	   		   joinColumns=@JoinColumn(name="cliente_codigo"),
+	   		   inverseJoinColumns = @JoinColumn(name="servico_codigo"))
 	private List<Servico> servicos;
 	public Cliente(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero, List<Animal> animais, List<Funcionario> funcionarios, List<Servico> servicos, List<Produto> produtos) {
 		super(codigo,cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);

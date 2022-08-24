@@ -17,18 +17,14 @@ import javax.swing.JOptionPane;
 public class Funcionario extends Pessoa{
 	@ManyToMany
 	@JoinTable(name="Atende",
-			   joinColumns=@JoinColumn(name="codigoFuncionario"),
-			   inverseJoinColumns = @JoinColumn(name="codigoCliente"))
+			   joinColumns=@JoinColumn(name="funcionario_codigo"),
+			   inverseJoinColumns = @JoinColumn(name="cliente_codigo"))
 	private List<Cliente> clientes;
 	@ManyToMany
 	@JoinTable(name="Realiza",
-	   		   joinColumns=@JoinColumn(name="codigoFuncionario"),
-	   		   inverseJoinColumns = @JoinColumn(name="codigoServico"))
+	   		   joinColumns=@JoinColumn(name="funcionario_codigo"),
+	   		   inverseJoinColumns = @JoinColumn(name="servico_codigo"))
 	private List<Servico> servicos;
-	@ManyToOne
-	private Loja loja;
-	@ManyToOne
-	private Funcao funcao;
 	
 	public Funcionario(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero, List<Cliente> clientes, List<Servico> servicos) {
 		super(codigo,cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);

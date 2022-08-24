@@ -27,10 +27,6 @@ public class Produto implements Pagamento,ImprimeDados{
 	@Column(length=50)
 	private String dataVenda;
 	private int quantidade;
-	@ManyToOne
-	private Loja loja;
-	@ManyToOne
-	private Cliente cliente;
 	public Produto(int codigo,String marca,double peso,String tipo,double valor,String data,int quantidade) {
 		this.codigo=codigo;
 		this.marca=marca;

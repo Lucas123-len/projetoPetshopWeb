@@ -34,14 +34,14 @@ public class Loja {
 	@Column(length=50)
 	private String telefone;
 	
-	@OneToMany(mappedBy = "loja")
+	@OneToMany
+	@JoinColumn(nullable = false, name = "loja_codigo")
 	private List<Funcionario> funcionarios;
 	
-	@OneToMany(mappedBy = "loja")
+	@OneToMany
+	@JoinColumn(nullable = false, name = "loja_codigo")
 	private List<Produto> produtos;
 	
-	@ManyToOne
-	private Petshop petshop;
 	
 	public Loja(int codigo, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero, String telefone, List<Funcionario> funcionarios, List<Produto> produtos) {
 		this.codigo = codigo;
