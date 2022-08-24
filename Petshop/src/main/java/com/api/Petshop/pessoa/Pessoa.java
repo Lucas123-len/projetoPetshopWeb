@@ -14,7 +14,7 @@ import javax.persistence.InheritanceType;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Pessoa {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	protected int codigo;
 	
 	@Column(length=50)
