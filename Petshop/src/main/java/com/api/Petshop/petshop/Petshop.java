@@ -25,7 +25,6 @@ public class Petshop {
 	private String site;
 	
 	@OneToMany(mappedBy = "petshop")
-	@JoinColumn(name="cnpjPetshop")
 	private List<Loja> lojas;
 	
 	public Petshop(String cnpj, String nome, String site, List<Loja> lojas) {

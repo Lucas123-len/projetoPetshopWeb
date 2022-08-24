@@ -35,11 +35,9 @@ public class Loja {
 	private String telefone;
 	
 	@OneToMany(mappedBy = "loja")
-	@JoinColumn(nullable = false, name="codigoLoja")
 	private List<Funcionario> funcionarios;
 	
 	@OneToMany(mappedBy = "loja")
-	@JoinColumn(nullable = false, name="codigoLoja")
 	private List<Produto> produtos;
 	
 	@ManyToOne

@@ -18,12 +18,13 @@ public class Funcao {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
+	
 	@Column(length=50)
 	private String descricao;
 	
 	private float salario;
+	
 	@OneToMany(mappedBy = "funcao")
-	@JoinColumn(nullable = false, name="codigoFuncao")
 	private List<Funcionario> funcionarios;
 	
 	public Funcao(int codigo, String descricao, float salario, List<Funcionario> funcionarios) {
