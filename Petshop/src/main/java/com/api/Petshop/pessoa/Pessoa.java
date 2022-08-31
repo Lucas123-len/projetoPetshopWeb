@@ -9,6 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.lang.NonNull;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
@@ -18,15 +24,19 @@ public abstract class Pessoa {
 	protected int codigo;
 	
 	@Column(length=50)
+	@CPF(message = "CPF inválido")
 	protected String cpf;
 
 	@Column(length=50)
+	@NotBlank(message = "Nome obrigatorio")
 	protected String nome;
 	
 	@Column(length=50)
 	protected String telefone;
 	
 	@Embedded
+	@NotNull(message = "Endereço obrigatorio")
+	@Valid
 	protected Endereco endereco;
 	
 	public Pessoa(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero) {
