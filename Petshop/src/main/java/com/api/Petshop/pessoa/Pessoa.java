@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.lang.NonNull;
 
@@ -23,7 +24,7 @@ public abstract class Pessoa {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	protected int codigo;
 	
-	@Column(length=50)
+	@Column(length=14, nullable = false)
 	@CPF(message = "CPF inválido")
 	protected String cpf;
 
@@ -31,7 +32,9 @@ public abstract class Pessoa {
 	@NotBlank(message = "Nome obrigatorio")
 	protected String nome;
 	
-	@Column(length=50)
+	@Column(length=14, nullable = false)
+	@NotBlank(message = "Numero de telefone obrigatorio")
+	@Length(min = 13, max = 14, message = "Telefone deve ter 13 ou 14 caracteres (Ex.: (99)9999-9999 ou (99)99999-9999")
 	protected String telefone;
 	
 	@Embedded

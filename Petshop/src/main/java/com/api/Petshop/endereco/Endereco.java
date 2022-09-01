@@ -15,15 +15,15 @@ public class Endereco {
 	private String estado;
 	@Column(length=50)
 	@NotBlank(message = "Cidade obrigatoria")
-	@Length(max = 50, message = "cidade deve ter no máximo 50 caracteres.")
+	@Length(min = 10, max = 50, message = "cidade deve ter no máximo 50 caracteres.")
 	private String cidade;
 	@Column(length=50)
 	@NotBlank(message = "Bairro obrigatoria")
-	@Length(max = 50, message = "bairro deve ter no máximo 50 caracteres.")
+	@Length(min = 20, max = 50, message = "bairro deve ter no máximo 50 caracteres.")
 	private String bairro;
 	@Column(length=200)
 	@NotBlank(message = "Rua obrigatoria")
-	@Length(max = 200, message = "Rua deve ter no máximo 200 caracteres.")
+	@Length(min = 100, max = 200, message = "Rua deve ter no máximo 200 caracteres.")
 	private String rua;
 	@Column(length=50)
 	@Digits(integer = 4, fraction = 0,message = "Numero deve ser inteiro e ter até 4 caracteres")

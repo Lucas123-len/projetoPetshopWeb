@@ -14,6 +14,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Loja {
@@ -23,20 +29,29 @@ public class Loja {
 	private int codigo;
 	
 	@Column(length=50)
+	@NotNull(message = "Nome obrigatorio")
 	private String nomeGerente;
 
 	@Embedded
+	@NotNull(message = "Endereço obrigatorio")
+	@Valid
 	private Endereco endereco;
 
-	@Column(length=50)
+	@Column(length = 14, nullable = false)
+	@NotBlank(message = "Numero de telefone obrigatorio")
+	@Length(min = 13, max = 14, message = "Telefone deve ter 13 ou 14 caracteres (Ex.: (99)9999-9999 ou (99)99999-9999")
 	private String telefone;
 	
 	@OneToMany
 	@JoinColumn(nullable = false, name = "loja_codigo")
+	@Size(min = 1, message = "Loja deve ter no minimo 1 funcionario")
+	@Valid
 	private List<Funcionario> funcionarios;
 	
 	@OneToMany
 	@JoinColumn(nullable = false, name = "loja_codigo")
+	@Size(min = 1, message = "Loja deve ter no minimo 1 produto")
+	@Valid
 	private List<Produto> produtos;
 	
 	

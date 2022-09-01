@@ -7,6 +7,8 @@ import com.api.Petshop.produto.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -17,11 +19,16 @@ import javax.persistence.OneToMany;
 public class Cliente extends Pessoa{
 	@OneToMany
 	@JoinColumn(nullable = false, name = "cliente_codigo")
+	@Size(min = 1, message = "Cliente deve ter no minimo 1 animal")
+	@Valid
 	private List<Animal> animais;
 	@OneToMany
 	@JoinColumn(nullable = false, name = "cliente_codigo")
+	@Size(min = 1, message = "Cliente deve comprar no minimo 1 produto")
+	@Valid
 	private List<Produto> produtos;
 	@ManyToMany(mappedBy="clientes")
+	@Size(min = 1, message = "Cliente deve ser atendido por pelo menos 1 funcionario")
 	private List<Funcionario> funcionarios;
 	@ManyToMany
 	@JoinTable(name="Requisita",

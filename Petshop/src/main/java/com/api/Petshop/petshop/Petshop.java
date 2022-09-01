@@ -7,6 +7,10 @@ import java.util.List;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.br.CNPJ;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -15,12 +19,15 @@ import javax.persistence.Entity;
 public class Petshop {
 	@Id
 	@Column(length=50, nullable = false, unique = true, updatable = false)
+	@CNPJ(message = "CNPJ inválido")
 	private String cnpj;
 
 	@Column(length=50)
+	@NotBlank(message = "Nome petshop obrigatorio")
 	private String nome;
 
 	@Column(length=50)
+	@NotBlank(message = "Nome site obrigatorio")
 	private String site;
 	
 	@OneToMany
