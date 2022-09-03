@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.swing.JOptionPane;
+import javax.validation.constraints.NotNull;
 @Entity
 public class Produto implements Pagamento,ImprimeDados{
 	@Id
@@ -17,10 +18,12 @@ public class Produto implements Pagamento,ImprimeDados{
 	private int codigo;
 
 	@Column(length=50)
+	@NotNull(message = "Marca obrigatorio")
 	private String marca;
 	private double peso;
 
 	@Column(length=50)
+	@NotNull(message = "Tipo obrigatorio")
 	private String tipo;
 	private double valor;
 

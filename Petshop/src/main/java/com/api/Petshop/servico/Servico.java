@@ -10,6 +10,9 @@ import java.util.List;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.swing.JOptionPane;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import com.api.Petshop.imprimeDados.*;
 import com.api.Petshop.pagamento.*;
 import com.api.Petshop.funcionario.*;
@@ -20,15 +23,19 @@ public class Servico implements Pagamento,ImprimeDados{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int codigo;
 	@Column(length=50)
+	@NotNull(message = "Descricao Serviço obrigatorio")
 	private String descricao;
 	@Column(length=50)
+	@NotNull(message = "Tipo Serviço obrigatorio")
 	private String tipo;
 	private double valor;
 	@Column(length=50)
 	private String dataServico;
 	@ManyToMany(mappedBy="servicos")
+	@Valid
 	private List<Funcionario> funcionarios;
 	@ManyToMany(mappedBy="servicos")
+	@Valid
 	private List<Cliente> clientes;
 	public Servico(int codigo,String descricao,String tipo,double valor,String dataServico, List<Funcionario> funcionarios, List<Cliente> clientes) {
 		this.codigo=codigo;

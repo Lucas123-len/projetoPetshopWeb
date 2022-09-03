@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +28,8 @@ public class Funcao {
 	
 	@OneToMany
 	@JoinColumn(nullable = false, name = "funcao_codigo")
+	@Size(min = 1, message = "Uma função pelo menos 1 funcionario")
+	@Valid
 	private List<Funcionario> funcionarios;
 	
 	public Funcao(int codigo, String descricao, float salario, List<Funcionario> funcionarios) {

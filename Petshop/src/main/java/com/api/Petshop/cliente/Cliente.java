@@ -29,6 +29,7 @@ public class Cliente extends Pessoa{
 	private List<Produto> produtos;
 	@ManyToMany(mappedBy="clientes")
 	@Size(min = 1, message = "Cliente deve ser atendido por pelo menos 1 funcionario")
+	@Valid
 	private List<Funcionario> funcionarios;
 	@ManyToMany
 	@JoinTable(name="Requisita",
