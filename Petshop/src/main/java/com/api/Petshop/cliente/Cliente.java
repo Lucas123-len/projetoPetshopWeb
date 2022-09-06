@@ -21,27 +21,23 @@ public class Cliente extends Pessoa{
 	@JoinColumn(nullable = false, name = "cliente_codigo")
 	@Size(min = 1, message = "Cliente deve ter no minimo 1 animal")
 	@Valid
-	private List<Animal> animais;
+	private List<Animal> animais = new ArrayList<Animal>();
 	@OneToMany
 	@JoinColumn(nullable = false, name = "cliente_codigo")
 	@Size(min = 1, message = "Cliente deve comprar no minimo 1 produto")
 	@Valid
-	private List<Produto> produtos;
+	private List<Produto> produtos = new ArrayList<Produto>();
 	@ManyToMany(mappedBy="clientes")
 	@Size(min = 1, message = "Cliente deve ser atendido por pelo menos 1 funcionario")
 	@Valid
-	private List<Funcionario> funcionarios;
+	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	@ManyToMany
 	@JoinTable(name="Requisita",
 	   		   joinColumns=@JoinColumn(name="cliente_codigo"),
 	   		   inverseJoinColumns = @JoinColumn(name="servico_codigo"))
-	private List<Servico> servicos;
-	public Cliente(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero, List<Animal> animais, List<Funcionario> funcionarios, List<Servico> servicos, List<Produto> produtos) {
+	private List<Servico> servicos = new ArrayList<Servico>();
+	public Cliente(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero) {
 		super(codigo,cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);
-		this.animais = new ArrayList<Animal>();
-		this.funcionarios = new ArrayList<Funcionario>();
-		this.servicos = new ArrayList<Servico>();
-		this.produtos = new ArrayList<Produto>();
 	}
 	
 	public List<Produto> getProdutos() {
