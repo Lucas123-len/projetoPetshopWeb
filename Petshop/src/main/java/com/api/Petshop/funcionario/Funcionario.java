@@ -15,17 +15,15 @@ public class Funcionario extends Pessoa{
 	@JoinTable(name="Atende",
 			   joinColumns=@JoinColumn(name="funcionario_codigo"),
 			   inverseJoinColumns = @JoinColumn(name="cliente_codigo"))
-	private List<Cliente> clientes;
+	private List<Cliente> clientes = new ArrayList<Cliente>();
 	@ManyToMany
 	@JoinTable(name="Realiza",
 	   		   joinColumns=@JoinColumn(name="funcionario_codigo"),
 	   		   inverseJoinColumns = @JoinColumn(name="servico_codigo"))
-	private List<Servico> servicos;
+	private List<Servico> servicos = new ArrayList<Servico>();
 	
-	public Funcionario(String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero, List<Cliente> clientes, List<Servico> servicos) {
+	public Funcionario(String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero) {
 		super(cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);
-		this.clientes = new ArrayList<Cliente>();
-		this.servicos = new ArrayList<Servico>();
 	}
 	
 	public List<Cliente> getClientes() {
