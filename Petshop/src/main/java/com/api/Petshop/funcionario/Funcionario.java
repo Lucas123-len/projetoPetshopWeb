@@ -22,8 +22,8 @@ public class Funcionario extends Pessoa{
 	   		   inverseJoinColumns = @JoinColumn(name="servico_codigo"))
 	private List<Servico> servicos;
 	
-	public Funcionario(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero, List<Cliente> clientes, List<Servico> servicos) {
-		super(codigo,cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);
+	public Funcionario(String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero, List<Cliente> clientes, List<Servico> servicos) {
+		super(cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);
 		this.clientes = new ArrayList<Cliente>();
 		this.servicos = new ArrayList<Servico>();
 	}

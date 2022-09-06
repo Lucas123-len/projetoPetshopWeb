@@ -42,8 +42,7 @@ public abstract class Pessoa {
 	@Valid
 	protected Endereco endereco;
 	
-	public Pessoa(int codigo, String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero) {
-		this.codigo = codigo;
+	public Pessoa(String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero) {
 		this.cpf = cpf;
 		this.nome = nome;
 		this.telefone = telefone;
@@ -61,14 +60,6 @@ public abstract class Pessoa {
 
 	public int getCodigo() {
 		return codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getCpf() {
-		return cpf;
 	}
 
 	public void setCpf(String cpf) {
