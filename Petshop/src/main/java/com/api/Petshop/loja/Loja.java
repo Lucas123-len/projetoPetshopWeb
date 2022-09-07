@@ -46,30 +46,24 @@ public class Loja {
 	@JoinColumn(nullable = false, name = "loja_codigo")
 	@Size(min = 1, message = "Loja deve ter no minimo 1 funcionario")
 	@Valid
-	private List<Funcionario> funcionarios;
+	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	
 	@OneToMany
 	@JoinColumn(nullable = false, name = "loja_codigo")
 	@Size(min = 1, message = "Loja deve ter no minimo 1 produto")
 	@Valid
-	private List<Produto> produtos;
+	private List<Produto> produtos = new ArrayList<Produto>();
 	
 	
-	public Loja(int codigo, String nome, String pais, String estado, String cidade, String bairro, String rua, String numero, String telefone, List<Funcionario> funcionarios, List<Produto> produtos) {
-		this.codigo = codigo;
+	public Loja(String nome, String pais, String estado, String cidade, String bairro, String rua, String numero, String telefone) {
 		this.nomeGerente = nome;
 		this.telefone = telefone;
 		Endereco ed = new Endereco(pais,estado,cidade,bairro,rua,numero);
 		this.endereco = ed;
-		this.funcionarios = new ArrayList<Funcionario>();
-		this.produtos = new ArrayList<Produto>();
 	}
 	
 	public int getCodigo() {
 		return codigo;
-	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
 	}
 
 	public String getNomeGerente() {

@@ -19,8 +19,7 @@ public class Animal {
 	private String raca;
 	@Column(length=50)
 	private String especie;
-	public Animal(int codigo, String nome, String raca, String especie) {
-		this.codigo = codigo;
+	public Animal(String nome, String raca, String especie) {
 		this.nome = nome;
 		this.raca = raca;
 		this.especie = especie;
@@ -28,10 +27,6 @@ public class Animal {
 
 	public int getCodigo() {
 		return codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
 	}
 
 	public String getNome() {

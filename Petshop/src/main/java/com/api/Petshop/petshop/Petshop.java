@@ -32,13 +32,12 @@ public class Petshop {
 	
 	@OneToMany
 	@JoinColumn(nullable = false, name = "petshop_cnpj")
-	private List<Loja> lojas;
+	private List<Loja> lojas = new ArrayList<Loja>();
 	
-	public Petshop(String cnpj, String nome, String site, List<Loja> lojas) {
+	public Petshop(String cnpj, String nome, String site) {
 		this.cnpj = cnpj;
 		this.nome = nome;
 		this.site = site;
-		this.lojas = new ArrayList<Loja>();
 	}
 	public String getCnpj() {
 		return cnpj;

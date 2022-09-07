@@ -20,18 +20,21 @@ public class Produto implements Pagamento,ImprimeDados{
 	@Column(length=50)
 	@NotNull(message = "Marca obrigatorio")
 	private String marca;
+	
 	private double peso;
 
 	@Column(length=50)
 	@NotNull(message = "Tipo obrigatorio")
 	private String tipo;
+	
 	private double valor;
 
 	@Column(length=50)
 	private String dataVenda;
+	
 	private int quantidade;
-	public Produto(int codigo,String marca,double peso,String tipo,double valor,String data,int quantidade) {
-		this.codigo=codigo;
+	
+	public Produto(String marca,double peso,String tipo,double valor,String data,int quantidade) {
 		this.marca=marca;
 		this.peso=peso;
 		this.tipo=tipo;
@@ -41,9 +44,6 @@ public class Produto implements Pagamento,ImprimeDados{
 	}
 	public int getCodigo() {
 		return codigo;
-	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
 	}
 	public String getMarca() {
 		return marca;

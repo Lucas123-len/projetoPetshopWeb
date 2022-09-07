@@ -30,13 +30,11 @@ public class Funcao {
 	@JoinColumn(nullable = false, name = "funcao_codigo")
 	@Size(min = 1, message = "Uma função pelo menos 1 funcionario")
 	@Valid
-	private List<Funcionario> funcionarios;
+	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	
-	public Funcao(int codigo, String descricao, float salario, List<Funcionario> funcionarios) {
-		this.codigo = codigo;
+	public Funcao(String descricao, float salario) {
 		this.descricao = descricao;
 		this.salario = salario;
-		this.funcionarios = new ArrayList<Funcionario>();
 	}
 	
 	public List<Funcionario> getFuncionarios() {
@@ -49,10 +47,6 @@ public class Funcao {
 
 	public int getCodigo() {
 		return codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
 	}
 
 	public String getDescricao() {

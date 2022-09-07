@@ -33,18 +33,16 @@ public class Servico implements Pagamento,ImprimeDados{
 	private String dataServico;
 	@ManyToMany(mappedBy="servicos")
 	@Valid
-	private List<Funcionario> funcionarios;
+	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	@ManyToMany(mappedBy="servicos")
 	@Valid
-	private List<Cliente> clientes;
-	public Servico(int codigo,String descricao,String tipo,double valor,String dataServico, List<Funcionario> funcionarios, List<Cliente> clientes) {
-		this.codigo=codigo;
+	private List<Cliente> clientes = new ArrayList<Cliente>();
+	
+	public Servico(String descricao,String tipo,double valor,String dataServico) {
 		this.descricao=descricao;
 		this.tipo=tipo;
 		this.valor=valor;
 		this.dataServico=dataServico;
-		this.funcionarios = new ArrayList<Funcionario>();
-		this.clientes = new ArrayList<Cliente>();
 	}
 	
 	public List<Cliente> getClientes() {
@@ -66,9 +64,7 @@ public class Servico implements Pagamento,ImprimeDados{
 	public int getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
+	
 	public String getDescricao() {
 		return descricao;
 	}
