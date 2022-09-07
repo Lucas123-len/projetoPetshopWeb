@@ -18,7 +18,7 @@ import java.util.List;
 public class Funcao {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
 	
 	@Column(length=50)

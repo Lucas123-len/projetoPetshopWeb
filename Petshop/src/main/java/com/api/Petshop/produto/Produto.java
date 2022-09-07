@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Produto implements Pagamento,ImprimeDados{
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
 
 	@Column(length=50)

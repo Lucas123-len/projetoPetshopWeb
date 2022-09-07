@@ -20,7 +20,7 @@ import com.api.Petshop.cliente.*;
 @Entity
 public class Servico implements Pagamento,ImprimeDados{
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
 	@Column(length=50)
 	@NotNull(message = "Descricao Serviço obrigatorio")

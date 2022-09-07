@@ -25,7 +25,7 @@ import org.hibernate.validator.constraints.Length;
 public class Loja {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
 	
 	@Column(length=50)

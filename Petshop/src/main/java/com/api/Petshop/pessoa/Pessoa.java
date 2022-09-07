@@ -18,10 +18,10 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.lang.NonNull;
 
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Pessoa {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected int codigo;
 	
 	@Column(length=14, nullable = false)
