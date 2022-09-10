@@ -1,6 +1,8 @@
 package com.api.Petshop.pessoa;
 import com.api.Petshop.endereco.*;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -15,11 +17,15 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.lang.NonNull;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected int codigo;
