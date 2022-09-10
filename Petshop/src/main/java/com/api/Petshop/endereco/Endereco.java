@@ -21,11 +21,11 @@ public class Endereco implements Serializable{
 	private String estado;
 	@Column(length=50)
 	@NotBlank(message = "Cidade obrigatoria")
-	@Length(min = 10, max = 50, message = "cidade deve ter no mínimo 10 e no máximo 50 caracteres.")
+	@Length(min = 5, max = 50, message = "cidade deve ter no mínimo 10 e no máximo 50 caracteres.")
 	private String cidade;
 	@Column(length=50)
 	@NotBlank(message = "Bairro obrigatoria")
-	@Length(min = 20, max = 50, message = "bairro deve ter no mínimo 20 e no máximo 50 caracteres.")
+	@Length(min = 5, max = 50, message = "bairro deve ter no mínimo 20 e no máximo 50 caracteres.")
 	private String bairro;
 	@Column(length=200)
 	@NotBlank(message = "Rua obrigatoria")

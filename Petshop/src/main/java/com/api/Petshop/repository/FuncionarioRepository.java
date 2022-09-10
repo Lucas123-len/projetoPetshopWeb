@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer>{
+public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 	@Query("Select p From Pessoa p Where p.cpf = :cpf Or p.nome = :nome")
 	public List<Pessoa> findByCpfOrNome(@Param("cpf") String cpf, @Param("nome") String nome);
 }
