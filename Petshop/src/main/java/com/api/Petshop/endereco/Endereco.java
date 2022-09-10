@@ -28,14 +28,7 @@ public class Endereco {
 	@Column(length=50)
 	@Digits(integer = 4, fraction = 0,message = "Numero deve ser inteiro e ter até 4 caracteres")
 	private String numero;
-	public Endereco(String pais, String estado, String cidade, String bairro, String rua, String numero) {
-		this.pais = pais;
-		this.estado = estado;
-		this.cidade = cidade;
-		this.bairro = bairro;
-		this.rua = rua;
-		this.numero = numero;
-	}
+	
 	public String getRua() {
 		return rua;
 	}

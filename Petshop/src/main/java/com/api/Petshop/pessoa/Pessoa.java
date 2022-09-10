@@ -52,8 +52,12 @@ public abstract class Pessoa implements Serializable{
 		this.cpf = cpf;
 		this.nome = nome;
 		this.telefone = telefone;
-		Endereco ed = new Endereco(pais,estado,cidade,bairro,rua,numero);
-		this.endereco = ed;
+		this.endereco.setPais(pais);
+		this.endereco.setEstado(estado);
+		this.endereco.setCidade(cidade);
+		this.endereco.setBairro(bairro);
+		this.endereco.setRua(rua);
+		this.endereco.setNumero(numero);
 	}
 	
 	public String getTelefone() {

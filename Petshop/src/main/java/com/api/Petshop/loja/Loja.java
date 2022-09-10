@@ -61,8 +61,13 @@ public class Loja {
 	public Loja(String nome, String pais, String estado, String cidade, String bairro, String rua, String numero, String telefone) {
 		this.nomeGerente = nome;
 		this.telefone = telefone;
-		Endereco ed = new Endereco(pais,estado,cidade,bairro,rua,numero);
-		this.endereco = ed;
+		this.telefone = telefone;
+		this.endereco.setPais(pais);
+		this.endereco.setEstado(estado);
+		this.endereco.setCidade(cidade);
+		this.endereco.setBairro(bairro);
+		this.endereco.setRua(rua);
+		this.endereco.setNumero(numero);
 	}
 	
 	public long getCodigo() {
