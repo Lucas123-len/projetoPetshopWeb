@@ -14,6 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.swing.JOptionPane;
 @Entity
 public class Funcionario extends Pessoa{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@ManyToMany
 	@JoinTable(name="Atende",
 			   joinColumns=@JoinColumn(name="funcionario_codigo"),
@@ -72,6 +77,6 @@ public class Funcionario extends Pessoa{
 	}
 	@Override
 	public int hashCode(){
-		return this.getNome().length() * 3 + this.codigo;
+		return (int) (this.getNome().length() * 3 + this.codigo);
 	}
 }

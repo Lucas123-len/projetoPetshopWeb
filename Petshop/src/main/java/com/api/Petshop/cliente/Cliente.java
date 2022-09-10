@@ -19,6 +19,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class Cliente extends Pessoa{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@OneToMany
 	@JoinColumn(name = "cliente_codigo")
 	@Size(min = 1, message = "Cliente deve ter no minimo 1 animal")
@@ -105,6 +110,6 @@ public class Cliente extends Pessoa{
 	}
 	@Override
 	public int hashCode(){
-		return this.nome.length() * 3 + this.codigo;
+		return (int) (this.nome.length() * 3 + this.codigo);
 	}
 }

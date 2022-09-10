@@ -27,7 +27,7 @@ public class Loja {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int codigo;
+	private long codigo;
 	
 	@Column(length=50)
 	@NotNull(message = "Nome obrigatorio")
@@ -65,7 +65,7 @@ public class Loja {
 		this.endereco = ed;
 	}
 	
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 

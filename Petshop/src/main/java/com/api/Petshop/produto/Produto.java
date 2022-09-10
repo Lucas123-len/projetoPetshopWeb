@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class Produto implements Pagamento,ImprimeDados{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int codigo;
+	private long codigo;
 
 	@Column(length=50)
 	@NotNull(message = "Marca obrigatorio")
@@ -48,7 +48,7 @@ public class Produto implements Pagamento,ImprimeDados{
 		this.dataVenda=data;
 		this.quantidade=quantidade;
 	}
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 	public String getMarca() {

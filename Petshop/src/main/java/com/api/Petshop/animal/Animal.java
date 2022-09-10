@@ -12,7 +12,7 @@ public class Animal {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int codigo;
+	private long codigo;
 	@Column(length=50)
 	private String nome;
 	@Column(length=50)
@@ -29,7 +29,7 @@ public class Animal {
 		this.especie = especie;
 	}
 
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 

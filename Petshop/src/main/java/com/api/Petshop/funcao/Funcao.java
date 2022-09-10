@@ -22,7 +22,7 @@ public class Funcao {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int codigo;
+	private long codigo;
 	
 	@Column(length=50)
 	private String descricao;
@@ -52,7 +52,7 @@ public class Funcao {
 		this.funcionarios = funcionarios;
 	}
 
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 

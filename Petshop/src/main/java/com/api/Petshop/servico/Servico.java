@@ -5,7 +5,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -22,7 +21,7 @@ public class Servico implements Pagamento,ImprimeDados{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int codigo;
+	private long codigo;
 	
 	@Column(length=50)
 	@NotNull(message = "Descricao Serviço obrigatorio")
@@ -68,7 +67,7 @@ public class Servico implements Pagamento,ImprimeDados{
 		this.funcionarios = funcionarios;
 	}
 
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 	

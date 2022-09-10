@@ -28,7 +28,7 @@ public abstract class Pessoa implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	protected int codigo;
+	protected long codigo;
 	
 	@Column(length=14, nullable = false)
 	@CPF(message = "CPF inválido")
@@ -64,7 +64,7 @@ public abstract class Pessoa implements Serializable{
 		this.telefone = telefone;
 	}
 
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 
