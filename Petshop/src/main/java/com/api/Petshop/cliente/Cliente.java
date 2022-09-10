@@ -3,6 +3,7 @@ import com.api.Petshop.pessoa.*;
 import com.api.Petshop.animal.*;
 import com.api.Petshop.funcionario.*;
 import com.api.Petshop.servico.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.api.Petshop.produto.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,25 +18,29 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente extends Pessoa{
-	@OneToMany
-	@JoinColumn(nullable = false, name = "cliente_codigo")
+	
+	@OneToMany(mappedBy = "cliente_codigo")
 	@Size(min = 1, message = "Cliente deve ter no minimo 1 animal")
 	@Valid
 	private List<Animal> animais = new ArrayList<Animal>();
-	@OneToMany
-	@JoinColumn(nullable = false, name = "cliente_codigo")
+	
+	@JsonBackReference
+	@OneToMany(mappedBy = "cliente_codigo")
 	@Size(min = 1, message = "Cliente deve comprar no minimo 1 produto")
 	@Valid
 	private List<Produto> produtos = new ArrayList<Produto>();
+	
 	@ManyToMany(mappedBy="clientes")
 	@Size(min = 1, message = "Cliente deve ser atendido por pelo menos 1 funcionario")
 	@Valid
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+	
 	@ManyToMany
 	@JoinTable(name="Requisita",
 	   		   joinColumns=@JoinColumn(name="cliente_codigo"),
 	   		   inverseJoinColumns = @JoinColumn(name="servico_codigo"))
 	private List<Servico> servicos = new ArrayList<Servico>();
+	
 	public Cliente(String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero) {
 		super(cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);
 	}

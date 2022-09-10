@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
@@ -30,8 +29,7 @@ public class Petshop {
 	@NotBlank(message = "Nome site obrigatorio")
 	private String site;
 	
-	@OneToMany
-	@JoinColumn(nullable = false, name = "petshop_cnpj")
+	@OneToMany(mappedBy = "petshop_cnpj")
 	private List<Loja> lojas = new ArrayList<Loja>();
 	
 	public Petshop(String cnpj, String nome, String site) {

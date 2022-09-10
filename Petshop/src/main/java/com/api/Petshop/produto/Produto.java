@@ -34,6 +34,12 @@ public class Produto implements Pagamento,ImprimeDados{
 	
 	private int quantidade;
 	
+	@ManyToOne
+	private Cliente cliente;
+	
+	@ManyToOne
+	private Loja loja;
+	
 	public Produto(String marca,double peso,String tipo,double valor,String data,int quantidade) {
 		this.marca=marca;
 		this.peso=peso;

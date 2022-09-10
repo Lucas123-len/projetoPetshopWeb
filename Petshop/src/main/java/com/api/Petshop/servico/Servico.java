@@ -19,21 +19,28 @@ import com.api.Petshop.funcionario.*;
 import com.api.Petshop.cliente.*;
 @Entity
 public class Servico implements Pagamento,ImprimeDados{
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
+	
 	@Column(length=50)
 	@NotNull(message = "Descricao Serviço obrigatorio")
 	private String descricao;
+	
 	@Column(length=50)
 	@NotNull(message = "Tipo Serviço obrigatorio")
 	private String tipo;
+	
 	private double valor;
+	
 	@Column(length=50)
 	private String dataServico;
+	
 	@ManyToMany(mappedBy="servicos")
 	@Valid
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+	
 	@ManyToMany(mappedBy="servicos")
 	@Valid
 	private List<Cliente> clientes = new ArrayList<Cliente>();

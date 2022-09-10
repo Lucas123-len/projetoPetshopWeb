@@ -2,6 +2,7 @@ package com.api.Petshop.loja;
 import com.api.Petshop.endereco.*;
 import com.api.Petshop.funcionario.*;
 import com.api.Petshop.produto.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -42,14 +42,14 @@ public class Loja {
 	@Length(min = 13, max = 14, message = "Telefone deve ter 13 ou 14 caracteres (Ex.: (99)9999-9999 ou (99)99999-9999")
 	private String telefone;
 	
-	@OneToMany
-	@JoinColumn(nullable = false, name = "loja_codigo")
+	@JsonBackReference
+	@OneToMany(mappedBy = "loja_codigo")
 	@Size(min = 1, message = "Loja deve ter no minimo 1 funcionario")
 	@Valid
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	
-	@OneToMany
-	@JoinColumn(nullable = false, name = "loja_codigo")
+	@JsonBackReference
+	@OneToMany(mappedBy = "loja_codigo")
 	@Size(min = 1, message = "Loja deve ter no minimo 1 produto")
 	@Valid
 	private List<Produto> produtos = new ArrayList<Produto>();

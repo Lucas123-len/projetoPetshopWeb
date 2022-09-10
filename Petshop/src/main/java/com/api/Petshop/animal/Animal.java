@@ -19,6 +19,10 @@ public class Animal {
 	private String raca;
 	@Column(length=50)
 	private String especie;
+	
+	@ManyToOne
+	private Cliente cliente;
+	
 	public Animal(String nome, String raca, String especie) {
 		this.nome = nome;
 		this.raca = raca;

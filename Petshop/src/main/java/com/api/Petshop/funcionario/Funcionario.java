@@ -2,12 +2,15 @@ package com.api.Petshop.funcionario;
 import com.api.Petshop.pessoa.*;
 import com.api.Petshop.cliente.*;
 import com.api.Petshop.servico.*;
+import com.api.Petshop.loja.*;
+import com.api.Petshop.funcao.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.swing.JOptionPane;
 @Entity
 public class Funcionario extends Pessoa{
@@ -16,11 +19,18 @@ public class Funcionario extends Pessoa{
 			   joinColumns=@JoinColumn(name="funcionario_codigo"),
 			   inverseJoinColumns = @JoinColumn(name="cliente_codigo"))
 	private List<Cliente> clientes = new ArrayList<Cliente>();
+	
 	@ManyToMany
 	@JoinTable(name="Realiza",
 	   		   joinColumns=@JoinColumn(name="funcionario_codigo"),
 	   		   inverseJoinColumns = @JoinColumn(name="servico_codigo"))
 	private List<Servico> servicos = new ArrayList<Servico>();
+	
+	@ManyToOne
+	private Loja loja;
+	
+	@ManyToOne
+	private Funcao funcao;
 	
 	public Funcionario(String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero) {
 		super(cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);
