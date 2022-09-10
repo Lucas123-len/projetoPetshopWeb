@@ -37,10 +37,6 @@ public class Funcionario extends Pessoa{
 	@ManyToOne
 	private Funcao funcao;
 	
-	public Funcionario(String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero) {
-		super(cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);
-	}
-	
 	public List<Cliente> getClientes() {
 		return clientes;
 	}

@@ -1,5 +1,7 @@
 package com.api.Petshop.endereco;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.Digits;
@@ -8,7 +10,11 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
 @Embeddable
-public class Endereco {
+public class Endereco implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Column(length=50)
 	private String pais;
 	@Column(length=50)

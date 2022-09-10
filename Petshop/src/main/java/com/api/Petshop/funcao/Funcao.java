@@ -39,11 +39,6 @@ public class Funcao {
 	@ManyToOne
 	private Petshop petshop;
 	
-	public Funcao(String descricao, float salario) {
-		this.descricao = descricao;
-		this.salario = salario;
-	}
-	
 	public List<Funcionario> getFuncionarios() {
 		return funcionarios;
 	}

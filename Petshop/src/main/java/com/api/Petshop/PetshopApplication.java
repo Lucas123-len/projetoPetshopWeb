@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.api.Petshop.cliente.Cliente;
+import com.api.Petshop.endereco.Endereco;
 import com.api.Petshop.repository.ClienteRepository;
 
 @SpringBootApplication
@@ -22,7 +23,21 @@ public class PetshopApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		//Cliente
-		Cliente cl = new Cliente("274.200.840-33","Fábio","(22)99900-2369","Brasil","Rio de Janeiro","Campos dos Goytacazes","Santa Rosa","Rua São Carmmo","14");
+		Cliente cl = new Cliente();
+		cl.setCpf("274.200.840-33");
+		cl.setNome("Fábio");
+		cl.setTelefone("(22)99900-2369");
+		
+		Endereco end = new Endereco();
+		end.setPais("Brasil");
+		end.setEstado("Rio de Janeiro");
+		end.setCidade("Campos dos Goytacazes");
+		end.setBairro("Santa Rosa");
+		end.setRua("Rua São Carmmo");
+		end.setNumero("14");
+		
+		cl.setEndereco(end);
+		
 		clienteRt.save(cl);//salva o repositório no banco
 	}
 

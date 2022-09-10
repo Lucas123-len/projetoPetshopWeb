@@ -34,11 +34,6 @@ public class Petshop {
 	@JoinColumn(name = "petshop_cnpj")
 	private List<Loja> lojas = new ArrayList<Loja>();
 	
-	public Petshop(String cnpj, String nome, String site) {
-		this.cnpj = cnpj;
-		this.nome = nome;
-		this.site = site;
-	}
 	public String getCnpj() {
 		return cnpj;
 	}

@@ -22,12 +22,6 @@ public class Animal {
 	
 	@ManyToOne
 	private Cliente cliente;
-	
-	public Animal(String nome, String raca, String especie) {
-		this.nome = nome;
-		this.raca = raca;
-		this.especie = especie;
-	}
 
 	public long getCodigo() {
 		return codigo;

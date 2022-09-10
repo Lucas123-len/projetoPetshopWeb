@@ -40,14 +40,6 @@ public class Produto implements Pagamento,ImprimeDados{
 	@ManyToOne
 	private Loja loja;
 	
-	public Produto(String marca,double peso,String tipo,double valor,String data,int quantidade) {
-		this.marca=marca;
-		this.peso=peso;
-		this.tipo=tipo;
-		this.valor=valor;
-		this.dataVenda=data;
-		this.quantidade=quantidade;
-	}
 	public long getCodigo() {
 		return codigo;
 	}

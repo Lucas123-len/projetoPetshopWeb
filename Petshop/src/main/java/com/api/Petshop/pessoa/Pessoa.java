@@ -48,18 +48,6 @@ public abstract class Pessoa implements Serializable{
 	@Valid
 	protected Endereco endereco;
 	
-	public Pessoa(String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero) {
-		this.cpf = cpf;
-		this.nome = nome;
-		this.telefone = telefone;
-		this.endereco.setPais(pais);
-		this.endereco.setEstado(estado);
-		this.endereco.setCidade(cidade);
-		this.endereco.setBairro(bairro);
-		this.endereco.setRua(rua);
-		this.endereco.setNumero(numero);
-	}
-	
 	public String getTelefone() {
 		return telefone;
 	}

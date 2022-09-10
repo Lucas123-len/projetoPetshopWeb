@@ -48,10 +48,6 @@ public class Cliente extends Pessoa{
 	   		   inverseJoinColumns = @JoinColumn(name="servico_codigo"))
 	private List<Servico> servicos = new ArrayList<Servico>();
 	
-	public Cliente(String cpf, String nome, String telefone, String pais, String estado, String cidade, String bairro, String rua, String numero) {
-		super(cpf,nome,telefone,pais,estado,cidade,bairro,rua,numero);
-	}
-	
 	public List<Produto> getProdutos() {
 		return produtos;
 	}

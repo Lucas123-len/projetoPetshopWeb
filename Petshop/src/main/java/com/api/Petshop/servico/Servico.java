@@ -44,13 +44,6 @@ public class Servico implements Pagamento,ImprimeDados{
 	@Valid
 	private List<Cliente> clientes = new ArrayList<Cliente>();
 	
-	public Servico(String descricao,String tipo,double valor,String dataServico) {
-		this.descricao=descricao;
-		this.tipo=tipo;
-		this.valor=valor;
-		this.dataServico=dataServico;
-	}
-	
 	public List<Cliente> getClientes() {
 		return clientes;
 	}
