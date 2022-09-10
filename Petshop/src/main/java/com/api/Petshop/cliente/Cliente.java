@@ -19,13 +19,15 @@ import javax.persistence.OneToMany;
 @Entity
 public class Cliente extends Pessoa{
 	
-	@OneToMany(mappedBy = "cliente_codigo")
+	@OneToMany
+	@JoinColumn(name = "cliente_codigo")
 	@Size(min = 1, message = "Cliente deve ter no minimo 1 animal")
 	@Valid
 	private List<Animal> animais = new ArrayList<Animal>();
 	
 	@JsonBackReference
-	@OneToMany(mappedBy = "cliente_codigo")
+	@OneToMany
+	@JoinColumn(name = "cliente_codigo")
 	@Size(min = 1, message = "Cliente deve comprar no minimo 1 produto")
 	@Valid
 	private List<Produto> produtos = new ArrayList<Produto>();

@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -43,13 +44,15 @@ public class Loja {
 	private String telefone;
 	
 	@JsonBackReference
-	@OneToMany(mappedBy = "loja_codigo")
+	@OneToMany
+	@JoinColumn(name = "loja_codigo")
 	@Size(min = 1, message = "Loja deve ter no minimo 1 funcionario")
 	@Valid
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	
 	@JsonBackReference
-	@OneToMany(mappedBy = "loja_codigo")
+	@OneToMany
+	@JoinColumn(name = "loja_codigo")
 	@Size(min = 1, message = "Loja deve ter no minimo 1 produto")
 	@Valid
 	private List<Produto> produtos = new ArrayList<Produto>();

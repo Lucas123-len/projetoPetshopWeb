@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -29,7 +30,8 @@ public class Funcao {
 	private float salario;
 	
 	@JsonBackReference
-	@OneToMany(mappedBy = "funcao_codigo")
+	@OneToMany
+	@JoinColumn(name = "funcao_codigo")
 	@Size(min = 1, message = "Uma função pelo menos 1 funcionario")
 	@Valid
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
