@@ -59,6 +59,10 @@ public abstract class Pessoa implements Serializable{
 	public long getCodigo() {
 		return codigo;
 	}
+	
+	public String getCpf() {
+		return cpf;
+	}
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
