@@ -12,7 +12,5 @@ import com.api.Petshop.loja.Loja;
 @Repository
 public interface LojaRepository extends JpaRepository<Loja, Long>{
 	@Query("Select l From Loja l Where l.nomeGerente = :nomeGerente Or l.telefone = :telefone")
-	private List<Loja> findByNomeGerenteOrTelefone(@Param("nomeGerente") String nomeGerente, @Param("telefone") String telefone) {
-		return null;
-	}
+	public List<Loja> findByNomeGerenteOrTelefone(@Param("nomeGerente") String nomeGerente, @Param("telefone") String telefone);
 }

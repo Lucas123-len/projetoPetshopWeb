@@ -10,7 +10,5 @@ import com.api.Petshop.funcao.Funcao;
 @Repository
 public interface FuncaoRepository extends JpaRepository<Funcao, Long>{
 	@Query("Select f From Funcao f Where f.descricao = :descricao")
-	private List<Funcao> findByDescricao(@Param("descricao") String descricao) {
-		return null;
-	}
+	public List<Funcao> findByDescricao(@Param("descricao") String descricao);
 }

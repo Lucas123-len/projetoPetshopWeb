@@ -10,7 +10,5 @@ import java.util.List;
 
 public interface ServicoRepository extends JpaRepository<Servico, Long>{
 	@Query("Select s Servico s where s.descricao = :descricao Or s.tipo = :tipo")
-	private List<Servico> findByDescricaoOrTipo(@Param("descricao") String descricao, @Param("tipo") String tipo) {
-		return null;
-	}
+	public List<Servico> findByDescricaoOrTipo(@Param("descricao") String descricao, @Param("tipo") String tipo);
 }

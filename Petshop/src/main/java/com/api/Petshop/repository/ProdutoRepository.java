@@ -12,7 +12,5 @@ import com.api.Petshop.produto.Produto;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 	@Query("Select pd Produto pd where pd.marca = :marca")
-	private List<Produto> findByMarca(@Param("marca") String marca) {
-		return null;
-	}
+	public List<Produto> findByMarca(@Param("marca") String marca);
 }

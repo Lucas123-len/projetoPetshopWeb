@@ -11,7 +11,5 @@ import com.api.Petshop.petshop.Petshop;
 @Repository
 public interface PetshopRepository extends JpaRepository<Petshop, String>{
 	@Query("Select pts Petshop pts where pts.cnpj = :cnpj")
-	private List<Petshop> findByCnpj(@Param("cnpj") String cnpj) {
-		return null;
-	}
+	public List<Petshop> findByCnpj(@Param("cnpj") String cnpj);
 }

@@ -25,7 +25,7 @@ public class PetshopService {
 		return repo.findAll();
 	}
 	
-	public Petshop findByCnpjOrNome(String cnpj) {
+	public Petshop findByCnpj(String cnpj) {
 		Optional<Petshop> result = repo.findByCnpj(cnpj);
 		if(result.isEmpty()) {
 			throw new RuntimeException("Petshop não encontrado.");
@@ -45,7 +45,7 @@ public class PetshopService {
 		Petshop obj = findByCnpj(p.getCnpj());
 		List<Loja> lojasAtuais = obj.getLojas();
 		lojasAtuais.removeAll(p.getLojas());
-		verificaExclusaoLojaComFuncionarios(lojasAtuais);
+		verificaExclusaoLojaComFucionarios(lojasAtuais);
 		
 		try {
 			p.setCnpj(obj.getCnpj());
@@ -57,7 +57,7 @@ public class PetshopService {
 	
 	public void delete(String cnpj) {
 		Petshop obj = findByCnpj(cnpj);
-		verificaExclusaoLojaComFuncionarios(obj.getLojas());
+		verificaExclusaoLojaComFucionarios(obj.getLojas());
 		try {
 			repo.delete(obj);
 		}catch(Exception e) {
@@ -65,7 +65,7 @@ public class PetshopService {
 		}
 	}
 	
-	public void verificaExlusaoLojaComFucionarios(List<Loja> lojas) {
+	public void verificaExclusaoLojaComFucionarios(List<Loja> lojas) {
 		for(Loja l : lojas) {
 			if(!l.getFuncionarios().isEmpty()) {
 				throw new RuntimeException("Não é possível excluir lojas com funcionarios.");
