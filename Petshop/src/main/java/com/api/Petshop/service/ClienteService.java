@@ -56,7 +56,7 @@ public class ClienteService {
 	
 	public void delete(String cpf,String nome) {
 		Cliente obj = findByCpfOrNome(cpf,nome);
-		verificaCpfNomeCadastrado(obj.getCpf(),obj.getNome());
+		verificaExclusaoCliente(obj);
 		try {
 			repo.delete(obj);
 		}catch(Exception e) {
@@ -68,6 +68,12 @@ public class ClienteService {
 		List<Pessoa> result = repo.findByCpfOrNome(cpf, nome);
 		if(!result.isEmpty()) {
 			throw new RuntimeException("Cpf ou Nome já cadastrado.");
+		}
+	}
+	
+	public void verificaExclusaoCliente(Cliente c) {
+		if(!c.getServicos().isEmpty()) {
+			throw new RuntimeException("Cliente requisitou serviços. Não pode ser excluído.");
 		}
 	}
 	
