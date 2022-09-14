@@ -12,6 +12,7 @@ import com.api.Petshop.cliente.Cliente;
 import com.api.Petshop.funcionario.Funcionario;
 import com.api.Petshop.pessoa.Pessoa;
 import com.api.Petshop.repository.FuncionarioRepository;
+import com.api.Petshop.servico.Servico;
 
 @Service
 public class FuncionarioService {
@@ -27,23 +28,12 @@ public class FuncionarioService {
 		return repo.findAll();
 	}
 	
-	public Funcionario findByCpfOrNome(String cpf, String nome) {
-		Optional<Funcionario> result = repo.findByCpfOrNome(cpf,nome);
+	public Funcionario findById(Long codigo) {
+		Optional<Funcionario> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new RuntimeException("Cliente não encontrado.");
 		}
 		return result.get();
-	}
-	
-	public Funcionario update(Funcionario f) {
-		Funcionario obj = findByCpfOrNome(f.getCpf(),f.getNome());
-		try {
-			f.setCpf(obj.getCpf());
-			f.setNome(obj.getNome());
-			return repo.save(f);
-		}catch(Exception e){
-			throw new RuntimeException("Falha ao atualizar funcionario.");
-		}
 	}
 	
 	public Funcionario save(Funcionario f) {
@@ -51,13 +41,28 @@ public class FuncionarioService {
 		try {
 			return repo.save(f);
 		}catch(Exception e) {
-			throw new RuntimeException("Falha ao salvar o funcionario.");
+			throw new RuntimeException("Falha ao salvar o Funcionario.");
 		}
 	}
 	
-	public void delete(String cpf, String nome) {
-		Funcionario obj = findByCpfOrNome(cpf,nome);
-		verificaExclusaoFuncionario(obj);
+	public Funcionario update(Funcionario f) {
+		
+		Funcionario obj = findById(f.getCodigo());
+		List<Servico> servicosAtuais = obj.getServicos();
+		servicosAtuais.removeAll(f.getServicos());
+		verificaExclusaoFuncionario(servicosAtuais);
+		
+		try {
+			f.setCpf(obj.getCpf());
+			return repo.save(f);
+		}catch(Exception e){
+			throw new RuntimeException("Falha ao atualizar Funcionario.");
+		}
+	}
+	
+	public void delete(Long codigo) {
+		Funcionario obj = findById(codigo);
+		verificaExclusaoFuncionario(obj.getServicos());
 		try {
 			repo.delete(obj);
 		}catch(Exception e) {
@@ -72,9 +77,11 @@ public class FuncionarioService {
 		}
 	}
 	
-	public void verificaExclusaoFuncionario(Funcionario f) {
-		if(!f.getServicos().isEmpty()) {
-			throw new RuntimeException("Funcionario realiza serviços. Não pode ser excluído.");
+	public void verificaExclusaoFuncionario(List<Servico> servicos) {
+		for(Servico s : servicos) {
+			if(!s.getClientes().isEmpty()) {
+				throw new RuntimeException("Funcionario realiza serviços que possuem clientes vinculados. Não pode ser excluído.");
+			}
 		}
 	}
 }

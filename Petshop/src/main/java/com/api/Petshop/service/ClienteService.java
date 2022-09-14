@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.api.Petshop.cliente.Cliente;
 import com.api.Petshop.pessoa.Pessoa;
 import com.api.Petshop.repository.ClienteRepository;
+import com.api.Petshop.servico.Servico;
 
 @Service
 public class ClienteService {
@@ -26,8 +27,8 @@ public class ClienteService {
 		return repo.findAll();
 	}
 	
-	public Cliente findByCpfOrNome(String cpf, String nome) {
-		Optional<Cliente> result = repo.findByCpfOrNome(cpf,nome);
+	public Cliente findById(Long codigo) {
+		Optional<Cliente> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new RuntimeException("Cliente não encontrado.");
 		}
@@ -44,19 +45,23 @@ public class ClienteService {
 	}
 	
 	public Cliente update(Cliente c) {
-		Cliente obj = findByCpfOrNome(c.getCpf(),c.getNome());
+		
+		Cliente obj = findById(c.getCodigo());
+		List<Servico> servicosRealizados = obj.getServicos();
+		servicosRealizados.removeAll(c.getServicos());
+		verificaExclusaoCliente(servicosRealizados);
 		try {
 			c.setCpf(obj.getCpf());
 			c.setNome(obj.getNome());
 			return repo.save(c);
 		}catch(Exception e){
-			throw new RuntimeException("Falha ao atualizar cliente.");
+			throw new RuntimeException("Falha ao atualizar Cliente.");
 		}
 	}
 	
-	public void delete(String cpf,String nome) {
-		Cliente obj = findByCpfOrNome(cpf,nome);
-		verificaExclusaoCliente(obj);
+	public void delete(Long codigo) {
+		Cliente obj = findById(codigo);
+		verificaExclusaoCliente(obj.getServicos());
 		try {
 			repo.delete(obj);
 		}catch(Exception e) {
@@ -65,14 +70,15 @@ public class ClienteService {
 	}
 	
 	public void verificaCpfNomeCadastrado(String cpf, String nome) {
-		List<Pessoa> result = repo.findByCpfOrNome(cpf, nome);
+		List<Pessoa> result = repo.findByCpfOrNomeOrId(cpf, nome);
 		if(!result.isEmpty()) {
 			throw new RuntimeException("Cpf ou Nome já cadastrado.");
 		}
 	}
 	
-	public void verificaExclusaoCliente(Cliente c) {
-		if(!c.getServicos().isEmpty()) {
+	public void verificaExclusaoCliente(List<Servico> servicos) {
+		for(Servico s : servicos)
+		if(!s.getFuncionarios().isEmpty()) {
 			throw new RuntimeException("Cliente requisitou serviços. Não pode ser excluído.");
 		}
 	}

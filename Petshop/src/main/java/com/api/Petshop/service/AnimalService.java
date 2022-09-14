@@ -26,8 +26,8 @@ public class AnimalService {
 		return repo.findAll();
 	}
 	
-	public Animal findByNomeOrRaca(String nome, String raca) {
-		Optional<Animal> result = repo.findByNomeOrRaca(nome, raca);
+	public Animal findById(Long codigo) {
+		Optional<Animal> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new RuntimeException("Animal não encontrado.");
 		}
@@ -35,7 +35,6 @@ public class AnimalService {
 	}
 	
 	public Animal save(Animal a) {
-		verificaNomeOuRacaCadastrado(a.getNome(),a.getRaca());
 		try {
 			return repo.save(a);
 		}catch(Exception e) {
@@ -44,29 +43,19 @@ public class AnimalService {
 	}
 	
 	public Animal update(Animal a) {
-		Animal obj = findByNomeOrRaca(a.getNome(),a.getRaca());
 		try {
-			a.setNome(obj.getNome());
-			a.setRaca(obj.getRaca());
 			return repo.save(a);
 		}catch(Exception e) {
-			throw new RuntimeException("Falha ao atualizar animal.");
+			throw new RuntimeException("Falha ao atualizar Animal.");
 		}
 	}
 	
-	public void delete(String nome, String raca) {
-		Animal obj = findByNomeOrRaca(nome,raca);
+	public void delete(Long codigo) {
+		Animal obj = findById(codigo);
 		try {
 			repo.delete(obj);
 		}catch(Exception e) {
 			throw new RuntimeException("Falha ao deletar o Animal.");
-		}
-	}
-	
-	public void verificaNomeOuRacaCadastrado(String nome, String raca) {
-		List<Animal> result = repo.findByNomeOrRaca(nome, raca);
-		if(!result.isEmpty()) {
-			throw new RuntimeException("Nome ou Raça já cadastrado.");
 		}
 	}
 }

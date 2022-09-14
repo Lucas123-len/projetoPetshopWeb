@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.api.Petshop.funcionario.Funcionario;
 import com.api.Petshop.repository.ServicoRepository;
 import com.api.Petshop.servico.Servico;
 
@@ -26,8 +27,8 @@ public class ServicoService {
 		return repo.findAll();
 	}
 	
-	public Servico findByDescricaoOrTipo(String descricao, String tipo) {
-		Optional<Servico> result = repo.findByDescricaoOrTipo(descricao,tipo);
+	public Servico findById(Long codigo) {
+		Optional<Servico> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new RuntimeException("Serviço não encontrado.");
 		}
@@ -44,19 +45,23 @@ public class ServicoService {
 	}
 	
 	public Servico update(Servico s) {
-		Servico obj = findByDescricaoOrTipo(s.getDescricao(),s.getTipo());
+		
+		Servico obj = findById(s.getCodigo());
+		List<Funcionario> funcionariosAtuais = obj.getFuncionarios();
+		funcionariosAtuais.removeAll(s.getFuncionarios());
+		verificaExclusaoServicoSendoExecutado(funcionariosAtuais);
+		
 		try {
 			s.setDescricao(obj.getDescricao());
-			s.setTipo(obj.getTipo());
 			return repo.save(s);
 		}catch(Exception e){
-			throw new RuntimeException("Falha ao atualizar serviço.");
+			throw new RuntimeException("Falha ao atualizar Serviço.");
 		}
 	}
 	
-	public void delete(String descricao,String tipo) {
-		Servico obj = findByDescricaoOrTipo(descricao,tipo);
-		verificaExclusaoServico(obj);
+	public void delete(Long codigo) {
+		Servico obj = findById(codigo);
+		verificaExclusaoServicoSendoExecutado(obj.getFuncionarios());
 		try {
 			repo.delete(obj);
 		}catch(Exception e) {
@@ -71,9 +76,11 @@ public class ServicoService {
 		}
 	}
 	
-	public void verificaExclusaoServico(Servico s) {
-		if(!s.getFuncionarios().isEmpty()) {
-			throw new RuntimeException("Funcionários cadastrados realizam serviço. Não pode ser excluído.");
+	public void verificaExclusaoServicoSendoExecutado(List<Funcionario> funcionarios) {
+		for(Funcionario f : funcionarios) {
+			if(!f.getClientes().isEmpty()) {
+				throw new RuntimeException("Funcionários cadastrados realizam Serviço. Não pode ser excluído.");
+			}
 		}
 	}
 }

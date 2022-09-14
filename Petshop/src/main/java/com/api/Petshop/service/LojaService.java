@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.api.Petshop.funcionario.Funcionario;
 import com.api.Petshop.loja.Loja;
 import com.api.Petshop.repository.LojaRepository;
 
@@ -26,8 +27,8 @@ public class LojaService {
 		return repo.findAll();
 	}
 	
-	public Loja findByNomeGerenteOrTelefone(String nomeGerente, String telefone) {
-		Optional<Loja> result = repo.findByNomeGerenteOrTelefone(nomeGerente,telefone);
+	public Loja findById(Long codigo) {
+		Optional<Loja> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new RuntimeException("Loja não encontrada.");
 		}
@@ -44,19 +45,23 @@ public class LojaService {
 	}
 	
 	public Loja update(Loja l) {
-		Loja obj = findByNomeGerenteOrTelefone(l.getNomeGerente(),l.getTelefone());
+		
+		Loja obj = findById(l.getCodigo());
+		List<Funcionario> funcionariosAtuais = obj.getFuncionarios();
+		funcionariosAtuais.removeAll(l.getFuncionarios());
+		
+		
 		try {
 			l.setNomeGerente(obj.getNomeGerente());
-			l.setTelefone(obj.getTelefone());
 			return repo.save(l);
 		}catch(Exception e){
 			throw new RuntimeException("Falha ao atualizar loja.");
 		}
 	}
 	
-	public void delete(String nomeGerente, String telefone) {
-		Loja obj = findByNomeGerenteOrTelefone(nomeGerente,telefone);
-		verificaExclusaoLoja(obj);
+	public void delete(Long codigo) {
+		Loja obj = findById(codigo);
+		verificaExclusaoLojaComFuncionarios(obj.getFuncionarios());
 		try {
 			repo.delete(obj);
 		}catch(Exception e) {
@@ -71,9 +76,11 @@ public class LojaService {
 		}
 	}
 	
-	public void verificaExclusaoLoja(Loja l) {
-		if(!l.getFuncionarios().isEmpty()) {
-			throw new RuntimeException("Loja possui funcionários. Não pode ser excluído.");
+	public void verificaExclusaoLojaComFuncionarios(List<Funcionario> funcionarios) {
+		for(Funcionario f : funcionarios) {
+			if(!f.getClientes().isEmpty()) {
+				throw new RuntimeException("Loja possui Funcionários atendendo clientes. Não pode ser excluído.");
+			}
 		}
 	}
 }

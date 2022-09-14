@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.api.Petshop.funcao.Funcao;
+import com.api.Petshop.funcionario.Funcionario;
 import com.api.Petshop.repository.FuncaoRepository;
 
 import java.util.List;
@@ -26,8 +27,8 @@ public class FuncaoService {
 		return repo.findAll();
 	}
 	
-	public Funcao findByDescricao(String descricao) {
-		Optional<Funcao> result = repo.findByDescricao(descricao);
+	public Funcao findById(Long codigo) {
+		Optional<Funcao> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new RuntimeException("Função não encontrada.");
 		}
@@ -39,12 +40,17 @@ public class FuncaoService {
 		try {
 			return repo.save(f);
 		}catch(Exception e) {
-			throw new RuntimeException("Falha ao salvar o função.");
+			throw new RuntimeException("Falha ao salvar o Função.");
 		}
 	}
 	
 	public Funcao update(Funcao f) {
-		Funcao obj = findByDescricao(f.getDescricao());
+		
+		Funcao obj = findById(f.getCodigo());
+		List<Funcionario> funcionariosAtuais = obj.getFuncionarios();
+		funcionariosAtuais.removeAll(obj.getFuncionarios());
+		verificaExclusaoFuncaoComFuncionarios(funcionariosAtuais);
+		
 		try {
 			f.setDescricao(obj.getDescricao());
 			return repo.save(f);
@@ -53,9 +59,9 @@ public class FuncaoService {
 		}
 	}
 	
-	public void delete(String descricao) {
-		Funcao obj = findByDescricao(descricao);
-		verificaExclusaoFuncao(obj);
+	public void delete(Long codigo) {
+		Funcao obj = findById(codigo);
+		verificaExclusaoFuncaoComFuncionarios(obj.getFuncionarios());
 		try {
 			repo.delete(obj);
 		}catch(Exception e) {
@@ -66,13 +72,16 @@ public class FuncaoService {
 	public void verificaDescricaoFuncao(String descricao) {
 		List<Funcao> result = repo.findByDescricao(descricao);
 		if(!result.isEmpty()) {
-			throw new RuntimeException("Descrição de função já cadastrado.");
+			throw new RuntimeException("Descrição de Função já cadastrado.");
 		}
 	}
 	
-	public void verificaExclusaoFuncao(Funcao f) {
-		if(!f.getFuncionarios().isEmpty()) {
-			throw new RuntimeException("Função possui funcionários cadastrados. Não pode ser excluído.");
+	public void verificaExclusaoFuncaoComFuncionarios(List<Funcionario> funcionarios) {
+		for(Funcionario f : funcionarios) {
+			if(!f.getServicos().isEmpty()) {
+				throw new RuntimeException("Função possui funcionários cadastrados que realizam serviços. Não pode ser excluído.");
+			}
 		}
+		
 	}
 }

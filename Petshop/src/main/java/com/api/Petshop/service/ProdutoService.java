@@ -26,8 +26,8 @@ public class ProdutoService {
 		return repo.findAll();
 	}
 	
-	public Produto findByMarca(String marca, long codigo) {
-		Optional<Produto> result = repo.findByMarca(marca,codigo);
+	public Produto findById(Long codigo) {
+		Optional<Produto> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new RuntimeException("Produto não encontrado.");
 		}
@@ -38,22 +38,22 @@ public class ProdutoService {
 		try {
 			return repo.save(p);
 		}catch(Exception e) {
-			throw new RuntimeException("Falha ao salvar o produto.");
+			throw new RuntimeException("Falha ao salvar o Produto.");
 		}
 	}
 	
 	public Produto update(Produto p) {
-		Produto obj = findByMarca(p.getMarca(),p.getCodigo());
+		Produto obj = findById(p.getCodigo());
 		try {
 			p.setMarca(obj.getMarca());
 			return repo.save(p);
 		}catch(Exception e){
-			throw new RuntimeException("Falha ao atualizar produto.");
+			throw new RuntimeException("Falha ao atualizar Produto.");
 		}
 	}
 	
-	public void delete(String marca, long codigo) {
-		Produto obj = findByMarca(marca,codigo);
+	public void delete(Long codigo) {
+		Produto obj = findById(codigo);
 		try {
 			repo.delete(obj);
 		}catch(Exception e) {
