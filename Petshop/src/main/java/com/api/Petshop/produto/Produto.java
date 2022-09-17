@@ -43,6 +43,9 @@ public class Produto implements Pagamento,ImprimeDados{
 	public long getCodigo() {
 		return codigo;
 	}
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
 	public String getMarca() {
 		return marca;
 	}

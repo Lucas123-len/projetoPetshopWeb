@@ -60,6 +60,10 @@ public class Loja {
 	public long getCodigo() {
 		return codigo;
 	}
+	
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
 
 	public String getNomeGerente() {
 		return nomeGerente;

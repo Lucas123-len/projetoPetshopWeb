@@ -64,6 +64,10 @@ public class Servico implements Pagamento,ImprimeDados{
 		return codigo;
 	}
 	
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+	
 	public String getDescricao() {
 		return descricao;
 	}

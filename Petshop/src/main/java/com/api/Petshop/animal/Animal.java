@@ -26,6 +26,10 @@ public class Animal {
 	public long getCodigo() {
 		return codigo;
 	}
+	
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
 
 	public String getNome() {
 		return nome;

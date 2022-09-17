@@ -50,6 +50,10 @@ public class Funcao {
 	public long getCodigo() {
 		return codigo;
 	}
+	
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
 
 	public String getDescricao() {
 		return descricao;
