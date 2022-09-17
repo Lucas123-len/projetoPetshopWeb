@@ -10,6 +10,10 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -23,6 +27,10 @@ public class Cliente extends Pessoa{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Column(length = 200)
+	@Length(max = 200, message = "Documentos devem ter no máximo 200 caracteres.")
+	private String documentos;
 
 	@OneToMany
 	@JoinColumn(name = "cliente_codigo")
@@ -47,6 +55,14 @@ public class Cliente extends Pessoa{
 	   		   joinColumns=@JoinColumn(name="cliente_codigo"),
 	   		   inverseJoinColumns = @JoinColumn(name="servico_codigo"))
 	private List<Servico> servicos = new ArrayList<Servico>();
+	
+	public String getDocumentos() {
+		return documentos;
+	}
+
+	public void setDocumentos(String documentos) {
+		this.documentos = documentos;
+	}
 	
 	public List<Produto> getProdutos() {
 		return produtos;

@@ -45,6 +45,9 @@ public class ClienteService {
 		if(file != null) {
 			if(!file.isEmpty()) {
 				salvarArquivo(file, c.getCpf()+".pdf");
+				c.setDocumentos(c.getCpf()+".pdf");
+			}else {
+				c.setDocumentos(null);
 			}
 		}
 		
@@ -79,6 +82,9 @@ public class ClienteService {
 		if(file != null) {
 			if(!file.isEmpty()) {
 				salvarArquivo(file, c.getCpf()+".pdf");
+				c.setDocumentos(c.getCpf()+".pdf");
+			}else {
+				c.setDocumentos(null);
 			}
 		}
 		
@@ -96,6 +102,7 @@ public class ClienteService {
 	
 	public void delete(Long codigo) {
 		Cliente obj = findById(codigo);
+		//verifica se há reservas
 		verificaExclusaoCliente(obj.getServicos());
 		try {
 			repo.delete(obj);
