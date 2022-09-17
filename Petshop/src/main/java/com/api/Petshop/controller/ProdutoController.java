@@ -14,18 +14,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.api.Petshop.cliente.Cliente;
-import com.api.Petshop.service.ClienteService;
+import com.api.Petshop.produto.Produto;
+import com.api.Petshop.service.ProdutoService;
 
 @RestController
-@RequestMapping(path = "/apirest/clientes")
+@RequestMapping(path = "/apirest/produtos")
 
-public class ClienteController {
-	
+public class ProdutoController {
 	@Autowired
-	private ClienteService service;
+	private ProdutoService service;
 	
 	@GetMapping
 	public ResponseEntity getAll(@RequestParam(name = "page", defaultValue = "0", required = false) int page, @RequestParam(name = "size", defaultValue = "10", required = false) int size) {
@@ -38,29 +36,22 @@ public class ClienteController {
 	}
 	
 	@PostMapping
-	public ResponseEntity save(@Valid @RequestBody Cliente cliente) {
-		cliente.setCodigo((Long) null);
-		service.save(cliente,null);
+	public ResponseEntity save(@Valid @RequestBody Produto produto) {
+		produto.setCodigo((Long) null);
+		service.save(produto);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 	@PutMapping(path = "/(codigo)")
-	public ResponseEntity update(@PathVariable("codigo") Long codigo, @Valid @RequestBody Cliente cliente) {
-		cliente.setCodigo(codigo);
-		service.update(cliente,null);
+	public ResponseEntity update(@PathVariable("codigo") Long codigo, @Valid @RequestBody Produto produto) {
+		produto.setCodigo(codigo);
+		service.update(produto);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 	@DeleteMapping(path = "/(codigo)")
 	public ResponseEntity delete(@PathVariable("/(codigo)") Long codigo) {
 		service.delete(codigo);
-		return ResponseEntity.ok().build();
-	}
-	
-	@PutMapping(path = "/(codigo)/uploadFile")
-	public ResponseEntity uploadFile(@PathVariable("codigo") Long codigo, MultipartFile file) {
-		Cliente cliente = service.findById(codigo);
-		service.update(cliente,file);
 		return ResponseEntity.ok().build();
 	}
 }
