@@ -39,8 +39,8 @@ public class ClienteController {
 	
 	@PostMapping
 	public ResponseEntity save(@Valid @RequestBody Cliente cliente) {
-		cliente.setCodigo(null);
-		service.save(cliente,null);
+		cliente.setCodigo((Long) null);
+		service.save(cliente);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
