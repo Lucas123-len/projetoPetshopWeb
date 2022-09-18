@@ -76,13 +76,11 @@ public class PetshopApplication implements CommandLineRunner {
 		
 		cl.setEndereco(end);
 		
-		clienteRt.save(cl);//salva o repositório no banco
-		
 		//Funcionario
-		Funcionario fc = new Funcionario();
-		fc.setCpf("671.442.130-32");
-		fc.setNome("Paulo");
-		fc.setTelefone("(11)98355-0432");
+		Funcionario fc1 = new Funcionario();
+		fc1.setCpf("671.442.130-32");
+		fc1.setNome("Paulo");
+		fc1.setTelefone("(11)98355-0432");
 		
 		Endereco end2 = new Endereco();
 		end2.setPais("Brasil");
@@ -92,17 +90,21 @@ public class PetshopApplication implements CommandLineRunner {
 		end2.setRua("Rua Orivaldo de Souza Rocha");
 		end2.setNumero("26");
 		
-		fc.setEndereco(end2);
+		fc1.setEndereco(end2);
 		
-		funcionarioRt.save(fc);
+		funcionarioRt.save(fc1);
+		
+		cl.setFuncionarios(List.of(fc1));
 		
 		//Animal
-		Animal an = new Animal();
-		an.setNome("Thor");
-		an.setRaca("Labrador");
-		an.setEspecie("cachorro");
+		Animal an1 = new Animal();
+		an1.setNome("Thor");
+		an1.setRaca("Labrador");
+		an1.setEspecie("cachorro");
 		
-		animalRt.save(an);
+		animalRt.save(an1);
+
+		cl.setAnimais(List.of(an1));
 		
 		//Funcao
 		Funcao fn = new Funcao();
@@ -137,28 +139,34 @@ public class PetshopApplication implements CommandLineRunner {
 		petshopRt.save(pt);
 		
 		//Produto
-		Produto pr = new Produto();
-		pr.setMarca("PetClean");
-		pr.setTipo("Sabonete");
-		pr.setPeso(0.150);
-		pr.setQuantidade(1);
-		pr.setValor(11.50);
-		pr.setDataVenda("20/08/2022");
+		Produto pr1 = new Produto();
+		pr1.setMarca("PetClean");
+		pr1.setTipo("Sabonete");
+		pr1.setPeso(0.150);
+		pr1.setQuantidade(1);
+		pr1.setValor(11.50);
+		pr1.setDataVenda("20/08/2022");
 		
-		produtoRt.save(pr);
+		produtoRt.save(pr1);
+		
+		cl.setProdutos(List.of(pr1));
 		
 		//Servico
-		Servico sv = new Servico();
-		sv.setDescricao("Banho e Tosa");
-		sv.setTipo("Banho e Tosa");
-		sv.setValor(30);
-		sv.setDataServico("10/09/2022");
+		Servico sv1 = new Servico();
+		sv1.setDescricao("Banho e Tosa");
+		sv1.setTipo("Banho e Tosa");
+		sv1.setValor(30);
+		sv1.setDataServico("10/09/2022");
 		
-		servicoRt.save(sv);
+		servicoRt.save(sv1);
+
+		cl.setServicos(List.of(sv1));
+		
+		clienteRt.save(cl);//salva o repositório no banco
 		
 		//Listas dos Objetos
 		//Lista de Clientes
-		List<Cliente> clientes = new ArrayList<Cliente>();
+		/*List<Cliente> clientes = new ArrayList<Cliente>();
 		clientes.add(cl);
 		//Lista de Animais
 		List<Animal> animais = new ArrayList<Animal>();
@@ -174,39 +182,34 @@ public class PetshopApplication implements CommandLineRunner {
 		servicos.add(sv);
 		//Lista de Lojas
 		List<Loja> lojas = new ArrayList<Loja>();
-		lojas.add(lj);
+		lojas.add(lj);*/
 		
-		//Validações Cliente
-		cl.setProdutos(produtos);
-		cl.setAnimais(animais);
-		cl.setFuncionarios(funcionarios);
-		cl.setServicos(servicos);
 		
 		//Associando Cliente a Animal
-		an.setCliente(cl);
+		an1.setCliente(cl);
 		
 		//Validações Funcao
-		fn.setFuncionarios(funcionarios);
+		fn.setFuncionarios(List.of(fc1));
 		fn.setPetshop(pt);
 		
 		//Validações Funcionario
-		fc.setClientes(clientes);
-		fc.setServicos(servicos);
-		fc.setFuncao(fn);
-		fc.setLoja(lj);
+		fc1.setClientes(List.of(cl));
+		fc1.setServicos(List.of(sv1));
+		fc1.setFuncao(fn);
+		fc1.setLoja(lj);
 		
 		//Validações Loja
-		lj.setFuncionarios(funcionarios);
-		lj.setProdutos(produtos);
+		lj.setFuncionarios(List.of(fc1));
+		lj.setProdutos(List.of(pr1));
 		
-		pt.setLojas(lojas);
+		pt.setLojas(List.of(lj));
 		
-		pr.setCliente(cl);
-		pr.setLoja(lj);
+		pr1.setCliente(cl);
+		pr1.setLoja(lj);
 		
 		//Validações Serviços
-		sv.setClientes(clientes);
-		sv.setFuncionarios(funcionarios);
+		sv1.setClientes(List.of(cl));
+		sv1.setFuncionarios(List.of(fc1));
 	}
 
 }

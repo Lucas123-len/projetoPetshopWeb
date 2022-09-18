@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -39,8 +40,8 @@ public class Cliente extends Pessoa{
 	private List<Animal> animais = new ArrayList<Animal>();
 	
 	@JsonBackReference
-	@OneToMany
-	@JoinColumn(name = "cliente_codigo")
+	@OneToMany//(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(nullable = false, name = "cliente_codigo")
 	@Size(min = 1, message = "Cliente deve comprar no minimo 1 produto")
 	@Valid
 	private List<Produto> produtos = new ArrayList<Produto>();
