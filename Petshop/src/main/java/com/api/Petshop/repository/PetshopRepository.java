@@ -9,7 +9,7 @@ import java.util.List;
 import com.api.Petshop.petshop.Petshop;
 
 @Repository
-public interface PetshopRepository extends JpaRepository<Petshop, String>{
+public interface PetshopRepository extends JpaRepository<Petshop, Long>{
 	@Query("Select pts Petshop pts where pts.cnpj = :cnpj")
 	public List<Petshop> findByCnpj(@Param("cnpj") String cnpj);
 }
