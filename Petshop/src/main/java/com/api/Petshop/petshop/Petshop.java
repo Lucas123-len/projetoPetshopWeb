@@ -13,11 +13,17 @@ import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 
 @Entity
 public class Petshop {
+	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	protected long codigo;
+	
 	@Column(length=50, nullable = false, unique = true, updatable = false)
 	@CNPJ(message = "CNPJ inválido")
 	private String cnpj;
