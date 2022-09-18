@@ -46,14 +46,14 @@ public class Loja {
 	@JsonBackReference
 	@OneToMany
 	@JoinColumn(name = "loja_codigo")
-	@Size(min = 1, message = "Loja deve ter no minimo 1 funcionario")
+	@NotNull(message = "Loja deve ter no minimo 1 funcionario")
 	@Valid
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	
 	@JsonBackReference
 	@OneToMany
 	@JoinColumn(name = "loja_codigo")
-	@Size(min = 1, message = "Loja deve ter no minimo 1 produto")
+	@NotNull(message = "Loja deve ter no minimo 1 produto")
 	@Valid
 	private List<Produto> produtos = new ArrayList<Produto>();
 	

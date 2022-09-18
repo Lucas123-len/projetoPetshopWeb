@@ -29,7 +29,7 @@ public class ClienteController {
 	
 	@GetMapping
 	public ResponseEntity getAll(@RequestParam(name = "page", defaultValue = "0", required = false) int page, @RequestParam(name = "size", defaultValue = "10", required = false) int size) {
-		return ResponseEntity.ok(service.findAll(page,size));
+		return ResponseEntity.status(HttpStatus.OK).body(service.findAll(page,size));
 	}
 	
 	@GetMapping(path = "/(codigo)")

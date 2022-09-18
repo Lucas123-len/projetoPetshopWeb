@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
@@ -35,19 +36,19 @@ public class Cliente extends Pessoa{
 
 	@OneToMany
 	@JoinColumn(name = "cliente_codigo")
-	@Size(min = 1, message = "Cliente deve ter no minimo 1 animal")
+	@NotNull(message = "Cliente deve ter no minimo 1 animal")
 	@Valid
 	private List<Animal> animais = new ArrayList<Animal>();
 	
 	@JsonBackReference
 	@OneToMany//(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "cliente_codigo")
-	@Size(min = 1, message = "Cliente deve comprar no minimo 1 produto")
+	@NotNull(message = "Cliente deve comprar no minimo 1 produto")
 	@Valid
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
 	@ManyToMany(mappedBy="clientes")
-	@Size(min = 1, message = "Cliente deve ser atendido por pelo menos 1 funcionario")
+	@NotNull(message = "Cliente deve ser atendido por pelo menos 1 funcionario")
 	@Valid
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	

@@ -1,6 +1,6 @@
 package com.api.Petshop;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +93,7 @@ public class PetshopApplication implements CommandLineRunner {
 		end2.setNumero("26");
 		
 		fc1.setEndereco(end2);
+		funcionarioRt.save(fc1);
 		
 		cl.setFuncionarios(List.of(fc1));
 		clienteRt.save(cl);
@@ -128,18 +129,19 @@ public class PetshopApplication implements CommandLineRunner {
 		end3.setNumero("113");
 		
 		lj.setEndereco(end3);
+		lojaRt.save(lj);
 		
 		//Petshop
 		Petshop pt = new Petshop();
 		pt.setCnpj("25.579.865/0001-85");
 		pt.setNome("PetMania");
 		pt.setSite("www.PetMania.com.br");
-		
+		petshopRt.save(pt);
 		fn.setFuncionarios(List.of(fc1));
 		fn.setPetshop(pt);
 		funcaoRt.save(fn);
 		
-		//Produto
+		//Produto1
 		Produto pr1 = new Produto();
 		pr1.setMarca("PetClean");
 		pr1.setTipo("Sabonete");
@@ -152,7 +154,20 @@ public class PetshopApplication implements CommandLineRunner {
 		
 		produtoRt.save(pr1);
 		
-		cl.setProdutos(List.of(pr1));
+		//Produto2
+		Produto pr2 = new Produto();
+		pr2.setMarca("PetClean");
+		pr2.setTipo("Shampoo");
+		pr2.setPeso(0.250);
+		pr2.setQuantidade(2);
+		pr2.setValor(15.50);
+		pr2.setDataVenda("20/08/2022");
+		pr2.setCliente(cl);
+		pr2.setLoja(lj);
+		
+		produtoRt.save(pr2);
+		
+		cl.setProdutos(List.of(pr1,pr2));
 		clienteRt.save(cl);
 		
 		lj.setFuncionarios(List.of(fc1));
@@ -168,6 +183,7 @@ public class PetshopApplication implements CommandLineRunner {
 		sv1.setTipo("Banho e Tosa");
 		sv1.setValor(30);
 		sv1.setDataServico("10/09/2022");
+		servicoRt.save(sv1);
 		
 		fc1.setClientes(List.of(cl));
 		fc1.setServicos(List.of(sv1));
