@@ -40,6 +40,12 @@ public class Petshop {
 	@JoinColumn(name = "petshop_cnpj")
 	private List<Loja> lojas = new ArrayList<Loja>();
 	
+	public long getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
 	public String getCnpj() {
 		return cnpj;
 	}
