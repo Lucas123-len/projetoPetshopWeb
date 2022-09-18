@@ -112,7 +112,7 @@ public class ClienteService {
 	}
 	
 	public void verificaCpfNomeCadastrado(String cpf, String nome) {
-		List<Pessoa> result = repo.findByCpfOrNomeOrId(cpf, nome);
+		List<Pessoa> result = repo.findByCpfOrNome(cpf, nome);
 		if(!result.isEmpty()) {
 			throw new RuntimeException("Cpf ou Nome já cadastrado.");
 		}
