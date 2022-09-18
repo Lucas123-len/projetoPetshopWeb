@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface AnimalRepository extends JpaRepository<Animal, Long>{
-	@Query("Select a Animal a where a.nome = :nome Or a.raca = :raca")
+	@Query("Select a From Animal a where a.nome = :nome Or a.raca = :raca")
 	public List<Animal> findByNomeOrRaca(@Param("nome") String nome, @Param("raca") String raca);
 }
