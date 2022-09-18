@@ -1,5 +1,8 @@
 package com.api.Petshop;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -153,6 +156,57 @@ public class PetshopApplication implements CommandLineRunner {
 		
 		servicoRt.save(sv);
 		
+		//Listas dos Objetos
+		//Lista de Clientes
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		clientes.add(cl);
+		//Lista de Animais
+		List<Animal> animais = new ArrayList<Animal>();
+		animais.add(an);
+		//Lista de Funcionarios
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+		funcionarios.add(fc);
+		//Lista de Produtos
+		List<Produto> produtos = new ArrayList<Produto>();
+		produtos.add(pr);
+		//Lista de Servicos
+		List<Servico> servicos = new ArrayList<Servico>();
+		servicos.add(sv);
+		//Lista de Lojas
+		List<Loja> lojas = new ArrayList<Loja>();
+		lojas.add(lj);
+		
+		//Validações Cliente
+		cl.setProdutos(produtos);
+		cl.setAnimais(animais);
+		cl.setFuncionarios(funcionarios);
+		cl.setServicos(servicos);
+		
+		//Associando Cliente a Animal
+		an.setCliente(cl);
+		
+		//Validações Funcao
+		fn.setFuncionarios(funcionarios);
+		fn.setPetshop(pt);
+		
+		//Validações Funcionario
+		fc.setClientes(clientes);
+		fc.setServicos(servicos);
+		fc.setFuncao(fn);
+		fc.setLoja(lj);
+		
+		//Validações Loja
+		lj.setFuncionarios(funcionarios);
+		lj.setProdutos(produtos);
+		
+		pt.setLojas(lojas);
+		
+		pr.setCliente(cl);
+		pr.setLoja(lj);
+		
+		//Validações Serviços
+		sv.setClientes(clientes);
+		sv.setFuncionarios(funcionarios);
 	}
 
 }

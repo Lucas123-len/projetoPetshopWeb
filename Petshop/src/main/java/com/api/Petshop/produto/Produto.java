@@ -85,6 +85,19 @@ public class Produto implements Pagamento,ImprimeDados{
 	public double getTotalPagamento() {
 		return this.valor*this.quantidade;
 	}
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	public Loja getLoja() {
+		return loja;
+	}
+	public void setLoja(Loja loja) {
+		this.loja = loja;
+	}
 	public void imprimeDados() {
 		JOptionPane.showMessageDialog(null, "Informações do Produto:"+
 				"\nCódigo: "+this.codigo+

@@ -70,4 +70,13 @@ public class Funcao {
 	public void setSalario(float salario) {
 		this.salario = salario;
 	}
+
+	public Petshop getPetshop() {
+		return petshop;
+	}
+
+	public void setPetshop(Petshop petshop) {
+		this.petshop = petshop;
+	}
+	
 }

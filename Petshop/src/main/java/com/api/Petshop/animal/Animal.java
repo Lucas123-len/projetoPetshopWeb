@@ -55,4 +55,12 @@ public class Animal {
 		this.especie = especie;
 	}
 	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
 }

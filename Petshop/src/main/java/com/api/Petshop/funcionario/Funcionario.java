@@ -53,6 +53,22 @@ public class Funcionario extends Pessoa{
 		this.servicos = servicos;
 	}
 
+	public Loja getLoja() {
+		return loja;
+	}
+
+	public void setLoja(Loja loja) {
+		this.loja = loja;
+	}
+
+	public Funcao getFuncao() {
+		return funcao;
+	}
+
+	public void setFuncao(Funcao funcao) {
+		this.funcao = funcao;
+	}
+
 	public void imprimeDados() {
 		JOptionPane.showMessageDialog(null, "Informações do Funcionario:"+
 				"\nCódigo Funcionário: "+this.codigo+
