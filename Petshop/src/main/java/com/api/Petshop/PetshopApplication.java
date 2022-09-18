@@ -66,8 +66,6 @@ public class PetshopApplication implements CommandLineRunner {
 		cl.setNome("Fábio");
 		cl.setTelefone("(22)99900-2369");
 		
-		clienteRt.save(cl);
-		
 		Endereco end = new Endereco();
 		end.setPais("Brasil");
 		end.setEstado("Rio de Janeiro");
@@ -77,6 +75,8 @@ public class PetshopApplication implements CommandLineRunner {
 		end.setNumero("14");
 		
 		cl.setEndereco(end);
+		
+		clienteRt.save(cl);
 		
 		//Funcionario
 		Funcionario fc1 = new Funcionario();
