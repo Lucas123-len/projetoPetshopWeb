@@ -66,6 +66,8 @@ public class PetshopApplication implements CommandLineRunner {
 		cl.setNome("Fábio");
 		cl.setTelefone("(22)99900-2369");
 		
+		clienteRt.save(cl);
+		
 		Endereco end = new Endereco();
 		end.setPais("Brasil");
 		end.setEstado("Rio de Janeiro");
@@ -177,11 +179,7 @@ public class PetshopApplication implements CommandLineRunner {
 		servicoRt.save(sv1);
 		
 		clienteRt.save(cl);//salva o repositório no banco
-		servicoRt.save(sv1);
-		funcionarioRt.save(fc1);
-		petshopRt.save(pt);
-		produtoRt.save(pr1);
-		animalRt.save(an1);
+		
 		//Listas dos Objetos
 		//Lista de Clientes
 		/*List<Cliente> clientes = new ArrayList<Cliente>();
