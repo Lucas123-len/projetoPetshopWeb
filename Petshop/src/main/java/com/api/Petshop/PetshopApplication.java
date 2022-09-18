@@ -177,7 +177,11 @@ public class PetshopApplication implements CommandLineRunner {
 		servicoRt.save(sv1);
 		
 		clienteRt.save(cl);//salva o repositório no banco
-		
+		servicoRt.save(sv1);
+		funcionarioRt.save(fc1);
+		petshopRt.save(pt);
+		produtoRt.save(pr1);
+		animalRt.save(an1);
 		//Listas dos Objetos
 		//Lista de Clientes
 		/*List<Cliente> clientes = new ArrayList<Cliente>();
