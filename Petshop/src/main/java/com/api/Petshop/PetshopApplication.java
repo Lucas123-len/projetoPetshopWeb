@@ -92,8 +92,6 @@ public class PetshopApplication implements CommandLineRunner {
 		
 		fc1.setEndereco(end2);
 		
-		funcionarioRt.save(fc1);
-		
 		cl.setFuncionarios(List.of(fc1));
 		
 		//Animal
@@ -101,17 +99,15 @@ public class PetshopApplication implements CommandLineRunner {
 		an1.setNome("Thor");
 		an1.setRaca("Labrador");
 		an1.setEspecie("cachorro");
-		
-		animalRt.save(an1);
 
 		cl.setAnimais(List.of(an1));
+		an1.setCliente(cl);
+		animalRt.save(an1);
 		
 		//Funcao
 		Funcao fn = new Funcao();
 		fn.setDescricao("Atendente");
 		fn.setSalario(1200);
-		
-		funcaoRt.save(fn);
 		
 		//Loja
 		Loja lj = new Loja();
@@ -128,15 +124,15 @@ public class PetshopApplication implements CommandLineRunner {
 		
 		lj.setEndereco(end3);
 		
-		lojaRt.save(lj);
-		
 		//Petshop
 		Petshop pt = new Petshop();
 		pt.setCnpj("25.579.865/0001-85");
 		pt.setNome("PetMania");
 		pt.setSite("www.PetMania.com.br");
 		
-		petshopRt.save(pt);
+		fn.setFuncionarios(List.of(fc1));
+		fn.setPetshop(pt);
+		funcaoRt.save(fn);
 		
 		//Produto
 		Produto pr1 = new Produto();
@@ -146,10 +142,19 @@ public class PetshopApplication implements CommandLineRunner {
 		pr1.setQuantidade(1);
 		pr1.setValor(11.50);
 		pr1.setDataVenda("20/08/2022");
+		pr1.setCliente(cl);
+		pr1.setLoja(lj);
 		
 		produtoRt.save(pr1);
 		
 		cl.setProdutos(List.of(pr1));
+		
+		lj.setFuncionarios(List.of(fc1));
+		lj.setProdutos(List.of(pr1));
+		lojaRt.save(lj);
+		
+		pt.setLojas(List.of(lj));
+		petshopRt.save(pt);
 		
 		//Servico
 		Servico sv1 = new Servico();
@@ -158,9 +163,18 @@ public class PetshopApplication implements CommandLineRunner {
 		sv1.setValor(30);
 		sv1.setDataServico("10/09/2022");
 		
-		servicoRt.save(sv1);
-
+		fc1.setClientes(List.of(cl));
+		fc1.setServicos(List.of(sv1));
+		fc1.setFuncao(fn);
+		fc1.setLoja(lj);
+		funcionarioRt.save(fc1);
+		
 		cl.setServicos(List.of(sv1));
+		
+		sv1.setClientes(List.of(cl));
+		sv1.setFuncionarios(List.of(fc1));
+		
+		servicoRt.save(sv1);
 		
 		clienteRt.save(cl);//salva o repositório no banco
 		
@@ -185,27 +199,6 @@ public class PetshopApplication implements CommandLineRunner {
 		lojas.add(lj);*/
 		
 		
-		//Associando Cliente a Animal
-		an1.setCliente(cl);
-		
-		//Validações Funcao
-		fn.setFuncionarios(List.of(fc1));
-		fn.setPetshop(pt);
-		
-		//Validações Funcionario
-		fc1.setClientes(List.of(cl));
-		fc1.setServicos(List.of(sv1));
-		fc1.setFuncao(fn);
-		fc1.setLoja(lj);
-		
-		//Validações Loja
-		lj.setFuncionarios(List.of(fc1));
-		lj.setProdutos(List.of(pr1));
-		
-		pt.setLojas(List.of(lj));
-		
-		pr1.setCliente(cl);
-		pr1.setLoja(lj);
 		
 		//Validações Serviços
 		sv1.setClientes(List.of(cl));
