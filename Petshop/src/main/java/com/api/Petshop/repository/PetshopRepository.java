@@ -10,6 +10,6 @@ import com.api.Petshop.petshop.Petshop;
 
 @Repository
 public interface PetshopRepository extends JpaRepository<Petshop, Long>{
-	@Query("Select pts Petshop pts where pts.cnpj = :cnpj")
+	@Query("Select pts From Petshop pts where pts.cnpj = :cnpj")
 	public List<Petshop> findByCnpj(@Param("cnpj") String cnpj);
 }

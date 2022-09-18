@@ -9,6 +9,6 @@ import com.api.Petshop.servico.Servico;
 import java.util.List;
 
 public interface ServicoRepository extends JpaRepository<Servico, Long>{
-	@Query("Select s Servico s where s.descricao = :descricao Or s.tipo = :tipo")
+	@Query("Select s From Servico s where s.descricao = :descricao Or s.tipo = :tipo")
 	public List<Servico> findByDescricaoOrTipo(@Param("descricao") String descricao, @Param("tipo") String tipo);
 }
