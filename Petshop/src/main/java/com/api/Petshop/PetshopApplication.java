@@ -95,6 +95,7 @@ public class PetshopApplication implements CommandLineRunner {
 		fc1.setEndereco(end2);
 		
 		cl.setFuncionarios(List.of(fc1));
+		clienteRt.save(cl);
 		
 		//Animal
 		Animal an1 = new Animal();
@@ -105,6 +106,8 @@ public class PetshopApplication implements CommandLineRunner {
 		cl.setAnimais(List.of(an1));
 		an1.setCliente(cl);
 		animalRt.save(an1);
+		
+		clienteRt.save(cl);
 		
 		//Funcao
 		Funcao fn = new Funcao();
@@ -150,6 +153,7 @@ public class PetshopApplication implements CommandLineRunner {
 		produtoRt.save(pr1);
 		
 		cl.setProdutos(List.of(pr1));
+		clienteRt.save(cl);
 		
 		lj.setFuncionarios(List.of(fc1));
 		lj.setProdutos(List.of(pr1));
