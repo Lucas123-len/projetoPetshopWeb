@@ -41,7 +41,7 @@ public class Cliente extends Pessoa{
 	
 	@JsonBackReference
 	@OneToMany//(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(nullable = false, name = "cliente_codigo")
+	@JoinColumn(name = "cliente_codigo")
 	@Size(min = 1, message = "Cliente deve comprar no minimo 1 produto")
 	@Valid
 	private List<Produto> produtos = new ArrayList<Produto>();
