@@ -31,9 +31,9 @@ public class PetshopController {
 		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
 	}
 	
-	@GetMapping(path = "/(cnpj)")
-	public ResponseEntity getOne(@PathVariable("cnpj") String cnpj) {
-		return ResponseEntity.ok(service.findByCnpj(cnpj));
+	@GetMapping(path = "/(codigo)")
+	public ResponseEntity getOne(@PathVariable("codigo") Long codigo) {
+		return ResponseEntity.ok(service.findById(codigo));
 	}
 	
 	@PostMapping
@@ -43,16 +43,16 @@ public class PetshopController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(petshop);
 	}
 	
-	@PutMapping("/(cnpj)")
-	public ResponseEntity update(@PathVariable("cnpj") String cnpj, @Valid @RequestBody Petshop petshop) {
-		petshop.setCnpj(cnpj);
+	@PutMapping("/(codigo)")
+	public ResponseEntity update(@PathVariable("codigo") Long codigo, @Valid @RequestBody Petshop petshop) {
+		petshop.setCodigo(codigo);
 		service.update(petshop);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
-	@DeleteMapping(path = "/(cnpj)")
-	public ResponseEntity delete(@PathVariable("cnpj") String cnpj) {
-		service.delete(cnpj);
+	@DeleteMapping(path = "/(codigo)")
+	public ResponseEntity delete(@PathVariable("codigo") Long codigo) {
+		service.delete(codigo);
 		return ResponseEntity.ok().build();
 	}
 }

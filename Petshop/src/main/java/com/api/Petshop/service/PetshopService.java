@@ -25,8 +25,8 @@ public class PetshopService {
 		return repo.findAll();
 	}
 	
-	public Petshop findByCnpj(String cnpj) {
-		Optional<Petshop> result = repo.findByCnpj(cnpj);
+	public Petshop findById(Long codigo) {
+		Optional<Petshop> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new RuntimeException("Petshop não encontrado.");
 		}
@@ -42,7 +42,7 @@ public class PetshopService {
 	}
 	
 	public Petshop update(Petshop p) {
-		Petshop obj = findByCnpj(p.getCnpj());
+		Petshop obj = findById(p.getCodigo());
 		List<Loja> lojasAtuais = obj.getLojas();
 		lojasAtuais.removeAll(p.getLojas());
 		verificaExclusaoLojaComFucionarios(lojasAtuais);
@@ -55,8 +55,8 @@ public class PetshopService {
 		}
 	}
 	
-	public void delete(String cnpj) {
-		Petshop obj = findByCnpj(cnpj);
+	public void delete(Long codigo) {
+		Petshop obj = findById(codigo);
 		verificaExclusaoLojaComFucionarios(obj.getLojas());
 		try {
 			repo.delete(obj);
