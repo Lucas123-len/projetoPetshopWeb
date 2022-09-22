@@ -3,6 +3,7 @@ import com.api.Petshop.pessoa.*;
 import com.api.Petshop.cliente.*;
 import com.api.Petshop.servico.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.api.Petshop.loja.*;
 import com.api.Petshop.funcao.*;
@@ -21,7 +22,7 @@ public class Funcionario extends Pessoa{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@JsonManagedReference
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="Atende",
 			   joinColumns=@JoinColumn(name="funcionario_codigo"),

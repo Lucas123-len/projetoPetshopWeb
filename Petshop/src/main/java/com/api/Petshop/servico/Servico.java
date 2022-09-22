@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 
 import com.api.Petshop.imprimeDados.*;
 import com.api.Petshop.pagamento.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.api.Petshop.funcionario.*;
 import com.api.Petshop.cliente.*;
 @Entity
@@ -42,10 +43,12 @@ public class Servico implements Pagamento,ImprimeDados, Serializable{
 	@Column(length=50)
 	private String dataServico;
 	
+	@JsonBackReference
 	@ManyToMany(mappedBy="servicos")
 	@Valid
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	
+	@JsonBackReference
 	@ManyToMany(mappedBy="servicos")
 	@Valid
 	private List<Cliente> clientes = new ArrayList<Cliente>();
