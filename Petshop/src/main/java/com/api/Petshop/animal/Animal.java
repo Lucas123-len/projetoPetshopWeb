@@ -1,5 +1,9 @@
 package com.api.Petshop.animal;
 import com.api.Petshop.cliente.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,8 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Animal {
+public class Animal implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long codigo;
@@ -20,6 +28,7 @@ public class Animal {
 	@Column(length=50)
 	private String especie;
 	
+	@JsonBackReference
 	@ManyToOne
 	private Cliente cliente;
 

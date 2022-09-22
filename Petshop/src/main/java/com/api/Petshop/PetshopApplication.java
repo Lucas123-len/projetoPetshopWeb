@@ -60,60 +60,13 @@ public class PetshopApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		//Cliente
-		Cliente cl = new Cliente();
-		cl.setCpf("274.200.840-33");
-		cl.setNome("Fábio");
-		cl.setTelefone("(22)99900-2369");
 		
-		Endereco end = new Endereco();
-		end.setPais("Brasil");
-		end.setEstado("Rio de Janeiro");
-		end.setCidade("Campos dos Goytacazes");
-		end.setBairro("Santa Rosa");
-		end.setRua("Rua São Carmmo");
-		end.setNumero("14");
-		
-		cl.setEndereco(end);
-		
-		clienteRt.save(cl);
-		
-		//Funcionario
-		Funcionario fc1 = new Funcionario();
-		fc1.setCpf("671.442.130-32");
-		fc1.setNome("Paulo");
-		fc1.setTelefone("(11)98355-0432");
-		
-		Endereco end2 = new Endereco();
-		end2.setPais("Brasil");
-		end2.setEstado("São Paulo");
-		end2.setCidade("Santos");
-		end2.setBairro("Vila Belmiro");
-		end2.setRua("Rua Orivaldo de Souza Rocha");
-		end2.setNumero("26");
-		
-		fc1.setEndereco(end2);
-		funcionarioRt.save(fc1);
-		
-		cl.setFuncionarios(List.of(fc1));
-		clienteRt.save(cl);
-		
-		//Animal
-		Animal an1 = new Animal();
-		an1.setNome("Thor");
-		an1.setRaca("Labrador");
-		an1.setEspecie("cachorro");
-
-		cl.setAnimais(List.of(an1));
-		an1.setCliente(cl);
-		animalRt.save(an1);
-		
-		clienteRt.save(cl);
-		
-		//Funcao
-		Funcao fn = new Funcao();
-		fn.setDescricao("Atendente");
-		fn.setSalario(1200);
+		//Petshop
+		Petshop pt = new Petshop();
+		pt.setCnpj("25.579.865/0001-85");
+		pt.setNome("PetMania");
+		pt.setSite("www.PetMania.com.br");
+		petshopRt.save(pt);
 		
 		//Loja
 		Loja lj = new Loja();
@@ -131,15 +84,74 @@ public class PetshopApplication implements CommandLineRunner {
 		lj.setEndereco(end3);
 		lojaRt.save(lj);
 		
-		//Petshop
-		Petshop pt = new Petshop();
-		pt.setCnpj("25.579.865/0001-85");
-		pt.setNome("PetMania");
-		pt.setSite("www.PetMania.com.br");
+		pt.setLojas(List.of(lj));
 		petshopRt.save(pt);
-		fn.setFuncionarios(List.of(fc1));
+		
+		lj.setPetshop(pt);
+		lojaRt.save(lj);
+		
+		//Funcao
+		Funcao fn = new Funcao();
+		fn.setDescricao("Atendente");
+		fn.setSalario(1200);
 		fn.setPetshop(pt);
 		funcaoRt.save(fn);
+		
+		//Cliente
+		Cliente cl = new Cliente();
+		cl.setCpf("274.200.840-33");
+		cl.setNome("Fábio");
+		cl.setTelefone("(22)99900-2369");
+		
+		Endereco end = new Endereco();
+		end.setPais("Brasil");
+		end.setEstado("Rio de Janeiro");
+		end.setCidade("Campos dos Goytacazes");
+		end.setBairro("Santa Rosa");
+		end.setRua("Rua São Carmmo");
+		end.setNumero("14");
+		
+		cl.setEndereco(end);
+		clienteRt.save(cl);
+		
+		//Funcionario
+		Funcionario fc1 = new Funcionario();
+		fc1.setCpf("671.442.130-32");
+		fc1.setNome("Paulo");
+		fc1.setTelefone("(11)98355-0432");
+		
+		
+		Endereco end2 = new Endereco();
+		end2.setPais("Brasil");
+		end2.setEstado("São Paulo");
+		end2.setCidade("Santos");
+		end2.setBairro("Vila Belmiro");
+		end2.setRua("Rua Orivaldo de Souza Rocha");
+		end2.setNumero("26");
+		
+		fc1.setEndereco(end2);
+		funcionarioRt.save(fc1);
+		
+		fn.setFuncionarios(List.of(fc1));
+		funcaoRt.save(fn);
+		
+		lj.setFuncionarios(List.of(fc1));
+		lojaRt.save(lj);
+		
+		cl.setFuncionarios(List.of(fc1));
+		clienteRt.save(cl);
+		
+		//Animal
+		Animal an1 = new Animal();
+		an1.setNome("Thor");
+		an1.setRaca("Labrador");
+		an1.setEspecie("cachorro");
+
+		cl.setAnimais(List.of(an1));
+		an1.setCliente(cl);
+		animalRt.save(an1);
+		
+		clienteRt.save(cl);
 		
 		//Produto1
 		Produto pr1 = new Produto();
@@ -170,12 +182,8 @@ public class PetshopApplication implements CommandLineRunner {
 		cl.setProdutos(List.of(pr1,pr2));
 		clienteRt.save(cl);
 		
-		lj.setFuncionarios(List.of(fc1));
-		lj.setProdutos(List.of(pr1));
+		lj.setProdutos(List.of(pr1,pr2));
 		lojaRt.save(lj);
-		
-		pt.setLojas(List.of(lj));
-		petshopRt.save(pt);
 		
 		//Servico
 		Servico sv1 = new Servico();

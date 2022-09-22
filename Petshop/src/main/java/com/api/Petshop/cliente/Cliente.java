@@ -4,17 +4,16 @@ import com.api.Petshop.animal.*;
 import com.api.Petshop.funcionario.*;
 import com.api.Petshop.servico.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.api.Petshop.produto.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -33,25 +32,28 @@ public class Cliente extends Pessoa{
 	@Column(length = 200)
 	@Length(max = 200, message = "Documentos devem ter no máximo 200 caracteres.")
 	private String documentos;
-
+	
+	@JsonManagedReference
 	@OneToMany
 	@JoinColumn(name = "cliente_codigo")
 	@NotNull(message = "Cliente deve ter no minimo 1 animal")
 	@Valid
 	private List<Animal> animais = new ArrayList<Animal>();
 	
-	@JsonBackReference
+	@JsonManagedReference
 	@OneToMany//(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "cliente_codigo")
 	@NotNull(message = "Cliente deve comprar no minimo 1 produto")
 	@Valid
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
+	@JsonBackReference
 	@ManyToMany(mappedBy="clientes")
 	@NotNull(message = "Cliente deve ser atendido por pelo menos 1 funcionario")
 	@Valid
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	
+	@JsonManagedReference
 	@ManyToMany
 	@JoinTable(name="Requisita",
 	   		   joinColumns=@JoinColumn(name="cliente_codigo"),

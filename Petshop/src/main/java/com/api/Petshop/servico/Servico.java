@@ -1,4 +1,5 @@
 package com.api.Petshop.servico;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -17,8 +18,13 @@ import com.api.Petshop.pagamento.*;
 import com.api.Petshop.funcionario.*;
 import com.api.Petshop.cliente.*;
 @Entity
-public class Servico implements Pagamento,ImprimeDados{
+public class Servico implements Pagamento,ImprimeDados, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long codigo;

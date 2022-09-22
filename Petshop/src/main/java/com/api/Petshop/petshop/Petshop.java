@@ -1,6 +1,8 @@
 package com.api.Petshop.petshop;
 import com.api.Petshop.loja.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +20,13 @@ import javax.persistence.GenerationType;
 
 
 @Entity
-public class Petshop {
+public class Petshop implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected long codigo;
@@ -36,6 +43,7 @@ public class Petshop {
 	@NotBlank(message = "Nome site obrigatorio")
 	private String site;
 	
+	@JsonManagedReference
 	@OneToMany
 	@JoinColumn(name = "petshop_cnpj")
 	private List<Loja> lojas = new ArrayList<Loja>();

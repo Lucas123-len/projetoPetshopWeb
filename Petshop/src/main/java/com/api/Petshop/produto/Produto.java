@@ -1,8 +1,12 @@
 package com.api.Petshop.produto;
 import com.api.Petshop.imprimeDados.*;
 import com.api.Petshop.pagamento.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.api.Petshop.cliente.*;
 import com.api.Petshop.loja.*;
+
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +16,12 @@ import javax.persistence.ManyToOne;
 import javax.swing.JOptionPane;
 import javax.validation.constraints.NotNull;
 @Entity
-public class Produto implements Pagamento,ImprimeDados{
+public class Produto implements Pagamento,ImprimeDados,Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long codigo;
@@ -34,9 +43,11 @@ public class Produto implements Pagamento,ImprimeDados{
 	
 	private int quantidade;
 	
+	@JsonBackReference
 	@ManyToOne
 	private Cliente cliente;
 	
+	@JsonBackReference
 	@ManyToOne
 	private Loja loja;
 	

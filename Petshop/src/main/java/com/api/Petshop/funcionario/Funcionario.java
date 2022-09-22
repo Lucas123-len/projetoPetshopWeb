@@ -2,6 +2,8 @@ package com.api.Petshop.funcionario;
 import com.api.Petshop.pessoa.*;
 import com.api.Petshop.cliente.*;
 import com.api.Petshop.servico.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.api.Petshop.loja.*;
 import com.api.Petshop.funcao.*;
 import java.util.ArrayList;
@@ -18,22 +20,26 @@ public class Funcionario extends Pessoa{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	@JsonManagedReference
 	@ManyToMany
 	@JoinTable(name="Atende",
 			   joinColumns=@JoinColumn(name="funcionario_codigo"),
 			   inverseJoinColumns = @JoinColumn(name="cliente_codigo"))
 	private List<Cliente> clientes = new ArrayList<Cliente>();
 	
+	@JsonManagedReference
 	@ManyToMany
 	@JoinTable(name="Realiza",
 	   		   joinColumns=@JoinColumn(name="funcionario_codigo"),
 	   		   inverseJoinColumns = @JoinColumn(name="servico_codigo"))
 	private List<Servico> servicos = new ArrayList<Servico>();
 	
+	@JsonBackReference
 	@ManyToOne
 	private Loja loja;
 	
+	@JsonManagedReference
 	@ManyToOne
 	private Funcao funcao;
 	

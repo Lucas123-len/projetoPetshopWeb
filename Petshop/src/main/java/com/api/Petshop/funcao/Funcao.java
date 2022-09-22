@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +32,11 @@ public class Funcao {
 	@JsonBackReference
 	@OneToMany
 	@JoinColumn(name = "funcao_codigo")
-	@Size(min = 1, message = "Uma função pelo menos 1 funcionario")
+	@NotNull(message = "Uma função pelo menos 1 funcionario")
 	@Valid
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	
+	@JsonBackReference
 	@ManyToOne
 	private Petshop petshop;
 	
