@@ -39,7 +39,7 @@ public class Funcionario extends Pessoa{
 	@ManyToOne
 	private Loja loja;
 	
-	@JsonManagedReference
+	@JsonBackReference
 	@ManyToOne
 	private Funcao funcao;
 	

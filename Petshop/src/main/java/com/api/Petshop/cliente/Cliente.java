@@ -4,6 +4,7 @@ import com.api.Petshop.animal.*;
 import com.api.Petshop.funcionario.*;
 import com.api.Petshop.servico.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.api.Petshop.produto.*;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class Cliente extends Pessoa{
 	@Valid
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany(mappedBy="clientes")
 	@NotNull(message = "Cliente deve ser atendido por pelo menos 1 funcionario")
 	@Valid
