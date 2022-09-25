@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.api.Petshop.exception.NotFoundException;
 import com.api.Petshop.funcionario.Funcionario;
 import com.api.Petshop.repository.ServicoRepository;
 import com.api.Petshop.servico.Servico;
@@ -30,7 +31,7 @@ public class ServicoService {
 	public Servico findById(Long codigo) {
 		Optional<Servico> result = repo.findById(codigo);
 		if(result.isEmpty()) {
-			throw new RuntimeException("Serviço não encontrado.");
+			throw new NotFoundException("Serviço não encontrado.");
 		}
 		return result.get();
 	}

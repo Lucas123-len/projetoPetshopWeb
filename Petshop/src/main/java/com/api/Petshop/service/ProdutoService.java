@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.api.Petshop.exception.NotFoundException;
 import com.api.Petshop.produto.Produto;
 import com.api.Petshop.repository.ProdutoRepository;
 
@@ -29,7 +30,7 @@ public class ProdutoService {
 	public Produto findById(Long codigo) {
 		Optional<Produto> result = repo.findById(codigo);
 		if(result.isEmpty()) {
-			throw new RuntimeException("Produto não encontrado.");
+			throw new NotFoundException("Produto não encontrado.");
 		}
 		return result.get();
 	}

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.Petshop.cliente.Cliente;
+import com.api.Petshop.exception.NotFoundException;
 import com.api.Petshop.pessoa.Pessoa;
 import com.api.Petshop.repository.ClienteRepository;
 import com.api.Petshop.servico.Servico;
@@ -35,7 +36,7 @@ public class ClienteService {
 	public Cliente findById(Long codigo) {
 		Optional<Cliente> result = repo.findById(codigo);
 		if(result.isEmpty()) {
-			throw new RuntimeException("Cliente não encontrado.");
+			throw new NotFoundException("Cliente não encontrado.");
 		}
 		return result.get();
 	}

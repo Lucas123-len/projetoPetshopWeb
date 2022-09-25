@@ -3,12 +3,15 @@ package com.api.Petshop.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.api.Petshop.cliente.Cliente;
+import com.api.Petshop.exception.NotFoundException;
 import com.api.Petshop.funcionario.Funcionario;
 import com.api.Petshop.pessoa.Pessoa;
 import com.api.Petshop.repository.FuncionarioRepository;
@@ -31,7 +34,7 @@ public class FuncionarioService {
 	public Funcionario findById(Long codigo) {
 		Optional<Funcionario> result = repo.findById(codigo);
 		if(result.isEmpty()) {
-			throw new RuntimeException("Cliente não encontrado.");
+			throw new NotFoundException("Cliente não encontrado.");
 		}
 		return result.get();
 	}
@@ -56,6 +59,13 @@ public class FuncionarioService {
 			f.setCpf(obj.getCpf());
 			return repo.save(f);
 		}catch(Exception e){
+			Throwable t = e;
+			while(t.getCause() != null) {
+				t = t.getCause();
+				if(t instanceof ConstraintViolationException) {
+					throw((ConstraintViolationException) t);
+				}
+			}
 			throw new RuntimeException("Falha ao atualizar Funcionario.");
 		}
 	}

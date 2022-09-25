@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.api.Petshop.exception.NotFoundException;
 import com.api.Petshop.funcao.Funcao;
 import com.api.Petshop.funcionario.Funcionario;
 import com.api.Petshop.repository.FuncaoRepository;
@@ -30,7 +31,7 @@ public class FuncaoService {
 	public Funcao findById(Long codigo) {
 		Optional<Funcao> result = repo.findById(codigo);
 		if(result.isEmpty()) {
-			throw new RuntimeException("Função não encontrada.");
+			throw new NotFoundException("Função não encontrada.");
 		}
 		return result.get();
 	}

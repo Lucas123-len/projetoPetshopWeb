@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import com.api.Petshop.exception.NotFoundException;
 import com.api.Petshop.loja.Loja;
 import com.api.Petshop.petshop.Petshop;
 import com.api.Petshop.repository.PetshopRepository;
@@ -28,7 +29,7 @@ public class PetshopService {
 	public Petshop findById(Long codigo) {
 		Optional<Petshop> result = repo.findById(codigo);
 		if(result.isEmpty()) {
-			throw new RuntimeException("Petshop não encontrado.");
+			throw new NotFoundException("Petshop não encontrado.");
 		}
 		return result.get();
 	}

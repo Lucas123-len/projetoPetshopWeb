@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.api.Petshop.animal.Animal;
+import com.api.Petshop.exception.NotFoundException;
 import com.api.Petshop.repository.AnimalRepository;
 
 @Service
@@ -29,7 +30,7 @@ public class AnimalService {
 	public Animal findById(Long codigo) {
 		Optional<Animal> result = repo.findById(codigo);
 		if(result.isEmpty()) {
-			throw new RuntimeException("Animal não encontrado.");
+			throw new NotFoundException("Animal não encontrado.");
 		}
 		return result.get();
 	}
