@@ -1,4 +1,4 @@
-package com.api.Petshop.controller;
+package com.api.Petshop.controller.apirest;
 
 import javax.validation.Valid;
 
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.Petshop.animal.Animal;
-import com.api.Petshop.service.AnimalService;
+import com.api.Petshop.servico.Servico;
+import com.api.Petshop.service.ServicoService;
 
 @RestController
-@RequestMapping(path = "/apirest/animais")
+@RequestMapping(path = "/apirest/servicos")
 
-public class AnimalController {
+public class ServicoController {
 	@Autowired
-	private AnimalService service;
+	private ServicoService service;
 	
 	@GetMapping
 	public ResponseEntity getAll(@RequestParam(name = "page", defaultValue = "0", required = false) int page, @RequestParam(name = "size", defaultValue = "10", required = false) int size) {
@@ -36,16 +36,16 @@ public class AnimalController {
 	}
 	
 	@PostMapping
-	public ResponseEntity save(@Valid @RequestBody Animal animal) {
-		animal.setCodigo((Long) null);
-		service.save(animal);
+	public ResponseEntity save(@Valid @RequestBody Servico servico) {
+		servico.setCodigo((Long) null);
+		service.save(servico);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 	@PutMapping(path = "/(codigo)")
-	public ResponseEntity update(@PathVariable("codigo") Long codigo, @Valid @RequestBody Animal animal) {
-		animal.setCodigo(codigo);
-		service.update(animal);
+	public ResponseEntity update(@PathVariable("codigo") Long codigo, @Valid @RequestBody Servico servico) {
+		servico.setCodigo(codigo);
+		service.update(servico);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	

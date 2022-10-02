@@ -1,4 +1,4 @@
-package com.api.Petshop.controller;
+package com.api.Petshop.controller.apirest;
 
 import javax.validation.Valid;
 
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.Petshop.servico.Servico;
-import com.api.Petshop.service.ServicoService;
+import com.api.Petshop.funcao.Funcao;
+import com.api.Petshop.service.FuncaoService;
 
 @RestController
-@RequestMapping(path = "/apirest/servicos")
+@RequestMapping(path = "/apirest/funcoes")
 
-public class ServicoController {
+public class FuncaoController {
 	@Autowired
-	private ServicoService service;
+	private FuncaoService service;
 	
 	@GetMapping
 	public ResponseEntity getAll(@RequestParam(name = "page", defaultValue = "0", required = false) int page, @RequestParam(name = "size", defaultValue = "10", required = false) int size) {
@@ -36,16 +36,16 @@ public class ServicoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity save(@Valid @RequestBody Servico servico) {
-		servico.setCodigo((Long) null);
-		service.save(servico);
+	public ResponseEntity save(@Valid @RequestBody Funcao funcao) {
+		funcao.setCodigo((Long) null);
+		service.save(funcao);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 	@PutMapping(path = "/(codigo)")
-	public ResponseEntity update(@PathVariable("codigo") Long codigo, @Valid @RequestBody Servico servico) {
-		servico.setCodigo(codigo);
-		service.update(servico);
+	public ResponseEntity update(@PathVariable("codigo") Long codigo, @Valid @RequestBody Funcao funcao) {
+		funcao.setCodigo(codigo);
+		service.update(funcao);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	

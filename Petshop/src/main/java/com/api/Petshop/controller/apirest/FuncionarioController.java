@@ -1,4 +1,4 @@
-package com.api.Petshop.controller;
+package com.api.Petshop.controller.apirest;
 
 import javax.validation.Valid;
 
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.Petshop.loja.Loja;
-import com.api.Petshop.service.LojaService;
+import com.api.Petshop.funcionario.Funcionario;
+import com.api.Petshop.service.FuncionarioService;
 
 @RestController
-@RequestMapping(path = "/apirest/lojas")
+@RequestMapping(path = "/apirest/funcionarios")
 
-public class LojaController {
+public class FuncionarioController {
 	@Autowired
-	private LojaService service;
+	private FuncionarioService service;
 	
 	@GetMapping
 	public ResponseEntity getAll(@RequestParam(name = "page", defaultValue = "0", required = false) int page, @RequestParam(name = "size", defaultValue = "10", required = false) int size) {
@@ -36,21 +36,21 @@ public class LojaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity save(@Valid @RequestBody Loja loja) {
-		loja.setCodigo((Long) null);
-		service.save(loja);
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	public ResponseEntity save(@Valid @RequestBody Funcionario funcionario) {
+		funcionario.setCodigo((Long) null);
+		service.save(funcionario);
+		return ResponseEntity.status(HttpStatus.CREATED).body(funcionario);
 	}
 	
 	@PutMapping(path = "/(codigo)")
-	public ResponseEntity update(@PathVariable("codigo") Long codigo, @Valid @RequestBody Loja loja) {
-		loja.setCodigo(codigo);
-		service.update(loja);
+	public ResponseEntity update(@PathVariable("codigo") Long codigo, @RequestBody Funcionario funcionario) {
+		funcionario.setCodigo(codigo);
+		service.update(funcionario);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 	@DeleteMapping(path = "/(codigo)")
-	public ResponseEntity delete(@PathVariable("/(id)") Long codigo) {
+	public ResponseEntity delete(@PathVariable("codigo") Long codigo) {
 		service.delete(codigo);
 		return ResponseEntity.ok().build();
 	}

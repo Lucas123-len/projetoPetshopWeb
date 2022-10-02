@@ -1,4 +1,4 @@
-package com.api.Petshop.controller;
+package com.api.Petshop.controller.apirest;
 import com.api.Petshop.exception.Error;
 import com.api.Petshop.exception.NotFoundException;
 import com.api.Petshop.exception.PropertyError;

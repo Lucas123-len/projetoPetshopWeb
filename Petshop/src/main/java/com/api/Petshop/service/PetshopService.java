@@ -35,6 +35,7 @@ public class PetshopService {
 	}
 	
 	public Petshop save(Petshop p) {
+		verificaCnpjCadastrado(p.getCnpj());
 		try {
 			return repo.save(p);
 		}catch(Exception e) {
@@ -71,6 +72,13 @@ public class PetshopService {
 			if(!l.getFuncionarios().isEmpty()) {
 				throw new RuntimeException("Não é possível excluir lojas com funcionarios.");
 			}
+		}
+	}
+	
+	public void verificaCnpjCadastrado(String cnpj) {
+		List<Petshop> result = repo.findByCnpj(cnpj);
+		if(!result.isEmpty()) {
+			throw new RuntimeException("CNPJ já cadastrado.");
 		}
 	}
 }
