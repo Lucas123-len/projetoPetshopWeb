@@ -1,4 +1,4 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.tymeleaf.org">
 	<head th:replace="~{Fragmentos :: imports-css(title='Petshops')}">
 		<title>Petshops</title>
@@ -13,7 +13,7 @@
 					<a class="btn btn-primary float-right" th:href="@{~/petshops/petshop}" role="button">Novo Petshop</a>
 				</h4>
 			</div>
-			
+			<div th:replace="~{Fragmentos :: mensagens}"></div>
 			<div class="card" th:each="petshop : ${petshops}">
 				<div class="card-body">
 					<h5 class="card-title" th:text="${petshop.nome}"></h5>
@@ -42,7 +42,7 @@
 				</div>
 				<div class="card-body">
 					<a th:href="@{'~/petshops/petshop/'+${petshop.codigo}}" class="btn btn-warning">Editar</a>
-					<a th:href="@{'~/petshops/'+${petshop.codigo}+'/deletar'}" class="btn btn-danger" onclick=" confirm ('Deseja realmente excluir esse hotel?')">Excluir</a>
+					<a th:href="@{'~/petshops/'+${petshop.codigo}+'/deletar'}" class="btn btn-danger" onclick="return confirm ('Deseja realmente excluir esse Petshop?')">Excluir</a>
 				</div>
 			</div>
 		</div>	

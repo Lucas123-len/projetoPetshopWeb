@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.tymeleaf.org">
+	<head th:replace="~{Fragmentos :: imports-css(title='Servicos')}">
+		<title>Servicos</title>
+	</head>
+	<body>
+		<div th:replace="~{Fragmentos :: barramenu(pagina='servicos')}"></div>
+		
+		<div class="container" style="margin-top: 20px">
+			<div class="card-header">
+				<h4>
+					Servicos Cadastrados
+					<a class="btn btn-primary float-right" th:href="@{~/servicos/servico}" role="button">Novo Servico</a>
+				</h4>
+			</div>
+			<div class="card" th:each="servicos : ${servicos}">
+				<div class="card-body">
+					<h5 class="card-title" th:text="'Descricao: '+${servico.descricao}"></h5>
+					<div class="card-text" th:text="'Tipo: '+${servico.tipo}"></div>
+					<div class="card-text" th:text="'Valor: '+${servico.valor}"></div>
+				</div>
+				<div class="card-body">
+					<a th:href="@{'~/servicos/servico/'+${servico.codigo}}" class="btn btn-warning">Editar</a>
+					<a th:href="@{'~/servicos/'+${servico.codigo}+'/deletar'}" class="btn btn-danger" onclick="return confirm ('Deseja realmente excluir essa Servico?')">Excluir</a>
+				</div>
+			</div>
+		</div>
+		
+		<div th:replace="~{Fragmentos :: imports-js}"></div>
+	</body>
+</html>
