@@ -1,4 +1,5 @@
 package com.api.Petshop.service;
+import com.api.Petshop.permissao.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.api.Petshop.cliente.Cliente;
@@ -40,23 +42,28 @@ public class FuncionarioService {
 	}
 	
 	public Funcionario save(Funcionario f) {
-		verificaCpfNomeCadastrado(f.getCpf(), f.getNome());
+		verificaCpfEmailCadastrado(f.getCpf(), f.getNome());
+		removePermissoesNulas(f);
 		try {
+			f.setSenha(new BCryptPasswordEncoder().encode(f.getSenha()));
 			return repo.save(f);
 		}catch(Exception e) {
 			throw new RuntimeException("Falha ao salvar o Funcionario.");
 		}
 	}
 	
-	public Funcionario update(Funcionario f) {
+	public Funcionario update(Funcionario f, String senhaAtual, String novaSenha, String confirmaNovaSenha) {
 		
 		Funcionario obj = findById(f.getCodigo());
 		List<Servico> servicosAtuais = obj.getServicos();
 		servicosAtuais.removeAll(f.getServicos());
 		verificaExclusaoFuncionario(servicosAtuais);
-		
+		removePermissoesNulas(f);
+		alterarSenha(obj,senhaAtual,novaSenha,confirmaNovaSenha);
 		try {
 			f.setCpf(obj.getCpf());
+			f.setEmail(obj.getEmail());
+			f.setSenha(obj.getSenha());
 			return repo.save(f);
 		}catch(Exception e){
 			Throwable t = e;
@@ -80,10 +87,22 @@ public class FuncionarioService {
 		}
 	}
 	
-	public void verificaCpfNomeCadastrado(String cpf, String nome) {
-		List<Pessoa> result = repo.findByCpfOrNome(cpf, nome);
+	public void verificaCpfEmailCadastrado(String cpf, String email) {
+		List<Pessoa> result = repo.findByCpfOrEmail(cpf, email);
 		if(!result.isEmpty()) {
 			throw new RuntimeException("Cpf ou Nome já cadastrado.");
+		}
+	}
+	
+	private void alterarSenha(Funcionario obj, String senhaAtual, String novaSenha, String confirmaNovaSenha) {
+		if(!senhaAtual.isBlank() && !novaSenha.isBlank() && !confirmaNovaSenha.isBlank()) {
+			if(!senhaAtual.equals(obj.getSenha())) {
+				throw new RuntimeException("Senha atual esta incorreta.");
+			}
+			if(!novaSenha.equals(confirmaNovaSenha)) {
+				throw new RuntimeException("Nova Senha e Confirmar Nova Senha não conferem.");
+			}
+			obj.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
 		}
 	}
 	
@@ -92,6 +111,15 @@ public class FuncionarioService {
 			if(!s.getClientes().isEmpty()) {
 				throw new RuntimeException("Funcionario realiza serviços que possuem clientes vinculados. Não pode ser excluído.");
 			}
+		}
+	}
+	
+	public void removePermissoesNulas(Funcionario f) {
+		f.getPermissoes().removeIf((Permissao p) -> {
+			return p.getCodigo()==null;
+		});
+		if(f.getPermissoes().isEmpty()) {
+			throw new RuntimeException("Funcionario deve conter no minimo 1 permissao.");
 		}
 	}
 }

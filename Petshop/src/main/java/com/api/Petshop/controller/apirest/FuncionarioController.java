@@ -45,13 +45,20 @@ public class FuncionarioController {
 	@PutMapping(path = "/(codigo)")
 	public ResponseEntity update(@PathVariable("codigo") Long codigo, @RequestBody Funcionario funcionario) {
 		funcionario.setCodigo(codigo);
-		service.update(funcionario);
+		service.update(funcionario,"","","");
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 	@DeleteMapping(path = "/(codigo)")
 	public ResponseEntity delete(@PathVariable("codigo") Long codigo) {
 		service.delete(codigo);
+		return ResponseEntity.ok().build();
+	}
+	
+	@PutMapping(path = "/{codigo}/alterarSenha")
+	public ResponseEntity alterarSenha(@PathVariable("codigo") Long codigo, @RequestParam(name = "senhaAtual", defaultValue = "", required = true) String senhaAtual, @RequestParam(name = "novaSenha", defaultValue = "", required = true) String novaSenha, @RequestParam(name = "confirmarNovaSenha", defaultValue = "", required = true) String confirmarNovaSenha) {
+		Funcionario f = service.findById(codigo);
+		service.update(f, senhaAtual, confirmarNovaSenha, novaSenha);
 		return ResponseEntity.ok().build();
 	}
 }

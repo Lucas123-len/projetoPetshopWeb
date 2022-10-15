@@ -18,9 +18,13 @@
 			<form th:object="${cliente}" th:action="@{~/clientes/cliente/{codigo}(codigo=${cliente.codigo})}" method="post" enctype="multipart/form-data" class="card-body">
 				<input type="hidden" th:field="*{codigo}">
 				<div class="form-row"><!-- class = form-row diz respeito a uma linha de um formulário -->
-					<div class="form-group">
+					<div class="form-group col-md-7">
 						<label for="nome">Nome:</label>
 						<input th:field="*{nome}" type="text" class="form-control" placeholder="Nome" required="required" maxlength="100">
+					</div>
+					<div class="form-group col-md-5">
+						<label for="email">Email:</label>
+						<input th:field="*{email}" type="text" class="form-control" placeholder="Email" required="required" maxlength="100">
 					</div>
 				</div>
 				<div class="form-row">

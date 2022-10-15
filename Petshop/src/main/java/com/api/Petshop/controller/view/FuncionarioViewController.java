@@ -1,11 +1,15 @@
 package com.api.Petshop.controller.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.api.Petshop.funcionario.Funcionario;
+import com.api.Petshop.repository.PermissaoRepository;
 import com.api.Petshop.service.FuncionarioService;
 
 @Controller
@@ -22,6 +27,9 @@ import com.api.Petshop.service.FuncionarioService;
 public class FuncionarioViewController {
 	@Autowired
 	private FuncionarioService service;
+	
+	@Autowired
+	private PermissaoRepository permissaoRepo;
 	
 	@GetMapping
 	public String getAll(Model model) {
@@ -32,13 +40,18 @@ public class FuncionarioViewController {
 	@GetMapping(path = "/funcionario")
 	public String cadastro(Model model) {
 		model.addAttribute("funcionario",new Funcionario());
+		model.addAttribute("permissoes",permissaoRepo.findAll());
 		return "FormFuncionario";
 	}
 	
 	@PostMapping(path = "/funcionario")
-	public String save(@Valid @ModelAttribute Funcionario funcionario, BindingResult result, Model model) {
+	public String save(@Valid @ModelAttribute Funcionario funcionario, BindingResult result, @RequestParam("confirmarSenha") String confirmarSenha, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("msgErros",result.getAllErrors());
+			return "FormFuncionario";
+		}
+		if(!funcionario.getSenha().equals(confirmarSenha)) {
+			model.addAttribute("msgErros", new ObjectError("funcionario","Campos Senha e Confirmar Senha devem ser iguais."));
 			return "FormFuncionario";
 		}
 		funcionario.setCodigo((Long) null);
@@ -61,18 +74,25 @@ public class FuncionarioViewController {
 	
 	@PostMapping(path = "/funcionario/{codigo}")
 	public String update(@Valid @ModelAttribute Funcionario funcionario, BindingResult result, @PathVariable("codigo") Long codigo, Model model) {
-		if(result.hasErrors()) {
-			model.addAttribute("msgErros",result.getAllErrors());
+		List<FieldError> list = new ArrayList<>();
+		for(FieldError fe : result.getFieldErrors()) {
+			if(!fe.getField().equals("senha")) {
+				list.add(fe);
+			}
+		}
+		if(!list.isEmpty()) {
+			model.addAttribute("msgErros",list);
 			return "FormFuncionario";
 		}
-		funcionario.setCodigo((Long) null);
+		
+		funcionario.setCodigo(codigo);
 		try {
-			service.save(funcionario);
-			model.addAttribute("msgSucesso","Funcionario cadastrado com sucesso");
-			model.addAttribute("funcionario",new Funcionario());
+			service.update(funcionario,"","","");
+			model.addAttribute("msgSucesso","Funcionario atualizado com sucesso");
+			model.addAttribute("funcionario",funcionario);
 			return "FormFuncionario";
 		}catch(Exception e) {
-			model.addAttribute("msgErros",new ObjectError("Funcionario", e.getMessage()));
+			model.addAttribute("msgErros",new ObjectError("funcionario", e.getMessage()));
 			return "FormFuncionario";
 		}
 	}

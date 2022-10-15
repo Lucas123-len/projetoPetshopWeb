@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
-	@Query("Select p From Pessoa p Where p.cpf = :cpf Or p.nome = :nome")
-	public List<Pessoa> findByCpfOrNome(@Param("cpf") String cpf, @Param("nome") String nome);
+	@Query("Select p From Pessoa p Where p.cpf = :cpf Or p.email = :email")
+	public List<Pessoa> findByCpfOrEmail(@Param("cpf") String cpf, @Param("email") String email);
 }

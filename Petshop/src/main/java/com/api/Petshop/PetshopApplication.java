@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.api.Petshop.animal.Animal;
 import com.api.Petshop.cliente.Cliente;
@@ -14,6 +15,7 @@ import com.api.Petshop.endereco.Endereco;
 import com.api.Petshop.funcao.Funcao;
 import com.api.Petshop.funcionario.Funcionario;
 import com.api.Petshop.loja.Loja;
+import com.api.Petshop.permissao.Permissao;
 import com.api.Petshop.petshop.Petshop;
 import com.api.Petshop.produto.Produto;
 import com.api.Petshop.repository.AnimalRepository;
@@ -21,6 +23,7 @@ import com.api.Petshop.repository.ClienteRepository;
 import com.api.Petshop.repository.FuncaoRepository;
 import com.api.Petshop.repository.FuncionarioRepository;
 import com.api.Petshop.repository.LojaRepository;
+import com.api.Petshop.repository.PermissaoRepository;
 import com.api.Petshop.repository.PetshopRepository;
 import com.api.Petshop.repository.ProdutoRepository;
 import com.api.Petshop.repository.ServicoRepository;
@@ -52,6 +55,9 @@ public class PetshopApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ServicoRepository servicoRt;
+	
+	@Autowired
+	private PermissaoRepository permissaoRt;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PetshopApplication.class, args);
@@ -59,7 +65,12 @@ public class PetshopApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
+		//Permissao
+		Permissao p1 = new Permissao();
+		p1.setNome("ADMIN");
+		Permissao p2 = new Permissao();
+		p2.setNome("FUNC");
+		permissaoRt.saveAll(List.of(p1, p2));
 		
 		//Petshop
 		Petshop pt = new Petshop();
@@ -99,6 +110,7 @@ public class PetshopApplication implements CommandLineRunner {
 		
 		//Cliente
 		Cliente cl = new Cliente();
+		cl.setEmail("fabio@hotmail.com");
 		cl.setCpf("274.200.840-33");
 		cl.setNome("Fábio");
 		cl.setTelefone("(22)99900-2369");
@@ -116,9 +128,12 @@ public class PetshopApplication implements CommandLineRunner {
 		
 		//Funcionario
 		Funcionario fc1 = new Funcionario();
+		fc1.setPermissoes(List.of(p1));
+		fc1.setEmail("paulo@gmail.com");
 		fc1.setCpf("671.442.130-32");
 		fc1.setNome("Paulo");
 		fc1.setTelefone("(11)98355-0432");
+		fc1.setSenha(new BCryptPasswordEncoder().encode("12345678"));
 		
 		
 		Endereco end2 = new Endereco();

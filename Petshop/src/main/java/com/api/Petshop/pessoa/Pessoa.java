@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -30,13 +31,18 @@ public abstract class Pessoa implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected long codigo;
 	
-	@Column(length=14, nullable = false)
+	@Column(length=14, nullable = false, unique = true, updatable = false)
 	@CPF(message = "CPF inválido")
 	protected String cpf;
 
 	@Column(length=50)
 	@NotBlank(message = "Nome obrigatorio")
 	protected String nome;
+	
+	@Column(length=100, nullable = false, unique = true, updatable = false)
+	@NotBlank(message = "Email obrigatorio")
+	@Email
+	protected String email;
 	
 	@Column(length=14, nullable = false)
 	@NotBlank(message = "Numero de telefone obrigatorio")
@@ -78,6 +84,14 @@ public abstract class Pessoa implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Endereco getEndereco() {

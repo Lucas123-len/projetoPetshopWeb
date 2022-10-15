@@ -53,7 +53,7 @@ public class ClienteService {
 		}
 		
 		//verifica se cpf e nome já cadastrados
-		verificaCpfNomeCadastrado(c.getCpf(), c.getNome());
+		verificaCpfEmailCadastrado(c.getCpf(), c.getNome());
 		try {
 			return repo.save(c);
 		}catch(Exception e) {
@@ -112,10 +112,10 @@ public class ClienteService {
 		}
 	}
 	
-	public void verificaCpfNomeCadastrado(String cpf, String nome) {
-		List<Pessoa> result = repo.findByCpfOrNome(cpf, nome);
+	public void verificaCpfEmailCadastrado(String cpf, String email) {
+		List<Pessoa> result = repo.findByCpfOrEmail(cpf, email);
 		if(!result.isEmpty()) {
-			throw new RuntimeException("Cpf ou Nome já cadastrado.");
+			throw new RuntimeException("Cpf ou Email já cadastrado.");
 		}
 	}
 	

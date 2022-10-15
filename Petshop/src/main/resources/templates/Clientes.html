@@ -17,6 +17,7 @@
 			<div class="card" th:each="cliente : ${clientes}">
 				<div class="card-body">
 					<h5 class="card-title" th:text="'Nome: '+${cliente.nome}"></h5>
+					<div class="card-text" th:text="'Email: '+${cliente.email}"></div>
 					<div class="card-text" th:text="'CPF: '+${cliente.cpf}"></div>
 					<div class="card-text" th:text="'Telefone: '+${cliente.telefone}"></div>
 					<div class="card-text" th:if="${cliente.documentos}">

@@ -6,21 +6,32 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.api.Petshop.loja.*;
+import com.api.Petshop.permissao.Permissao;
 import com.api.Petshop.funcao.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.swing.JOptionPane;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 @Entity
 public class Funcionario extends Pessoa{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@NotBlank(message = "Senha Obrigatoria")
+	@Length(min = 8, message = "Senha deve ter no minimo 8 caracteres")
+	private String senha;
 	
 	@JsonIgnore
 	@ManyToMany
@@ -35,6 +46,10 @@ public class Funcionario extends Pessoa{
 	   		   joinColumns=@JoinColumn(name="funcionario_codigo"),
 	   		   inverseJoinColumns = @JoinColumn(name="servico_codigo"))
 	private List<Servico> servicos = new ArrayList<Servico>();
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@NotNull(message = "Funcionario deve ter no mínimo 1 permissao.")
+	private List<Permissao> permissoes = new ArrayList<Permissao>();
 	
 	@JsonBackReference
 	@ManyToOne
@@ -74,6 +89,22 @@ public class Funcionario extends Pessoa{
 
 	public void setFuncao(Funcao funcao) {
 		this.funcao = funcao;
+	}
+	
+	public List<Permissao> getPermissoes() {
+		return permissoes;
+	}
+
+	public void setPermissoes(List<Permissao> permissoes) {
+		this.permissoes = permissoes;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public void imprimeDados() {
