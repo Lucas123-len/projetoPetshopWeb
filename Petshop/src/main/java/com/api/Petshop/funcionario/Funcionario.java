@@ -10,6 +10,8 @@ import com.api.Petshop.permissao.Permissao;
 import com.api.Petshop.funcao.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -115,18 +117,25 @@ public class Funcionario extends Pessoa{
 				"\nTelefone: "+this.telefone+
 				"\nEndereço: "+this.endereco.getRua()+","+this.endereco.getNumero()+","+this.endereco.getBairro()+","+this.endereco.getCidade()+","+this.endereco.getEstado()+","+this.endereco.getPais());
 	}
+
 	@Override
-	public boolean equals(Object obj){
-	//if(this == obj){return true;}
-		if(!(obj instanceof Funcionario)){
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(senha);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
 			return false;
-		}
-		//if(this.getClass != obj.getClass){return false;}
-		Funcionario fc = (Funcionario) obj;
-		return this.codigo == fc.codigo;
+		if (getClass() != obj.getClass())
+			return false;
+		Funcionario other = (Funcionario) obj;
+		return Objects.equals(senha, other.senha);
 	}
-	@Override
-	public int hashCode(){
-		return (int) (this.getNome().length() * 3 + this.codigo);
-	}
+	
 }

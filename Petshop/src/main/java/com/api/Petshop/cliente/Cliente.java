@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.api.Petshop.produto.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import javax.swing.JOptionPane;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -110,23 +112,25 @@ public class Cliente extends Pessoa{
 				"\nEndereço: "+this.endereco.getRua()+","+this.endereco.getNumero()+","+this.endereco.getBairro()+","+this.endereco.getCidade()+","+this.endereco.getEstado()+","+this.endereco.getPais()
 				);
 	}
+
 	@Override
-	public boolean equals(Object obj){
-		//if(this == obj){return true;}
-		if(!(obj instanceof Cliente)){
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(documentos);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
 			return false;
-		}
-		//if(this.getClass != obj.getClass){return false;}
-		Cliente cl = (Cliente) obj;
-		if(telefone.equals(null)){
-			if(!cl.telefone.equals(null)){
-				return false;
-			}
-		}
-		return this.codigo == cl.codigo && this.telefone.equals(cl.telefone);
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return Objects.equals(documentos, other.documentos);
 	}
-	@Override
-	public int hashCode(){
-		return (int) (this.nome.length() * 3 + this.codigo);
-	}
+	
 }

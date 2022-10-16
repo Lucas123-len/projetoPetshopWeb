@@ -2,6 +2,7 @@ package com.api.Petshop.pessoa;
 import com.api.Petshop.endereco.*;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -102,4 +103,23 @@ public abstract class Pessoa implements Serializable{
 		this.endereco = endereco;
 	}
 	public abstract void imprimeDados();
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(codigo, cpf, email, nome, telefone);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pessoa other = (Pessoa) obj;
+		return codigo == other.codigo && Objects.equals(cpf, other.cpf) && Objects.equals(email, other.email)
+				&& Objects.equals(nome, other.nome) && Objects.equals(telefone, other.telefone);
+	}
+	
 }

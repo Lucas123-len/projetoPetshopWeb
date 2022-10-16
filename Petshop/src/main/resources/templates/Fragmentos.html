@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.tymeleaf.org">
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.tymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<head th:fragment="imports-css(title)">
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +25,7 @@
 							<li class="nav-item" th:classappend="${pagina == 'clientes' ? 'active' : ''}">
 								<a class="nav-link" th:href="@{~/clientes}">Clientes</a>
 							</li>
-							<li class="nav-item" th:classappend="${pagina == 'funcionarios' ? 'active' : ''}">
+							<li class="nav-item" th:classappend="${pagina == 'funcionarios' ? 'active' : ''}" sec:authorize="hasRole('ROLE_ADMIN')">
 								<a class="nav-link" th:href="@{~/funcionarios}">Funcionarios</a>
 							</li>
 							<li class="nav-item" th:classappend="${pagina == 'lojas' ? 'active' : ''}">
@@ -43,7 +43,11 @@
 							<li class="nav-item" th:classappend="${pagina == 'servicos' ? 'active' : ''}">
 								<a class="nav-link" th:href="@{~/servicos}">Servicos</a>
 							</li>
+							<li class="nav-item" th:classappend="${pagina == 'meusdados' ? 'active' : ''}">
+								<a class="nav-link" th:href="@{~/funcionarios/meusdados}">Meus Dados</a>
+							</li>
 						</ul>
+						<a sec:authorize="isAuthenticated()" class="btn btn-outline-danger" style="float: right" th:href="@{~/logout}" role="button">Sair</a>
 					</div>
 				</nav>
 			</div>
