@@ -184,11 +184,18 @@ public class PetshopApplication implements CommandLineRunner {
 		
 		//Servico
 		Servico sv1 = new Servico();
-		sv1.setDescricao("Banho e Tosa");
-		sv1.setTipo("Banho e Tosa");
+		sv1.setDescricao("Banho");
+		sv1.setTipo("Banho");
 		sv1.setValor(30.00);
 		sv1.setDataServico("10/09/2022");
 		servicoRt.save(sv1);
+		
+		Servico sv2 = new Servico();
+		sv2.setDescricao("Tosa");
+		sv2.setTipo("Tosa");
+		sv2.setValor(20.00);
+		sv2.setDataServico("10/09/2022");
+		servicoRt.save(sv2);
 		
 		//Produto2
 		Produto pr2 = new Produto();
@@ -222,6 +229,10 @@ public class PetshopApplication implements CommandLineRunner {
 		sv1.setClientes(List.of(cl));
 		sv1.setFuncionarios(List.of(fc1));
 		servicoRt.save(sv1);
+		
+		sv2.setClientes(List.of(cl));
+		sv2.setFuncionarios(List.of(fc1));
+		servicoRt.save(sv2);
 	}
 
 }
