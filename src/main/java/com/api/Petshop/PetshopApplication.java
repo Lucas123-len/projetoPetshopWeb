@@ -68,9 +68,11 @@ public class PetshopApplication implements CommandLineRunner {
 		//Permissao
 		Permissao p1 = new Permissao();
 		p1.setNome("ADMIN");
+		permissaoRt.save(p1);
+		
 		Permissao p2 = new Permissao();
 		p2.setNome("FUNC");
-		permissaoRt.saveAll(List.of(p1, p2));
+		permissaoRt.save(p2);
 		
 		//Petshop
 		Petshop pt = new Petshop();
@@ -135,7 +137,6 @@ public class PetshopApplication implements CommandLineRunner {
 		fc1.setTelefone("(11)98355-0432");
 		fc1.setSenha(new BCryptPasswordEncoder().encode("12345678"));
 		
-		
 		Endereco end2 = new Endereco();
 		end2.setPais("Brasil");
 		end2.setEstado("São Paulo");
@@ -181,6 +182,14 @@ public class PetshopApplication implements CommandLineRunner {
 		
 		produtoRt.save(pr1);
 		
+		//Servico
+		Servico sv1 = new Servico();
+		sv1.setDescricao("Banho e Tosa");
+		sv1.setTipo("Banho e Tosa");
+		sv1.setValor(30.00);
+		sv1.setDataServico("10/09/2022");
+		servicoRt.save(sv1);
+		
 		//Produto2
 		Produto pr2 = new Produto();
 		pr2.setMarca("PetClean");
@@ -199,15 +208,7 @@ public class PetshopApplication implements CommandLineRunner {
 		
 		lj.setProdutos(List.of(pr1,pr2));
 		lojaRt.save(lj);
-		
-		//Servico
-		Servico sv1 = new Servico();
-		sv1.setDescricao("Banho e Tosa");
-		sv1.setTipo("Banho e Tosa");
-		sv1.setValor(30);
-		sv1.setDataServico("10/09/2022");
-		servicoRt.save(sv1);
-		
+			
 		fc1.setClientes(List.of(cl));
 		fc1.setServicos(List.of(sv1));
 		fc1.setFuncao(fn);
@@ -216,38 +217,11 @@ public class PetshopApplication implements CommandLineRunner {
 		
 		cl.setServicos(List.of(sv1));
 		
-		sv1.setClientes(List.of(cl));
-		sv1.setFuncionarios(List.of(fc1));
-		
-		servicoRt.save(sv1);
-		
 		clienteRt.save(cl);//salva o repositório no banco
 		
-		//Listas dos Objetos
-		//Lista de Clientes
-		/*List<Cliente> clientes = new ArrayList<Cliente>();
-		clientes.add(cl);
-		//Lista de Animais
-		List<Animal> animais = new ArrayList<Animal>();
-		animais.add(an);
-		//Lista de Funcionarios
-		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
-		funcionarios.add(fc);
-		//Lista de Produtos
-		List<Produto> produtos = new ArrayList<Produto>();
-		produtos.add(pr);
-		//Lista de Servicos
-		List<Servico> servicos = new ArrayList<Servico>();
-		servicos.add(sv);
-		//Lista de Lojas
-		List<Loja> lojas = new ArrayList<Loja>();
-		lojas.add(lj);*/
-		
-		
-		
-		//Validações Serviços
 		sv1.setClientes(List.of(cl));
 		sv1.setFuncionarios(List.of(fc1));
+		servicoRt.save(sv1);
 	}
 
 }

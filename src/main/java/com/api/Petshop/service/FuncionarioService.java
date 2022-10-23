@@ -1,5 +1,4 @@
 package com.api.Petshop.service;
-import com.api.Petshop.permissao.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.api.Petshop.cliente.Cliente;
 import com.api.Petshop.exception.NotFoundException;
 import com.api.Petshop.funcionario.Funcionario;
 import com.api.Petshop.pessoa.Pessoa;
@@ -120,9 +118,8 @@ public class FuncionarioService {
 	}
 	
 	public void removePermissoesNulas(Funcionario f) {
-		f.getPermissoes().removeIf((Permissao p) -> {
-			return p.getCodigo()==null;
-		});
+		f.getPermissoes().removeIf( p -> p.getCodigo() == 0L);
+		
 		if(f.getPermissoes().isEmpty()) {
 			throw new RuntimeException("Funcionario deve conter no minimo 1 permissao.");
 		}

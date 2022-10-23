@@ -13,7 +13,7 @@
 					<a class="btn btn-primary float-right" th:href="@{~/servicos/servico}" role="button">Novo Servico</a>
 				</h4>
 			</div>
-			<div class="card" th:each="servicos : ${servicos}">
+			<div class="card" th:each="servico : ${servicos}">
 				<div class="card-body">
 					<h5 class="card-title" th:text="'Descricao: '+${servico.descricao}"></h5>
 					<div class="card-text" th:text="'Tipo: '+${servico.tipo}"></div>

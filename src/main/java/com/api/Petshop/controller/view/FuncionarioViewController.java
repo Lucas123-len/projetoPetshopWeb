@@ -48,6 +48,10 @@ public class FuncionarioViewController {
 	
 	@PostMapping(path = "/funcionario")
 	public String save(@Valid @ModelAttribute Funcionario funcionario, BindingResult result, @RequestParam("confirmarSenha") String confirmarSenha, Model model) {
+		
+		//valores a serem retornados
+		model.addAttribute("permissoes", permissaoRepo.findAll());
+		
 		if(result.hasErrors()) {
 			model.addAttribute("msgErros",result.getAllErrors());
 			return "FormFuncionario";
@@ -71,11 +75,16 @@ public class FuncionarioViewController {
 	@GetMapping(path = "/funcionario/{codigo}")
 	public String atualizacao(@PathVariable("codigo") Long codigo, Model model) {
 		model.addAttribute("funcionario",service.findById(codigo));
+		model.addAttribute("permissoes", permissaoRepo.findAll());
 		return "FormFuncionario";
 	}
 	
 	@PostMapping(path = "/funcionario/{codigo}")
 	public String update(@Valid @ModelAttribute Funcionario funcionario, BindingResult result, @PathVariable("codigo") Long codigo, Model model) {
+		
+		//valores a serem retornados
+		model.addAttribute("permissoes", permissaoRepo.findAll());		
+		
 		List<FieldError> list = new ArrayList<>();
 		for(FieldError fe : result.getFieldErrors()) {
 			if(!fe.getField().equals("senha")) {

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.util.List;
+import java.util.Objects;
+
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.swing.JOptionPane;
@@ -19,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.api.Petshop.funcionario.*;
 import com.api.Petshop.cliente.*;
 @Entity
-public class Servico implements Pagamento,ImprimeDados, Serializable{
+public class Servico implements Serializable,Pagamento,ImprimeDados{
 	
 	/**
 	 * 
@@ -113,31 +115,25 @@ public class Servico implements Pagamento,ImprimeDados, Serializable{
 				"\nData do Serviço: "+this.dataServico+
 				"\nTotal do Pagamento: "+this.getTotalPagamento());
 	}
+
 	@Override
-	public boolean equals(Object obj){
-		//if(this == obj){return true;}
-		if(!(obj instanceof Servico)){return false;}
-		//if(this.getClass != obj.getClass){return false;}
-		Servico s = (Servico) obj;
-		if(descricao.equals(null)){
-			if(!s.descricao.equals(null)){
-				return false;
-			}
-		}
-		if(tipo.equals(null)){
-			if(!s.tipo.equals(null)){
-				return false;
-			}
-		}
-		if(dataServico.equals(null)){
-			if(!s.dataServico.equals(null)){
-				return false;
-			}
-		}
-		return this.codigo == s.codigo && this.descricao.equals(s.descricao) && this.tipo.equals(s.tipo) && this.valor == s.valor && this.dataServico.equals(s.dataServico);
+	public int hashCode() {
+		return Objects.hash(clientes, codigo, dataServico, descricao, funcionarios, tipo, valor);
 	}
+
 	@Override
-	public int hashCode(){
-		return (int)(this.valor * 10 + this.descricao.length());
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Servico other = (Servico) obj;
+		return Objects.equals(clientes, other.clientes) && codigo == other.codigo
+				&& Objects.equals(dataServico, other.dataServico) && Objects.equals(descricao, other.descricao)
+				&& Objects.equals(funcionarios, other.funcionarios) && Objects.equals(tipo, other.tipo)
+				&& Double.doubleToLongBits(valor) == Double.doubleToLongBits(other.valor);
 	}
+	
 }
