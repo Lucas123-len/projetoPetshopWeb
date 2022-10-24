@@ -26,16 +26,19 @@ public class PetshopController {
 	@Autowired
 	private PetshopService service;
 	
+	@ResponseBody
 	@GetMapping
 	public ResponseEntity getAll(@RequestParam(name = "page", defaultValue = "0", required = false) int page, @RequestParam(name = "size", defaultValue = "10", required = false) int size) {
 		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
 	}
 	
+	@ResponseBody
 	@GetMapping(path = "/(codigo)")
 	public ResponseEntity getOne(@PathVariable("codigo") long codigo) {
 		return ResponseEntity.ok(service.findById(codigo));
 	}
 	
+	@ResponseBody
 	@PostMapping
 	public ResponseEntity save(@Valid @RequestBody Petshop petshop) {
 		petshop.setCodigo(0L);
@@ -43,6 +46,7 @@ public class PetshopController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(petshop);
 	}
 	
+	@ResponseBody
 	@PutMapping("/(codigo)")
 	public ResponseEntity update(@PathVariable("codigo") long codigo, @Valid @RequestBody Petshop petshop) {
 		petshop.setCodigo(codigo);
@@ -50,6 +54,7 @@ public class PetshopController {
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
+	@ResponseBody
 	@DeleteMapping(path = "/(codigo)")
 	public ResponseEntity delete(@PathVariable("/(codigo)") long codigo) {
 		service.delete(codigo);
