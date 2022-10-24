@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.api.Petshop.cliente.Cliente;
 import com.api.Petshop.service.ClienteService;
 
+@ResponseBody
 @Controller
 @RequestMapping(path = "/clientes")
 public class ClienteViewController {
@@ -60,7 +61,7 @@ public class ClienteViewController {
 		return "FormCliente";
 	}
 	
-	@PostMapping(path = "/cliente/{codigo}")
+	@PutMapping(path = "/cliente/{codigo}")
 	public String atualizar(@Valid @ModelAttribute Cliente cliente, BindingResult result, @RequestParam("file") MultipartFile file, @PathVariable("codigo") long codigo, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
@@ -78,7 +79,7 @@ public class ClienteViewController {
 		}
 	}
 	
-	@GetMapping(path = "/{codigo}/deletar")
+	@DeleteMapping(path = "/{codigo}/deletar")
 	public String deletar(@PathVariable("codigo") long codigo) {
 		service.delete(codigo);
 		return "redirect:/clientes";
