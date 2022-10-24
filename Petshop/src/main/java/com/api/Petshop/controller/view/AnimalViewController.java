@@ -16,25 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.api.Petshop.animal.Animal;
 import com.api.Petshop.service.AnimalService;
 
-@ResponseBody
 @Controller
 @RequestMapping(path = "/animais")
 public class AnimalViewController {
 	@Autowired
 	private AnimalService service;
 	
+	@ResponseBody
 	@GetMapping
 	public String getAll(Model model) {
 		model.addAttribute("animais",service.findAll());
 		return "animais";
 	}
-	
+	@ResponseBody
 	@GetMapping(path = "/animal")
 	public String cadastro(Model model) {
 		model.addAttribute("animal", new Animal());
 		return "FormAnimal";
 	}
-	
+	@ResponseBody
 	@PostMapping(path = "/animal")
 	public String salvar(@Valid @ModelAttribute Animal animal, BindingResult result, Model model) {
 		if(result.hasErrors()) {
@@ -52,13 +52,13 @@ public class AnimalViewController {
 			return "FormAnimal";
 		}
 	}
-	
+	@ResponseBody
 	@GetMapping(path = "/animal/{codigo}")
 	public String editar(@PathVariable("codigo") long codigo, Model model) {
 		model.addAttribute("animal", service.findById(codigo));
 		return "FormAnimal";
 	}
-	
+	@ResponseBody
 	@PutMapping(path = "/animal/{codigo}")
 	public String atualizar(@Valid @ModelAttribute Animal animal, BindingResult result, @PathVariable("codigo") long codigo, Model model) {
 		if(result.hasErrors()) {
@@ -76,7 +76,7 @@ public class AnimalViewController {
 			return "FormAnimal";
 		}
 	}
-	
+	@ResponseBody
 	@DeleteMapping(path = "/{codigo}/deletar")
 	public String deletar(@PathVariable("codigo") long codigo) {
 		service.delete(codigo);
