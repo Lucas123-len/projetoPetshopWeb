@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.api.Petshop.loja.Loja;
 import com.api.Petshop.service.LojaService;
 
-@ResponseBody
 @Controller
 @RequestMapping(path = "/lojas")
 public class LojaViewController {
