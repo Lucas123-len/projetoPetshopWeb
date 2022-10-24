@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.api.Petshop.funcao.Funcao;
 import com.api.Petshop.service.FuncaoService;
 
-@ResponseBody
 @Controller
 @RequestMapping(path = "/funcoes")
 public class FuncaoViewController {
