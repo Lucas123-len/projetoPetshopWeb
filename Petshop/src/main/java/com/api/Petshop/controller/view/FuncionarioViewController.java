@@ -24,7 +24,6 @@ import com.api.Petshop.funcionario.Funcionario;
 import com.api.Petshop.repository.PermissaoRepository;
 import com.api.Petshop.service.FuncionarioService;
 
-@ResponseBody
 @Controller
 @RequestMapping(path = "/funcionarios")
 public class FuncionarioViewController {
