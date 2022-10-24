@@ -24,6 +24,7 @@ import com.api.Petshop.funcionario.Funcionario;
 import com.api.Petshop.repository.PermissaoRepository;
 import com.api.Petshop.service.FuncionarioService;
 
+@ResponseBody
 @Controller
 @RequestMapping(path = "/funcionarios")
 public class FuncionarioViewController {
@@ -108,7 +109,7 @@ public class FuncionarioViewController {
 		}
 	}
 	
-	@GetMapping(path = "/{codigo}/deletar")
+	@DeleteMapping(path = "/{codigo}/deletar")
 	public String deletar(@PathVariable("codigo") long codigo) {
 		service.delete(codigo);
 		return "redirect:/funcionarios";
@@ -123,7 +124,7 @@ public class FuncionarioViewController {
 		return "FormMeusDados";
 	}
 	
-	@PostMapping(path = "/meusdados")
+	@PutMapping(path = "/meusdados")
 	public String updateMeusDados(@Valid @ModelAttribute Funcionario funcionario, BindingResult result, @AuthenticationPrincipal User user, @RequestParam("senhaAtual") String senhaAtual, @RequestParam("novaSenha") String novaSenha, @RequestParam("confirmarNovaSenha") String confirmarNovaSenha, Model model) {
 		List<FieldError> list = new ArrayList<>();
 		for(FieldError fe : result.getFieldErrors()) {
