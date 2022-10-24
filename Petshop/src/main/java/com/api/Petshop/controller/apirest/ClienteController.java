@@ -27,16 +27,19 @@ public class ClienteController {
 	@Autowired
 	private ClienteService service;
 	
+	@ResponseBody
 	@GetMapping
 	public ResponseEntity getAll(@RequestParam(name = "page", defaultValue = "0", required = false) int page, @RequestParam(name = "size", defaultValue = "10", required = false) int size) {
 		return ResponseEntity.status(HttpStatus.OK).body(service.findAll(page,size));
 	}
 	
+	@ResponseBody
 	@GetMapping(path = "/(codigo)")
 	public ResponseEntity getOne(@PathVariable("codigo") long codigo) {
 		return ResponseEntity.ok(service.findById(codigo));
 	}
 	
+	@ResponseBody
 	@PostMapping
 	public ResponseEntity save(@Valid @RequestBody Cliente cliente) {
 		cliente.setCodigo(0L);
@@ -44,6 +47,7 @@ public class ClienteController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
 	}
 	
+	@ResponseBody
 	@PutMapping(path = "/(codigo)")
 	public ResponseEntity update(@PathVariable("codigo") long codigo, @Valid @RequestBody Cliente cliente) {
 		cliente.setCodigo(codigo);
@@ -51,12 +55,14 @@ public class ClienteController {
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
+	@ResponseBody
 	@DeleteMapping(path = "/(codigo)")
 	public ResponseEntity delete(@PathVariable("/(codigo)") long codigo) {
 		service.delete(codigo);
 		return ResponseEntity.ok().build();
 	}
 	
+	@ResponseBody
 	@PutMapping(path = "/(codigo)/uploadFile")
 	public ResponseEntity uploadFile(@PathVariable("codigo") long codigo, MultipartFile file) {
 		Cliente cliente = service.findById(codigo);
