@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.api.Petshop.service.ServicoService;
 import com.api.Petshop.servico.Servico;
 
+@ResponseBody
 @Controller
 @RequestMapping(path = "/servicos")
 public class ServicoViewController {
@@ -58,7 +59,7 @@ public class ServicoViewController {
 		return "FormServico";
 	}
 	
-	@PostMapping(path = "/servico/{codigo}")
+	@PutMapping(path = "/servico/{codigo}")
 	public String atualizar(@Valid @ModelAttribute Servico servico, BindingResult result, @PathVariable("codigo") long codigo, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
@@ -76,7 +77,7 @@ public class ServicoViewController {
 		}
 	}
 	
-	@GetMapping(path = "/{codigo}/deletar")
+	@DeleteMapping(path = "/{codigo}/deletar")
 	public String deletar(@PathVariable("codigo") long codigo) {
 		service.delete(codigo);
 		return "redirect:/servicos";
