@@ -3,7 +3,6 @@ import com.api.Petshop.funcionario.*;
 import com.api.Petshop.petshop.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonMerge;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

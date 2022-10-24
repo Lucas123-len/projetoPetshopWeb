@@ -27,7 +27,7 @@ public class ProdutoService {
 		return repo.findAll();
 	}
 	
-	public Produto findById(Long codigo) {
+	public Produto findById(long codigo) {
 		Optional<Produto> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new NotFoundException("Produto não encontrado.");
@@ -53,7 +53,7 @@ public class ProdutoService {
 		}
 	}
 	
-	public void delete(Long codigo) {
+	public void delete(long codigo) {
 		Produto obj = findById(codigo);
 		try {
 			repo.delete(obj);

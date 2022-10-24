@@ -38,12 +38,12 @@ public class FuncaoViewController {
 	public String salvar(@Valid @ModelAttribute Funcao funcao, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
-			return "FormCliente";
+			return "FormFuncao";
 		}
-		funcao.setCodigo((Long) null);
+		//funcao.setCodigo(0L);
 		try {
 			service.save(funcao);
-			model.addAttribute("msgSucesso","Funcao cadastrado com sucesso.");
+			model.addAttribute("msgSucesso","Funcao cadastrada com sucesso.");
 			model.addAttribute("funcao", new Funcao());
 			return "FormFuncao";
 		}catch(Exception e) {
@@ -53,31 +53,31 @@ public class FuncaoViewController {
 	}
 	
 	@GetMapping(path = "/funcao/{codigo}")
-	public String editar(@PathVariable("codigo") Long codigo, Model model) {
+	public String editar(@PathVariable("codigo") long codigo, Model model) {
 		model.addAttribute("funcao", service.findById(codigo));
 		return "FormFuncao";
 	}
 	
 	@PostMapping(path = "/funcao/{codigo}")
-	public String atualizar(@Valid @ModelAttribute Funcao funcao, BindingResult result, @PathVariable("codigo") Long codigo, Model model) {
+	public String atualizar(@Valid @ModelAttribute Funcao funcao, BindingResult result, @PathVariable("codigo") long codigo, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
 			return "FormFuncao";
 		}
-		funcao.setCodigo((Long) null);
+		funcao.setCodigo(codigo);
 		try {
 			service.update(funcao);
 			model.addAttribute("msgSucesso","Funcao cadastrado com sucesso.");
 			model.addAttribute("funcao", funcao);
 			return "FormFuncao";
 		}catch(Exception e) {
-			model.addAttribute("msgErros", new ObjectError("cliente",e.getMessage()));
-			return "FormCliente";
+			model.addAttribute("msgErros", new ObjectError("funcao",e.getMessage()));
+			return "FormFuncao";
 		}
 	}
 	
-	@GetMapping(path = "deletar")
-	public String deletar(@PathVariable("codigo") Long codigo) {
+	@GetMapping(path = "/{codigo}/deletar")
+	public String deletar(@PathVariable("codigo") long codigo) {
 		service.delete(codigo);
 		return "redirect:/funcoes";
 	}

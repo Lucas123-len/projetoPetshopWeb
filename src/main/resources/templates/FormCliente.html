@@ -15,7 +15,7 @@
 			
 			<div th:replace="~{Fragmentos :: mensagens}"></div>
 			
-			<form th:object="${cliente}" th:action="@{~/clientes/cliente/{codigo}(codigo=${cliente.codigo})}" method="post" enctype="multipart/form-data" class="card-body">
+			<form th:object="${cliente}" th:action="@{~/clientes/cliente/{codigo}(codigo=${cliente.codigo})}" th:method="POST" enctype="multipart/form-data" class="card-body">
 				<input type="hidden" th:field="*{codigo}">
 				<div class="form-row"><!-- class = form-row diz respeito a uma linha de um formulário -->
 					<div class="form-group col-md-7">
@@ -61,7 +61,7 @@
 				<div class="form-row">
 					<div class="form-group">
 						<label for="telefone">Telefone:</label>
-						<input th:field="*{telefone}" type="tel" maxlength="14" pattern="([0-9]{2}).[0-9]{4,5}-[0-9]{4}" class="form-control" placeholder="(00)00000-0000" required="required">
+						<input th:field="*{telefone}" type="tel" maxlength="14" class="form-control" placeholder="(00)00000-0000" required="required">
 					</div>
 				</div>
 				

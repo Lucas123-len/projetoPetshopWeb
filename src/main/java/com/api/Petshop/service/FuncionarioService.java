@@ -35,10 +35,10 @@ public class FuncionarioService {
 		return repo.findByEmail(email);
 	}
 	
-	public Funcionario findById(Long codigo) {
+	public Funcionario findById(long codigo) {
 		Optional<Funcionario> result = repo.findById(codigo);
 		if(result.isEmpty()) {
-			throw new NotFoundException("Cliente não encontrado.");
+			throw new NotFoundException("Funcionario não encontrado.");
 		}
 		return result.get();
 	}
@@ -59,7 +59,7 @@ public class FuncionarioService {
 		Funcionario obj = findById(f.getCodigo());
 		List<Servico> servicosAtuais = obj.getServicos();
 		servicosAtuais.removeAll(f.getServicos());
-		verificaExclusaoFuncionario(servicosAtuais);
+		
 		removePermissoesNulas(f);
 		alterarSenha(obj,senhaAtual,novaSenha,confirmaNovaSenha);
 		try {
@@ -79,7 +79,7 @@ public class FuncionarioService {
 		}
 	}
 	
-	public void delete(Long codigo) {
+	public void delete(long codigo) {
 		Funcionario obj = findById(codigo);
 		verificaExclusaoFuncionario(obj.getServicos());
 		try {

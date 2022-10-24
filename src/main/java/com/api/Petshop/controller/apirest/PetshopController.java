@@ -32,26 +32,26 @@ public class PetshopController {
 	}
 	
 	@GetMapping(path = "/(codigo)")
-	public ResponseEntity getOne(@PathVariable("codigo") Long codigo) {
+	public ResponseEntity getOne(@PathVariable("codigo") long codigo) {
 		return ResponseEntity.ok(service.findById(codigo));
 	}
 	
 	@PostMapping
 	public ResponseEntity save(@Valid @RequestBody Petshop petshop) {
-		petshop.setCnpj(null);
+		petshop.setCodigo(0L);
 		service.save(petshop);
 		return ResponseEntity.status(HttpStatus.CREATED).body(petshop);
 	}
 	
 	@PutMapping("/(codigo)")
-	public ResponseEntity update(@PathVariable("codigo") Long codigo, @Valid @RequestBody Petshop petshop) {
+	public ResponseEntity update(@PathVariable("codigo") long codigo, @Valid @RequestBody Petshop petshop) {
 		petshop.setCodigo(codigo);
 		service.update(petshop);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 	@DeleteMapping(path = "/(codigo)")
-	public ResponseEntity delete(@PathVariable("codigo") Long codigo) {
+	public ResponseEntity delete(@PathVariable("/(codigo)") long codigo) {
 		service.delete(codigo);
 		return ResponseEntity.ok().build();
 	}

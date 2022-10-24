@@ -40,7 +40,7 @@ public class AnimalViewController {
 			model.addAttribute("msgErros", result.getAllErrors());
 			return "FormAnimal";
 		}
-		animal.setCodigo((Long) null);
+		//animal.setCodigo(0L);
 		try {
 			service.save(animal);
 			model.addAttribute("msgSucesso","Animal cadastrado com sucesso.");
@@ -53,21 +53,21 @@ public class AnimalViewController {
 	}
 	
 	@GetMapping(path = "/animal/{codigo}")
-	public String editar(@PathVariable("codigo") Long codigo, Model model) {
+	public String editar(@PathVariable("codigo") long codigo, Model model) {
 		model.addAttribute("animal", service.findById(codigo));
 		return "FormAnimal";
 	}
 	
 	@PostMapping(path = "/animal/{codigo}")
-	public String atualizar(@Valid @ModelAttribute Animal animal, BindingResult result, @PathVariable("codigo") Long codigo, Model model) {
+	public String atualizar(@Valid @ModelAttribute Animal animal, BindingResult result, @PathVariable("codigo") long codigo, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
 			return "FormAnimal";
 		}
-		animal.setCodigo((Long) null);
+		animal.setCodigo(codigo);
 		try {
 			service.update(animal);
-			model.addAttribute("msgSucesso","Animal cadastrado com sucesso.");
+			model.addAttribute("msgSucesso","Animal atualizado com sucesso.");
 			model.addAttribute("animal", animal);
 			return "FormAnimal";
 		}catch(Exception e) {
@@ -76,8 +76,8 @@ public class AnimalViewController {
 		}
 	}
 	
-	@GetMapping(path = "deletar")
-	public String deletar(@PathVariable("codigo") Long codigo) {
+	@GetMapping(path = "/{codigo}/deletar")
+	public String deletar(@PathVariable("codigo") long codigo) {
 		service.delete(codigo);
 		return "redirect:/animal";
 	}

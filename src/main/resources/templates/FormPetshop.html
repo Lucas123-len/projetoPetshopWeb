@@ -15,7 +15,7 @@
 			
 			<div th:replace="~{Fragmentos :: mensagens}"></div>
 			
-			<form th:object="${petshop}" th:action="@{~/petshops/petshop/{codigo}(codigo=${petshop.codigo})}" method="post" class="card-body">
+			<form th:object="${petshop}" th:action="@{~/petshops/petshop/{codigo}(codigo=${petshop.codigo})}" th:method="POST" class="card-body">
 				<input type="hidden" th:field="*{codigo}">
 				<div class="form-row"><!-- class = form-row diz respeito a uma linha de um formulário -->
 					<div class="form-group col-md-8">

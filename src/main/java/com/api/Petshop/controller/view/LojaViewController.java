@@ -40,44 +40,44 @@ public class LojaViewController {
 			model.addAttribute("msgErros", result.getAllErrors());
 			return "FormLoja";
 		}
-		loja.setCodigo((Long) null);
+		//loja.setCodigo(0L);
 		try {
 			service.save(loja);
 			model.addAttribute("msgSucesso","Loja cadastrada com sucesso");
 			model.addAttribute("loja",new Loja());
 			return "FormLoja";
 		}catch(Exception e) {
-			model.addAttribute("msgErros", new ObjectError("Loja", e.getMessage()));
+			model.addAttribute("msgErros", new ObjectError("loja", e.getMessage()));
 			return "FormLoja";
 		}
 	}
 	
 	@GetMapping(path = "/loja/{codigo}")
-	public String autualizacao(@PathVariable("codigo") Long codigo, Model model) {
+	public String autualizacao(@PathVariable("codigo") long codigo, Model model) {
 		model.addAttribute("loja", service.findById(codigo));
 		return "FormLoja";
 	}
 	
 	@PostMapping(path = "/loja{codigo}")
-	public String update(@Valid @ModelAttribute Loja loja, BindingResult result, @PathVariable("codigo") Long codigo, Model model) {
+	public String update(@Valid @ModelAttribute Loja loja, BindingResult result, @PathVariable("codigo") long codigo, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
 			return "FormLoja";
 		}
-		loja.setCodigo((Long) null);
+		loja.setCodigo(codigo);
 		try {
-			service.save(loja);
+			service.update(loja);
 			model.addAttribute("msgSucesso","Loja cadastrada com sucesso");
-			model.addAttribute("loja",new Loja());
+			model.addAttribute("loja",loja);
 			return "FormLoja";
 		}catch(Exception e) {
-			model.addAttribute("msgErros", new ObjectError("Loja", e.getMessage()));
+			model.addAttribute("msgErros", new ObjectError("loja", e.getMessage()));
 			return "FormLoja";
 		}
 	}
 	
 	@GetMapping(path = "/{codigo}/deletar")
-	public String deletar(@PathVariable("codigo") Long codigo) {
+	public String deletar(@PathVariable("codigo") long codigo) {
 		service.delete(codigo);
 		return "redirect:/lojas";
 	}

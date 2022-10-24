@@ -28,7 +28,7 @@ public class FuncaoService {
 		return repo.findAll();
 	}
 	
-	public Funcao findById(Long codigo) {
+	public Funcao findById(long codigo) {
 		Optional<Funcao> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new NotFoundException("Função não encontrada.");
@@ -50,7 +50,6 @@ public class FuncaoService {
 		Funcao obj = findById(f.getCodigo());
 		List<Funcionario> funcionariosAtuais = obj.getFuncionarios();
 		funcionariosAtuais.removeAll(obj.getFuncionarios());
-		verificaExclusaoFuncaoComFuncionarios(funcionariosAtuais);
 		
 		try {
 			f.setDescricao(obj.getDescricao());
@@ -60,7 +59,7 @@ public class FuncaoService {
 		}
 	}
 	
-	public void delete(Long codigo) {
+	public void delete(long codigo) {
 		Funcao obj = findById(codigo);
 		verificaExclusaoFuncaoComFuncionarios(obj.getFuncionarios());
 		try {

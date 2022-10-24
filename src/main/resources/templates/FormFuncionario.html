@@ -15,7 +15,7 @@
 			
 			<div th:replace="~{Fragmentos :: mensagens}"></div>
 			
-			<form th:object="${funcionario}" th:action="@{~/funcionarios/funcionario/{codigo}(codigo=${funcionario.codigo})}" method="post" enctype="multipart/form-data" class="card-body">
+			<form th:object="${funcionario}" th:action="@{~/funcionarios/funcionario/{codigo}(codigo=${funcionario.codigo})}" th:method="POST" enctype="multipart/form-data" class="card-body">
 				<input type="hidden" th:field="*{codigo}">
 				<div class="form-row"><!-- class = form-row diz respeito a uma linha de um formulário -->
 					<div class="form-group col-md-7">
@@ -70,18 +70,18 @@
 				<div class="form-row">
 					<div class="form-group">
 						<label for="telefone">Telefone:</label>
-						<input th:field="*{telefone}" type="tel" maxlength="14" pattern="([0-9]{2}).[0-9]{4,5}-[0-9]{4}" class="form-control" placeholder="(00)00000-0000" required="required">
+						<input th:field="*{telefone}" type="tel" maxlength="14" class="form-control" placeholder="(00)00000-0000" required="required">
 					</div>
 				</div>
 				
-				<div class="form-row" th:if="${funcionario.codigo==null}">
+				<div class="form-row" th:if="${funcionario.codigo==0L}">
 					<div class="form-group col-md-6">
 						<label for="senha">Senha:</label>
-						<input th:field="*{senha}" type="password" minlength="8" class="form-control" required="required">
+						<input th:field="*{senha}" type="password" th:minlength="8" class="form-control" required="required">
 					</div>
 					<div class="form-group col-md-6">
 						<label for="confirmarSenha">Confirmar Senha:</label>
-						<input th:field="confirmarSenha" type="password" minlength="8" class="form-control" required="required">
+						<input name="confirmarSenha" type="password" th:minlength="8" class="form-control" required="required">
 					</div>
 				</div>
 				

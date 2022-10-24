@@ -33,7 +33,7 @@ public class ClienteService {
 		return repo.findAll();
 	}
 	
-	public Cliente findById(Long codigo) {
+	public Cliente findById(long codigo) {
 		Optional<Cliente> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new NotFoundException("Cliente não encontrado.");
@@ -91,7 +91,7 @@ public class ClienteService {
 		
 		List<Servico> servicosRealizados = obj.getServicos();
 		servicosRealizados.removeAll(c.getServicos());
-		verificaExclusaoCliente(servicosRealizados);
+		
 		try {
 			c.setCpf(obj.getCpf());
 			c.setNome(obj.getNome());
@@ -101,7 +101,7 @@ public class ClienteService {
 		}
 	}
 	
-	public void delete(Long codigo) {
+	public void delete(long codigo) {
 		Cliente obj = findById(codigo);
 		//verifica se há reservas
 		verificaExclusaoCliente(obj.getServicos());

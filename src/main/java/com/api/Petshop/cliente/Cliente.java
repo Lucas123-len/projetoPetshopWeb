@@ -3,7 +3,6 @@ import com.api.Petshop.pessoa.*;
 import com.api.Petshop.animal.*;
 import com.api.Petshop.funcionario.*;
 import com.api.Petshop.servico.*;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.api.Petshop.produto.*;

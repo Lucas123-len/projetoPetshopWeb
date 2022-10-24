@@ -28,7 +28,7 @@ public class LojaService {
 		return repo.findAll();
 	}
 	
-	public Loja findById(Long codigo) {
+	public Loja findById(long codigo) {
 		Optional<Loja> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new NotFoundException("Loja não encontrada.");
@@ -60,7 +60,7 @@ public class LojaService {
 		}
 	}
 	
-	public void delete(Long codigo) {
+	public void delete(long codigo) {
 		Loja obj = findById(codigo);
 		verificaExclusaoLojaComFuncionarios(obj.getFuncionarios());
 		try {

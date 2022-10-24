@@ -33,32 +33,32 @@ public class ClienteController {
 	}
 	
 	@GetMapping(path = "/(codigo)")
-	public ResponseEntity getOne(@PathVariable("codigo") Long codigo) {
+	public ResponseEntity getOne(@PathVariable("codigo") long codigo) {
 		return ResponseEntity.ok(service.findById(codigo));
 	}
 	
 	@PostMapping
 	public ResponseEntity save(@Valid @RequestBody Cliente cliente) {
-		cliente.setCodigo((Long) null);
+		cliente.setCodigo(0L);
 		service.save(cliente,null);
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
 	}
 	
 	@PutMapping(path = "/(codigo)")
-	public ResponseEntity update(@PathVariable("codigo") Long codigo, @Valid @RequestBody Cliente cliente) {
+	public ResponseEntity update(@PathVariable("codigo") long codigo, @Valid @RequestBody Cliente cliente) {
 		cliente.setCodigo(codigo);
 		service.update(cliente,null);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 	@DeleteMapping(path = "/(codigo)")
-	public ResponseEntity delete(@PathVariable("/(codigo)") Long codigo) {
+	public ResponseEntity delete(@PathVariable("/(codigo)") long codigo) {
 		service.delete(codigo);
 		return ResponseEntity.ok().build();
 	}
 	
 	@PutMapping(path = "/(codigo)/uploadFile")
-	public ResponseEntity uploadFile(@PathVariable("codigo") Long codigo, MultipartFile file) {
+	public ResponseEntity uploadFile(@PathVariable("codigo") long codigo, MultipartFile file) {
 		Cliente cliente = service.findById(codigo);
 		service.update(cliente,file);
 		return ResponseEntity.ok().build();

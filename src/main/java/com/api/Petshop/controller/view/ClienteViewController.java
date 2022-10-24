@@ -42,7 +42,7 @@ public class ClienteViewController {
 			model.addAttribute("msgErros", result.getAllErrors());
 			return "FormCliente";
 		}
-		cliente.setCodigo((Long) null);
+		//cliente.setCodigo(0L);
 		try {
 			service.save(cliente, file);
 			model.addAttribute("msgSucesso","Cliente cadastrado com sucesso.");
@@ -55,21 +55,21 @@ public class ClienteViewController {
 	}
 	
 	@GetMapping(path = "/cliente/{codigo}")
-	public String editar(@PathVariable("codigo") Long codigo, Model model) {
+	public String editar(@PathVariable("codigo") long codigo, Model model) {
 		model.addAttribute("cliente", service.findById(codigo));
 		return "FormCliente";
 	}
 	
 	@PostMapping(path = "/cliente/{codigo}")
-	public String atualizar(@Valid @ModelAttribute Cliente cliente, BindingResult result, @RequestParam("file") MultipartFile file, @PathVariable("codigo") Long codigo, Model model) {
+	public String atualizar(@Valid @ModelAttribute Cliente cliente, BindingResult result, @RequestParam("file") MultipartFile file, @PathVariable("codigo") long codigo, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
 			return "FormCliente";
 		}
-		cliente.setCodigo((Long) null);
+		cliente.setCodigo(codigo);
 		try {
 			service.update(cliente, file);
-			model.addAttribute("msgSucesso","Cliente cadastrado com sucesso.");
+			model.addAttribute("msgSucesso","Cliente atualizado com sucesso.");
 			model.addAttribute("cliente", cliente);
 			return "FormCliente";
 		}catch(Exception e) {
@@ -78,8 +78,8 @@ public class ClienteViewController {
 		}
 	}
 	
-	@GetMapping(path = "deletar")
-	public String deletar(@PathVariable("codigo") Long codigo) {
+	@GetMapping(path = "/{codigo}/deletar")
+	public String deletar(@PathVariable("codigo") long codigo) {
 		service.delete(codigo);
 		return "redirect:/clientes";
 	}

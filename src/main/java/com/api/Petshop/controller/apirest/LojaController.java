@@ -31,26 +31,26 @@ public class LojaController {
 	}
 	
 	@GetMapping(path = "/(codigo)")
-	public ResponseEntity getOne(@PathVariable("codigo") Long codigo) {
+	public ResponseEntity getOne(@PathVariable("codigo") long codigo) {
 		return ResponseEntity.ok(service.findById(codigo));
 	}
 	
 	@PostMapping
 	public ResponseEntity save(@Valid @RequestBody Loja loja) {
-		loja.setCodigo((Long) null);
+		loja.setCodigo(0L);
 		service.save(loja);
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		return ResponseEntity.status(HttpStatus.CREATED).body(loja);
 	}
 	
 	@PutMapping(path = "/(codigo)")
-	public ResponseEntity update(@PathVariable("codigo") Long codigo, @Valid @RequestBody Loja loja) {
+	public ResponseEntity update(@PathVariable("codigo") long codigo, @Valid @RequestBody Loja loja) {
 		loja.setCodigo(codigo);
 		service.update(loja);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 	@DeleteMapping(path = "/(codigo)")
-	public ResponseEntity delete(@PathVariable("/(id)") Long codigo) {
+	public ResponseEntity delete(@PathVariable("/(codigo)") long codigo) {
 		service.delete(codigo);
 		return ResponseEntity.ok().build();
 	}

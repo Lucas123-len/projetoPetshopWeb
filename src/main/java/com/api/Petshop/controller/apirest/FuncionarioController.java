@@ -31,32 +31,32 @@ public class FuncionarioController {
 	}
 	
 	@GetMapping(path = "/(codigo)")
-	public ResponseEntity getOne(@PathVariable("codigo") Long codigo) {
+	public ResponseEntity getOne(@PathVariable("codigo") long codigo) {
 		return ResponseEntity.ok(service.findById(codigo));
 	}
 	
 	@PostMapping
 	public ResponseEntity save(@Valid @RequestBody Funcionario funcionario) {
-		funcionario.setCodigo((Long) null);
+		funcionario.setCodigo(0L);
 		service.save(funcionario);
 		return ResponseEntity.status(HttpStatus.CREATED).body(funcionario);
 	}
 	
 	@PutMapping(path = "/(codigo)")
-	public ResponseEntity update(@PathVariable("codigo") Long codigo, @RequestBody Funcionario funcionario) {
+	public ResponseEntity update(@PathVariable("codigo") long codigo, @RequestBody Funcionario funcionario) {
 		funcionario.setCodigo(codigo);
 		service.update(funcionario,"","","");
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 	@DeleteMapping(path = "/(codigo)")
-	public ResponseEntity delete(@PathVariable("codigo") Long codigo) {
+	public ResponseEntity delete(@PathVariable("/(codigo)") long codigo) {
 		service.delete(codigo);
 		return ResponseEntity.ok().build();
 	}
 	
 	@PutMapping(path = "/{codigo}/alterarSenha")
-	public ResponseEntity alterarSenha(@PathVariable("codigo") Long codigo, @RequestParam(name = "senhaAtual", defaultValue = "", required = true) String senhaAtual, @RequestParam(name = "novaSenha", defaultValue = "", required = true) String novaSenha, @RequestParam(name = "confirmarNovaSenha", defaultValue = "", required = true) String confirmarNovaSenha) {
+	public ResponseEntity alterarSenha(@PathVariable("codigo") long codigo, @RequestParam(name = "senhaAtual", defaultValue = "", required = true) String senhaAtual, @RequestParam(name = "novaSenha", defaultValue = "", required = true) String novaSenha, @RequestParam(name = "confirmarNovaSenha", defaultValue = "", required = true) String confirmarNovaSenha) {
 		Funcionario f = service.findById(codigo);
 		service.update(f, senhaAtual, confirmarNovaSenha, novaSenha);
 		return ResponseEntity.ok().build();

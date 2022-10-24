@@ -28,7 +28,7 @@ public class ServicoService {
 		return repo.findAll();
 	}
 	
-	public Servico findById(Long codigo) {
+	public Servico findById(long codigo) {
 		Optional<Servico> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new NotFoundException("Serviço não encontrado.");
@@ -50,7 +50,6 @@ public class ServicoService {
 		Servico obj = findById(s.getCodigo());
 		List<Funcionario> funcionariosAtuais = obj.getFuncionarios();
 		funcionariosAtuais.removeAll(s.getFuncionarios());
-		verificaExclusaoServicoSendoExecutado(funcionariosAtuais);
 		
 		try {
 			s.setDescricao(obj.getDescricao());
@@ -60,7 +59,7 @@ public class ServicoService {
 		}
 	}
 	
-	public void delete(Long codigo) {
+	public void delete(long codigo) {
 		Servico obj = findById(codigo);
 		verificaExclusaoServicoSendoExecutado(obj.getFuncionarios());
 		try {

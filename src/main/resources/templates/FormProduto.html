@@ -15,7 +15,7 @@
 			
 			<div th:replace="~{Fragmentos :: mensagens}"></div>
 			
-			<form th:object="${produto}" th:action="@{~/produtos/produto/{codigo}(codigo=${produto.codigo})}" method="post" enctype="multipart/form-data" class="card-body">
+			<form th:object="${produto}" th:action="@{~/produtos/produto/{codigo}(codigo=${produto.codigo})}" th:method="POST" enctype="multipart/form-data" class="card-body">
 				<input type="hidden" th:field="*{codigo}">
 				<div class="form-row"><!-- class = form-row diz respeito a uma linha de um formulário -->
 					<div class="form-group">

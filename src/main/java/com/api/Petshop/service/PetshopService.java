@@ -26,7 +26,7 @@ public class PetshopService {
 		return repo.findAll();
 	}
 	
-	public Petshop findById(Long codigo) {
+	public Petshop findById(long codigo) {
 		Optional<Petshop> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new NotFoundException("Petshop não encontrado.");
@@ -47,7 +47,6 @@ public class PetshopService {
 		Petshop obj = findById(p.getCodigo());
 		List<Loja> lojasAtuais = obj.getLojas();
 		lojasAtuais.removeAll(p.getLojas());
-		verificaExclusaoLojaComFucionarios(lojasAtuais);
 		
 		try {
 			p.setCnpj(obj.getCnpj());
@@ -57,7 +56,7 @@ public class PetshopService {
 		}
 	}
 	
-	public void delete(Long codigo) {
+	public void delete(long codigo) {
 		Petshop obj = findById(codigo);
 		verificaExclusaoLojaComFucionarios(obj.getLojas());
 		try {

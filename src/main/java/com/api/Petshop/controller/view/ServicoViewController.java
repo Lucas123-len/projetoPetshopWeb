@@ -40,7 +40,7 @@ public class ServicoViewController {
 			model.addAttribute("msgErros", result.getAllErrors());
 			return "FormServico";
 		}
-		servico.setCodigo((Long) null);
+		//servico.setCodigo(0L);
 		try {
 			service.save(servico);
 			model.addAttribute("msgSucesso","Servico cadastrado com sucesso.");
@@ -53,18 +53,18 @@ public class ServicoViewController {
 	}
 	
 	@GetMapping(path = "/servico/{codigo}")
-	public String editar(@PathVariable("codigo") Long codigo, Model model) {
+	public String editar(@PathVariable("codigo") long codigo, Model model) {
 		model.addAttribute("servico", service.findById(codigo));
 		return "FormServico";
 	}
 	
 	@PostMapping(path = "/servico/{codigo}")
-	public String atualizar(@Valid @ModelAttribute Servico servico, BindingResult result, @PathVariable("codigo") Long codigo, Model model) {
+	public String atualizar(@Valid @ModelAttribute Servico servico, BindingResult result, @PathVariable("codigo") long codigo, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
 			return "FormServico";
 		}
-		servico.setCodigo((Long) null);
+		servico.setCodigo(codigo);
 		try {
 			service.update(servico);
 			model.addAttribute("msgSucesso","Servico cadastrado com sucesso.");
@@ -76,8 +76,8 @@ public class ServicoViewController {
 		}
 	}
 	
-	@GetMapping(path = "deletar")
-	public String deletar(@PathVariable("codigo") Long codigo) {
+	@GetMapping(path = "/{codigo}/deletar")
+	public String deletar(@PathVariable("codigo") long codigo) {
 		service.delete(codigo);
 		return "redirect:/servicos";
 	}

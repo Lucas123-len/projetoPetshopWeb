@@ -27,7 +27,7 @@ public class AnimalService {
 		return repo.findAll();
 	}
 	
-	public Animal findById(Long codigo) {
+	public Animal findById(long codigo) {
 		Optional<Animal> result = repo.findById(codigo);
 		if(result.isEmpty()) {
 			throw new NotFoundException("Animal não encontrado.");
@@ -51,7 +51,7 @@ public class AnimalService {
 		}
 	}
 	
-	public void delete(Long codigo) {
+	public void delete(long codigo) {
 		Animal obj = findById(codigo);
 		try {
 			repo.delete(obj);

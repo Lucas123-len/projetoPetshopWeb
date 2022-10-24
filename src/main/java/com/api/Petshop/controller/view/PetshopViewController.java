@@ -40,26 +40,26 @@ public class PetshopViewController {
 			model.addAttribute("msgErros", result.getAllErrors());
 			return "FormPetshop";
 		}
-		petshop.setCodigo((Long) null);
+		//petshop.setCodigo(0L);
 		try {
 			service.save(petshop);
 			model.addAttribute("msgSucesso","Petshop cadastrado com sucesso");
 			model.addAttribute("petshop", new Petshop());
 			return "FormPetshop";
 		}catch(Exception e){
-			model.addAttribute("msgErros",new ObjectError("Petshop", e.getMessage()));
+			model.addAttribute("msgErros",new ObjectError("petshop", e.getMessage()));
 			return "FormPetshop";
 		}
 	}
 	
 	@GetMapping(path = "/petshop/{codigo}")
-	public String alterar(@PathVariable("codigo") Long codigo, Model model) {
+	public String alterar(@PathVariable("codigo") long codigo, Model model) {
 		model.addAttribute("petshop",service.findById(codigo));
 		return "FormPetshop";
 	}
 	
 	@PostMapping(path = "/petshop/{codigo}")
-	public String update(@Valid @ModelAttribute Petshop petshop, BindingResult result, @PathVariable("codigo") Long codigo, Model model) {
+	public String update(@Valid @ModelAttribute Petshop petshop, BindingResult result, @PathVariable("codigo") long codigo, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("msgErros", result.getAllErrors());
 			return "FormPetshop";
@@ -71,13 +71,13 @@ public class PetshopViewController {
 			model.addAttribute("petshop",petshop);
 			return "FormPetshop";
 		}catch(Exception e){
-			model.addAttribute("msgErros",new ObjectError("Petshop", e.getMessage()));
+			model.addAttribute("msgErros",new ObjectError("petshop", e.getMessage()));
 			return "FormPetshop";
 		}
 	}
 	
 	@GetMapping(path = "/{codigo}/deletar")
-	public String deletar(@PathVariable("codigo") Long codigo) {
+	public String deletar(@PathVariable("codigo") long codigo) {
 		service.delete(codigo);
 		return "redirect:/petshops";
 	}

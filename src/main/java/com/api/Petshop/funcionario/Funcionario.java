@@ -21,7 +21,6 @@ import javax.persistence.ManyToOne;
 import javax.swing.JOptionPane;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 @Entity

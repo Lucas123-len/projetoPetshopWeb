@@ -60,27 +60,27 @@ public class FuncionarioViewController {
 			model.addAttribute("msgErros", new ObjectError("funcionario","Campos Senha e Confirmar Senha devem ser iguais."));
 			return "FormFuncionario";
 		}
-		funcionario.setCodigo((Long) null);
+		//funcionario.setCodigo(0L);
 		try {
 			service.save(funcionario);
 			model.addAttribute("msgSucesso","Funcionario cadastrado com sucesso");
 			model.addAttribute("funcionario",new Funcionario());
 			return "FormFuncionario";
 		}catch(Exception e) {
-			model.addAttribute("msgErros",new ObjectError("Funcionario", e.getMessage()));
+			model.addAttribute("msgErros",new ObjectError("funcionario", e.getMessage()));
 			return "FormFuncionario";
 		}
 	}
 	
 	@GetMapping(path = "/funcionario/{codigo}")
-	public String atualizacao(@PathVariable("codigo") Long codigo, Model model) {
+	public String atualizacao(@PathVariable("codigo") long codigo, Model model) {
 		model.addAttribute("funcionario",service.findById(codigo));
 		model.addAttribute("permissoes", permissaoRepo.findAll());
 		return "FormFuncionario";
 	}
 	
 	@PostMapping(path = "/funcionario/{codigo}")
-	public String update(@Valid @ModelAttribute Funcionario funcionario, BindingResult result, @PathVariable("codigo") Long codigo, Model model) {
+	public String update(@Valid @ModelAttribute Funcionario funcionario, BindingResult result, @PathVariable("codigo") long codigo, Model model) {
 		
 		//valores a serem retornados
 		model.addAttribute("permissoes", permissaoRepo.findAll());		
@@ -109,7 +109,7 @@ public class FuncionarioViewController {
 	}
 	
 	@GetMapping(path = "/{codigo}/deletar")
-	public String deletar(@PathVariable("codigo") Long codigo) {
+	public String deletar(@PathVariable("codigo") long codigo) {
 		service.delete(codigo);
 		return "redirect:/funcionarios";
 	}
