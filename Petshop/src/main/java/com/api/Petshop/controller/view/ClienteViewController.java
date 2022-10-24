@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.api.Petshop.cliente.Cliente;
 import com.api.Petshop.service.ClienteService;
 
-@ResponseBody
 @Controller
 @RequestMapping(path = "/clientes")
 public class ClienteViewController {
