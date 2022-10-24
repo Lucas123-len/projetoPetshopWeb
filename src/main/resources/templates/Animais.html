@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.tymeleaf.org">
+	<head th:replace="~{Fragmentos :: imports-css(title='Animais')}">
+		<title>Animais</title>
+	</head>
+	<body>
+		<div th:replace="~{Fragmentos :: barramenu(pagina='animais')}"></div>
+		
+		<div class="container" style="margin-top: 20px">
+			<div class="card-header">
+				<h4>
+					Animais Cadastrados
+					<a class="btn btn-primary float-right" th:href="@{~/animais/animal}" role="button">Novo Animal</a>
+				</h4>
+			</div>
+			<div class="card" th:each="animal : ${animais}">
+				<div class="card-body">
+					<h5 class="card-title" th:text="'Nome: '+${animal.nome}"></h5>
+					<div class="card-text" th:text="'Raca: '+${animal.raca}"></div>
+					<div class="card-text" th:text="'Especie: '+${animal.especie}"></div>
+				</div>
+				<div class="card-body">
+					<a th:href="@{'~/animais/animal/'+${animal.codigo}}" class="btn btn-warning">Editar</a>
+					<a th:href="@{'~/animais/'+${animal.codigo}+'/deletar'}" class="btn btn-danger" onclick="return confirm ('Deseja realmente excluir essa Animal?')">Excluir</a>
+				</div>
+			</div>
+		</div>
+		
+		<div th:replace="~{Fragmentos :: imports-js}"></div>
+	</body>
+</html>
